@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>직장 vs 창업 진단 | decide.lab</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:   #3182F6;
+      --orange: #FE4C1B;
+      --red:    #FE4C1B;
+      --green:  #1EC33F;
+      --amber:  #F4C506;
+      --purple: #7B61FF;
+      --ink1:   #0A0D2D;
+      --ink2:   #4E5968;
+      --ink3:   #8B95A1;
+      --ink4:   #B0B8C1;
+      --bg:     #F2F3FF;
+      --white:  #FFFFFF;
+      --line:   #E5E8EB;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, sans-serif;
+      color: var(--ink1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #0A0D2D;
+      padding: 36px 20px 36px;
+      text-align: center;
+    }
+    .header-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      letter-spacing: -.01em;
+      margin-bottom: 24px;
+    }
+    .header-logo-mark {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      letter-spacing: -.04em;
+      margin-bottom: 12px;
+    }
+    .header-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+    .score-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 480px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+    @media (max-width: 480px) {
+      .score-pills {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .score-pill:last-child {
+        flex-basis: auto;
+        justify-content: center;
+      }
+    }
+    .score-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,.75);
+      white-space: nowrap;
+    }
+    .pill-dot { width: 10px; height: 10px; border-radius: 4px; flex-shrink: 0; }
+    .pill-score { font-weight: 800; color: #fff; margin-left: 2px; }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 20px 0;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 32px; }
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 20px 20px 16px;
+     
+    }
+    .section-badge {
+      width: 32px; height: 32px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .badge-a { background: rgba(30,195,63,100); color: var(--white); }
+    .badge-b { background: rgba(244,197,6,100); color: var(--white); }
+    .badge-c { background: rgba(254,76,27,100); color: var(--white); }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-count { font-size: 14px; font-weight: 500; color: var(--ink4); }
+    .section-sub { font-size: 14px; color: var(--ink1); margin-top: 4px; }
+
+    /* ── CARD ── */
+    .card { background: var(--white); border-radius: 16px; overflow: hidden; }
+
+    /* ── CHECK ITEM ── */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .15s;
+      -webkit-tap-highlight-color: transparent;
+      border-bottom: none;
+      background-image: linear-gradient(var(--line), var(--line));
+      background-size: calc(100% - 32px) 1px;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    .check-item:last-child { background-image: none; }
+    .check-item:has(+ .sub-label) { background-image: none; }
+    .check-item:active { background-color: var(--bg); }
+
+    .checkbox {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s cubic-bezier(.34, 1.4, .64, 1);
+      background: var(--white);
+    }
+    .checkbox svg { opacity: 0; transform: scale(0); transition: all .2s cubic-bezier(.34, 1.4, .64, 1); }
+    .check-item.checked .checkbox svg { opacity: 1; transform: scale(1); }
+    .check-item.checked-a .checkbox { background: var(--ink1); border-color: var(--ink1); }
+    .check-item.checked-b .checkbox { background: var(--ink1); border-color: var(--ink1); }
+    .check-item.checked-c .checkbox { background: var(--ink1);  border-color: var(--ink1);  }
+
+    .check-label {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink3);
+      font-weight: 400;
+      flex: 1;
+      transition: color .15s;
+      padding-top: 1px;
+    }
+    .check-item.checked .check-label { color: var(--ink1); font-weight: 500; }
+
+    /* ── SUB LABEL ── */
+    .sub-label {
+      padding: 16px 20px 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink1);
+      letter-spacing: -.01em;
+      background: var(--white);
+      border-bottom: none;
+    }
+    .sub-source {
+      padding: 8px 20px 0;
+      font-size: 12px;
+      color: var(--ink4);
+      line-height: 1.5;
+    }
+    .source-text {
+      padding: 8px 0px 0;
+      font-size: 12px;
+      color: var(--ink4);
+      line-height: 1.5;
+    }
+
+    /* ── FLOATING BAR ── */
+    .floating-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      background: var(--white);
+      padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+      box-shadow: 0 -1px 0 var(--line), 0 -8px 24px rgba(0,0,0,.06);
+      z-index: 100;
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      margin: 0 0 12px;
+    }
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .progress-label { font-size: 14px; font-weight: 700; color: var(--ink1); }
+    .progress-count { font-size: 14px; font-weight: 700; color: var(--ink1); }
+    .progress-bar-bg { height: 6px; background: var(--line); border-radius: 100px; overflow: hidden; }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--ink1);
+      border-radius: 100px;
+      transition: width .4s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
+
+    /* ── CTA ── */
+    .cta-btn {
+      width: 100%;
+      padding: 17px;
+      background: var(--orange);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: -.01em;
+      margin-bottom: 0;
+      transition: background .15s, transform .1s;
+    }
+    .cta-btn:hover { background: #e03916; }
+    .cta-btn:active { transform: scale(.99); }
+    .cta-btn:disabled { opacity: .65; cursor: default; }
+
+    /* ── RESULT ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .result-section { animation: fadeUp .4s ease; margin-bottom: 48px; }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .score-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 18px 8px 14px;
+      text-align: center;
+    }
+    .score-num {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: 2px;
+    }
+    .score-denom { font-size: 13px; color: var(--ink4); font-weight: 400; }
+    .score-name { font-size: 12px; color: var(--ink1); font-weight: 500; margin-top: 4px; }
+
+    .result-card { background: var(--white); border-radius: 20px; overflow: hidden; }
+
+    .result-top { padding: 36px 24px 16px; text-align: center; }
+
+    .result-icon { margin: 0 auto 20px; display: block; width: 80px; height: 80px; }
+
+    .result-type {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink1);
+      letter-spacing: -.03em;
+      margin-bottom: 8px;
+    }
+    .result-desc {
+      font-size: 14px;
+      color: var(--ink3);
+      line-height: 20px;
+    }
+
+    .result-divider { height: 1px; background: var(--line); }
+    .result-body { position: relative; }
+
+    /* 블러 영역 */
+    .locked-preview {
+      position: relative;
+      padding: 0 20px 0;
+    }
+    .locked-preview::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--white));
+      pointer-events: none;
+      z-index: 1;
+    }
+    .locked-inner {
+      filter: blur(5px);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Tip box */
+    .tip-box {
+      background: var(--bg);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--ink1);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .locked-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink3);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* Risk rows */
+    .risk-section-wrap { margin-bottom: 20px; }
+    .risk-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .risk-row:last-child { border-bottom: none; }
+    .risk-label { font-size: 14px; color: var(--ink1); font-weight: 600; }
+    .risk-bar-wrap { display: flex; align-items: center; gap: 10px; }
+    .risk-bar-bg { width: 100px; height: 6px; background: var(--bg); border-radius: 100px; overflow: hidden; }
+    .risk-bar-fill { height: 100%; border-radius: 100px; }
+    .risk-val { font-size: 13px; font-weight: 700; min-width: 32px; text-align: right; }
+
+    /* Action steps */
+    .action-section-wrap { }
+    .action-step {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: flex-start;
+    }
+    .action-step:last-child { border-bottom: none; }
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--ink1);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text { font-size: 14px; color: var(--ink2); line-height: 1.6; }
+    .step-text strong { color: var(--ink1); font-weight: 700; }
+
+    .locked-bottom-pad { height: 24px; }
+
+    /* 잠금 배너 */
+    .lock-banner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 24px 20px 20px;
+      text-align: center;
+    }
+    .lock-icon {
+      width: 64px; height: 64px;
+      background: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .lock-title { font-size: 20px; font-weight: 700; color: var(--ink1); letter-spacing: -.03em; margin-bottom: 8px; }
+    .lock-sub { font-size: 14px; color: var(--ink3); line-height: 20px; }
+
+    .upsell-wrap { padding: 0 20px 20px; }
+    .upsell-box { background: var(--ink1); border-radius: 16px; padding: 20px; }
+    .upsell-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink3);
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .upsell-features { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+    .upsell-feature {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: rgba(255,255,255,.7);
+    }
+    .upsell-check {
+      width: 24px; height: 24px;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .upgrade-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--orange);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: -.01em;
+    }
+    .email-step { margin-top: 12px; }
+    .email-input {
+      width: 100%; box-sizing: border-box;
+      padding: 13px 16px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--ink1);
+      background: var(--white);
+      outline: none;
+      margin-bottom: 8px;
+      transition: border-color .15s;
+    }
+    .email-input:focus { border-color: var(--orange); }
+    .email-hint { font-size: 12px; color: var(--ink3); margin-bottom: 12px; line-height: 1.5; }
+    .pay-btn {
+      width: 100%; padding: 14px;
+      background: var(--orange); border: none; border-radius: 10px;
+      color: #fff; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: inherit; letter-spacing: -.01em;
+    }
+    .pay-btn:hover { background: #e03916; }
+    .pay-btn:disabled { opacity: .5; cursor: default; }
+
+    /* ── 약관 동의 ── */
+    .consent-wrap { margin: 12px 0 4px; display: flex; flex-direction: column; gap: 8px; }
+    .consent-item { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
+    .consent-item input[type="checkbox"] { flex-shrink: 0; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--orange); cursor: pointer; }
+    .consent-text { font-size: 12px; color: var(--ink3); line-height: 1.5; }
+    .consent-text a { color: var(--orange); text-decoration: underline; }
+    .consent-policy { margin-top: 12px; padding: 14px 16px; background: var(--bg); border-radius: 10px; font-size: 11px; color: var(--ink3); line-height: 1.7; }
+    .consent-policy strong { color: var(--ink2); font-weight: 600; }
+    .biz-info { margin-top: 16px; padding: 14px 16px; background: var(--bg); border-radius: 10px; font-size: 11px; color: var(--ink3); line-height: 1.9; }
+    .biz-info strong { color: var(--ink2); font-weight: 600; display: block; margin-bottom: 4px; }
+
+    .share-btn {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink2);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 10px;
+      transition: border-color .15s;
+    }
+    .share-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 24px 16px 48px;
+      font-size: 11px;
+      color: var(--ink4);
+    }
+
+    .hidden { display: none !important; }
+    .source-list { list-style: none; padding-left: 0; margin: 12px 0 0; }
+    .source-list li { display: flex; align-items: center; gap: 6px; }
+    .source-list li::before { content: "•"; font-size: 0.75em; flex-shrink: 0; }
+    .source-accordion-arrow { transition: transform .25s; flex-shrink: 0; }
+    .source-accordion.open .source-accordion-arrow { transform: rotate(180deg); }
+    .source-accordion-body { display: none; }
+    .source-accordion.open .source-accordion-body { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">
+    <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24.5366 17.0275C24.5366 17.965 24.4116 18.8579 24.1616 19.7061C23.9116 20.5454 23.5589 21.3222 23.1036 22.0364C22.6571 22.7507 22.1214 23.398 21.4964 23.9784C20.8714 24.5498 20.1795 25.0364 19.4205 25.4382C18.6705 25.84 17.8625 26.1525 16.9964 26.3757C16.1393 26.59 15.2554 26.6972 14.3446 26.6972H5.84018V7.41144H14.3446C15.2554 7.41144 16.1393 7.51858 16.9964 7.73287C17.8536 7.94715 18.6571 8.25519 19.4071 8.65697C20.1661 9.04983 20.858 9.53197 21.483 10.1034C22.117 10.6748 22.6571 11.3177 23.1036 12.032C23.5589 12.7373 23.9116 13.5141 24.1616 14.3623C24.4116 15.2016 24.5366 16.09 24.5366 17.0275ZM19.1393 17.0275C19.1393 15.9829 19.0098 14.9918 18.7509 14.0543C18.5009 13.1079 18.108 12.2775 17.5723 11.5632C17.0366 10.8489 16.3536 10.282 15.5232 9.86233C14.7018 9.44269 13.7152 9.23287 12.5634 9.23287H11.1571V24.8222H12.5634C13.6973 24.8222 14.675 24.6123 15.4964 24.1927C16.3268 23.7641 17.0098 23.1927 17.5455 22.4784C18.0902 21.7552 18.492 20.9248 18.7509 19.9873C19.0098 19.0498 19.1393 18.0632 19.1393 17.0275Z" fill="#FF481F"/>
+      <path d="M27.8779 5.15936C28.0581 4.88508 28.4265 4.80883 28.7008 4.989C28.9751 5.16921 29.0515 5.53772 28.8713 5.81204C28.6902 6.08772 28.5283 6.30111 26.5687 8.39883C24.5866 10.5206 20.8857 14.4402 18.9615 16.5048C17.8637 17.8016 17.2372 18.612 16.8322 19.1071C16.643 19.3384 16.4716 19.5401 16.3196 19.666C16.2454 19.7273 16.1138 19.8247 15.9357 19.8617C15.709 19.9088 15.4991 19.8415 15.3455 19.7154C15.2569 19.6428 15.1669 19.5391 15.0955 19.4528C15.0148 19.3554 14.9219 19.2357 14.8222 19.1027C14.6224 18.836 14.3821 18.4988 14.134 18.1431C13.6372 17.4311 13.097 16.6282 12.7643 16.1344C12.5809 15.8622 12.6529 15.4929 12.9251 15.3095C13.1973 15.1261 13.5666 15.198 13.75 15.4702C14.084 15.9659 14.6186 16.7604 15.1088 17.463C15.3542 17.8147 15.5855 18.1392 15.7733 18.3898C15.7913 18.4138 15.8088 18.4369 15.8257 18.4592C15.8522 18.4275 15.881 18.3928 15.9122 18.3546C16.2952 17.8865 16.9536 17.0368 18.0633 15.7263L18.0724 15.7155L18.0821 15.7053C19.9945 13.6532 23.7319 9.69431 25.7001 7.5874C27.6942 5.45281 27.7666 5.32879 27.8779 5.15936Z" fill="white"/>
+    </svg>
+    Decide.Lab
+  </div>
+  <h1>직장 vs 창업<br>나는 어떤 사람인가?</h1>
+  <p class="header-sub">30문항 · 약 5분</p>
+  <div class="score-pills">
+    <div class="score-pill">
+      <div class="pill-dot" style="background:#1EC33F"></div>
+      직장 적합도&nbsp;<span class="pill-score" id="score-A-pill">0/8</span>
+    </div>
+    <div class="score-pill">
+      <div class="pill-dot" style="background:#F4C506"></div>
+      이탈 신호&nbsp;<span class="pill-score" id="score-B-pill">0/7</span>
+    </div>
+    <div class="score-pill">
+      <div class="pill-dot" style="background:#FE4C1B"></div>
+      창업 준비도&nbsp;<span class="pill-score" id="score-C-pill">0/15</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- SECTION A -->
+  <div class="section">
+    <div class="card" id="items-A">
+      <div class="section-header">
+        <div class="section-badge badge-a">A</div>
+        <div>
+          <div class="section-title">직장 적합도 <span class="section-count" id="count-A">0 / 8</span></div>
+          <div class="section-sub">나는 지금 직장에서 성장 중인가?</div>
+        </div>
+      </div>
+      <div class="check-item" data-section="A" data-idx="0">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지난 6개월간 새로운 스킬이나 지식을 업무에 실제로 적용한 경험이 3회 이상 있다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="1">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지금 하는 업무가 3년 후 내 커리어 방향과 연결된다고 구체적으로 설명할 수 있다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="2">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">최근 6개월 내 상사 또는 동료로부터 내 기여에 대한 긍정적 피드백을 받은 적이 있다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="3">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">동종업계 같은 연차와 비교했을 때 연봉이 심하게 낮다고 느끼지 않는다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="4">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">직장을 떠나고 싶은 주된 이유가 '이 일이 싫다'보다 '다른 무언가를 해보고 싶다'에 가깝다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="5">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지금 조직 안에 내가 배울 점이 있는 사람이 최소 1명 이상 있다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="6">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">현재 팀·조직의 방향성에 어느 정도 공감하며, 그 안에서 내 역할이 의미 있다고 느낀다</span>
+      </div>
+      <div class="check-item" data-section="A" data-idx="7">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지금 회사에서 향후 1년 내 성장 기회(승진, 프로젝트, 역할 확장 등)가 존재한다고 본다</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION B -->
+  <div class="section">
+    <div class="card" id="items-B">
+      <div class="section-header">
+        <div class="section-badge badge-b">B</div>
+        <div>
+          <div class="section-title">이탈 신호 <span class="section-count" id="count-B">0 / 7</span></div>
+          <div class="section-sub">나는 떠나야 할 상황인가?</div>
+        </div>
+      </div>
+      <div class="check-item" data-section="B" data-idx="0">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">월요일 아침마다 무기력함이나 불안감이 느껴지고, 이 패턴이 6개월 이상 지속되고 있다</span>
+      </div>
+      <div class="check-item" data-section="B" data-idx="1">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">내 성과가 실력보다 조직 내 정치·구조 문제로 저평가되고 있다고 느낀다</span>
+      </div>
+      <div class="check-item" data-section="B" data-idx="2">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지난 1년간 연봉 또는 직급 변화가 기대보다 현저히 낮았다</span>
+      </div>
+      <div class="check-item" data-section="B" data-idx="3">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지금 이 일을 5년 더 했을 때, 내가 원하는 삶의 모습에 가까워질 것 같지 않다</span>
+      </div>
+      <div class="check-item" data-section="B" data-idx="4">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">현재 역량이라면 지금 회사가 아닌 다른 곳에서도 충분히 일할 수 있다는 확신이 있다</span>
+      </div>
+      <div class="check-item" data-section="B" data-idx="5">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">최근 3개월간 이직 또는 창업 관련 정보를 주도적으로 찾아본 적이 있다</span>
+      </div>
+      <div class="check-item" data-section="B" data-idx="6">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">가까운 동료나 지인이 이직·창업 후 더 나은 상황에 있는 것을 목격한 적이 있다</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION C -->
+  <div class="section">
+    <div class="card" id="items-C">
+      <div class="section-header">
+        <div class="section-badge badge-c">C</div>
+        <div>
+          <div class="section-title">창업 준비도 <span class="section-count" id="count-C">0 / 15</span></div>
+          <div class="section-sub">나는 창업할 준비가 됐는가?</div>
+        </div>
+      </div>
+      <div class="sub-label">시장·사업 검증</div>
+      <div class="check-item" data-section="C" data-idx="0">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">내가 해결하려는 문제와 타깃 고객을 한 문장으로 구체적으로 설명할 수 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="1">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">잠재 고객과 직접 대화(인터뷰, 설문 등)를 최소 5회 이상 해봤다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="2">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">목표 시장의 주요 경쟁사·대체재를 파악하고, 내 차별화 포인트를 말할 수 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="3">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">지금 당장 돈을 낼 의향이 있는 고객을 최소 1명 이상 이름·연락처 수준으로 특정할 수 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="4">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">작은 규모라도 MVP(최소 기능 제품)나 시제품을 만들어본 경험이 있다</span>
+      </div>
+      <div class="sub-label">재무 안전망</div>
+      <div class="check-item" data-section="C" data-idx="5">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">현재 보유 현금(예금·비상금)으로 최소 6개월치 생활비를 충당할 수 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="6">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">매달 나가는 대출 상환액이 월급의 절반도 안 된다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="7">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">창업 초기에도 프리랜싱·컨설팅·부업 등으로 부분적 수입 창출이 가능하다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="8">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">배우자·파트너 등 가족 중 안정적 소득원이 있거나, 부양 부담이 낮은 편이다</span>
+      </div>
+      <div class="sub-label">역량·실행력</div>
+      <div class="check-item" data-section="C" data-idx="9">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">창업하려는 도메인에서 최소 2년 이상 실무 경험이 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="10">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">혼자 또는 소수로 무언가를 기획·실행하고 완료한 경험이 최근 3년 내 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="11">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">초기 고객을 직접 발굴하고 설득할 수 있는 네트워크나 채널이 있다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="12">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">기술·디자인·영업 중 최소 한 가지 영역에서 '이것만큼은 자신 있다'고 말할 수 있다</span>
+      </div>
+      <div class="sub-label">동기·지속력</div>
+      <div class="check-item" data-section="C" data-idx="13">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">창업 동기가 '직장 탈출'보다 '이 문제를 반드시 내가 풀고 싶다'에 더 가깝다</span>
+      </div>
+      <div class="check-item" data-section="C" data-idx="14">
+        <div class="checkbox"><svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1.5 4L4 6.5L9.5 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="check-label">6개월 이상 수입이 없어도 이 일을 지속할 수 있는 심리적 여유가 있다</span>
+      </div>
+    </div>
+    <div class="source-accordion" style="margin-top:24px; background:#E8EAFF; border-radius:16px; padding:16px 20px;">
+      <button onclick="this.closest('.source-accordion').classList.toggle('open')" style="width:100%; display:flex; justify-content:space-between; align-items:center; background:none; border:none; padding:0; cursor:pointer;">
+        <span style="font-size:13px; font-weight:600; color:#AAAECB; text-align:left;">📊 이 문항은 실제 데이터를 바탕으로 만들었어요</span>
+        <svg class="source-accordion-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="#AAAECB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="source-accordion-body">
+        <ul class="source-list" style="font-size:12px; color:#AAAECB; line-height:1.8;">
+          <li>CB Insights — 실패 기업 300개 중 42%가 시장 수요 부재 (2024)</li>
+          <li>CB Insights — 실패 기업 29% 현금 고갈 (2024)</li>
+          <li>중소벤처기업부 창업실태조사 (2023)</li>
+          <li>Kauffman Foundation 창업자 성공 요인 연구 (2023)</li>
+          <li>스타트업 얼라이언스 보고서 (2024)</li>
+          <li>Gallup 직원 몰입도 조사 (2023)</li>
+          <li>블라인드 직장인 설문 (2024)</li>
+          <li>커리어리 이직 패턴 분석 (2024)</li>
+          <li>직장인 대상 창업·부업 관련 In-depth 인터뷰 (2026)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING BAR -->
+  <div class="floating-bar">
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-row">
+        <span class="progress-label">체크한 항목</span>
+        <span class="progress-count" id="progress-count">0 / 30</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </div>
+    <button class="cta-btn" id="cta-btn" onclick="handleSubmit()">결과 확인하기</button>
+  </div>
+  <!-- RESULT -->
+  <div class="result-section hidden" id="result-section">
+
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-num" style="color:#1EC33F"><span id="res-A">0</span><span class="score-denom">/8</span></div>
+        <div class="score-name">직장 적합도</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num" style="color:#F4C506"><span id="res-B">0</span><span class="score-denom">/7</span></div>
+        <div class="score-name">이탈 신호</div>
+      </div>
+      <div class="score-card">
+        <div class="score-num" style="color:#FE4C1B"><span id="res-C">0</span><span class="score-denom">/15</span></div>
+        <div class="score-name">창업 준비도</div>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-top">
+        <div class="result-icon" id="result-icon"></div>
+        <div class="result-type" id="result-type"></div>
+        <p class="result-desc" id="result-desc"></p>
+      </div>
+
+      <!-- 탐색 중일 때 숨김, 나머지 유형은 표시 -->
+      <div id="result-locked-body">
+        <div class="result-body">
+          <div class="locked-preview">
+            <div class="tip-box" id="result-tip" style="margin-bottom:24px;"></div>
+            <div class="locked-inner">
+              <div class="locked-section-title">영역별 리스크 분석</div>
+              <div class="risk-section-wrap" id="risk-rows"></div>
+
+              <div class="locked-section-title">지금 당장 해야 할 행동 3가지</div>
+              <div class="action-section-wrap" id="action-steps"></div>
+
+              <div class="locked-bottom-pad"></div>
+            </div>
+          </div>
+
+          <div class="lock-banner">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-title">상세 분석은 잠겨 있어요</div>
+            <div class="lock-sub">리스크 등급·점수·행동 플랜을<br>지금 바로 확인할 수 있어요</div>
+          </div>
+
+          <div class="upsell-wrap">
+            <div class="upsell-box">
+              <div class="upsell-label">정밀 분석에서 확인할 수 있어요</div>
+              <div class="upsell-features">
+                <div class="upsell-feature">
+                  <div class="upsell-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#FE4C1B" stroke="#FE4C1B"/><path d="M16 9.6875L10.5 15.1875L8 12.6875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  100점 종합 스코어 — 막연한 불안을 숫자로
+                </div>
+                <div class="upsell-feature">
+                  <div class="upsell-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#FE4C1B" stroke="#FE4C1B"/><path d="M16 9.6875L10.5 15.1875L8 12.6875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  직장·이탈·창업 영역별 리스크 등급
+                </div>
+                <div class="upsell-feature">
+                  <div class="upsell-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#FE4C1B" stroke="#FE4C1B"/><path d="M16 9.6875L10.5 15.1875L8 12.6875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  내 유형에 맞는 다음 행동 3단계 가이드
+                </div>
+              </div>
+              <button class="upgrade-btn" id="upgrade-btn">정밀 분석 받기 · 9,900원</button>
+              <div class="email-step hidden" id="email-step">
+                <input class="email-input" id="email-input" type="email" placeholder="결과를 받을 이메일 주소를 입력하세요" />
+                <p class="email-hint">결제 완료 후 이 이메일로 정밀 분석 결과 링크를 보내드려요.</p>
+
+                <!-- 환불 정책 안내 -->
+                <div class="consent-policy">
+                  <strong>디지털 콘텐츠 환불 정책</strong>
+                  결제 완료 후 <strong>콘텐츠가 전달된 시점부터</strong> 열람 여부와 관계없이 청약철회(환불)가 불가합니다. 전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항 제5호에 따른 디지털 콘텐츠 특성상 공급이 개시된 경우 환불이 제한됩니다. 결제 전 충분히 확인 후 구매해 주세요.
+                </div>
+
+                <!-- 동의 체크박스 -->
+                <div class="consent-wrap">
+                  <label class="consent-item">
+                    <input type="checkbox" id="consent-privacy" />
+                    <span class="consent-text">[필수] 개인정보 수집·이용에 동의합니다 — 수집 항목: 이메일 주소 / 수집 목적: 분석 결과 전달 / 보유 기간: 서비스 제공 완료 후 즉시 파기</span>
+                  </label>
+                  <label class="consent-item">
+                    <input type="checkbox" id="consent-terms" />
+                    <span class="consent-text">[필수] 이용약관 및 환불 정책에 동의합니다 — 콘텐츠 전달 후 열람 여부와 관계없이 환불이 불가함을 확인했습니다</span>
+                  </label>
+                </div>
+
+                <button class="pay-btn" id="pay-btn" disabled>결제하기 · 9,900원</button>
+
+                <!-- 사업자 고지 (전자상거래법 제13조) -->
+                <div class="biz-info">
+                  <strong>사업자 정보</strong>
+                  상호: 빛이랑 (decide.lab) &nbsp;|&nbsp; 대표자: 사공선<br>
+                  사업자등록번호: 576-37-00764<br>
+                  통신판매업 신고번호: 제2020-성남분당에이-1536호<br>
+                  주소: (우 16873) 경기도 용인시 수지구 대지로 36 신흥빌딩 3동 302호<br>
+                  고객센터: sun314.studio@gmail.com
+                </div>
+              </div>
+            </div>
+            <button class="share-btn" onclick="handleShare()">내 유형 공유하기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 탐색 중 전용: 공유 버튼만 -->
+      <div id="result-explore-body" class="hidden">
+        <div style="padding: 0 20px 20px;">
+          <button class="share-btn" onclick="handleShare()">내 유형 공유하기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer style="height:78px; display:flex; align-items:center; justify-content:center; background:var(--bg);">
+  <span style="font-size:13px; color:#B0B0CC; font-weight:400; letter-spacing:-.01em;">© 2026 decide.lab</span>
+</footer>
+<div style="height:160px;"></div>
+
+<script>
+  /* ── 아이콘 SVG ── */
+  const ICONS = {
+    growth: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="78" height="78" rx="8" fill="#1EC33F"/><rect x="8" y="50" width="18" height="20" fill="white"/><rect x="30" y="30" width="18" height="40" fill="white"/><rect x="52" y="8" width="18" height="62" fill="white"/></svg>`,
+    startup: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 39C0 17.4609 17.4609 0 39 0H67.1478C73.1413 0 78 4.85868 78 10.8522V39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39Z" fill="#FE4C1B"/><path d="M61 12.7578L64.3643 9.39355L68.6064 13.6367L65.2432 17H70V23H65.2422L68.6064 26.3643L64.3643 30.6064L61 27.2422V32H55V27.2422L51.6357 30.6064L47.3936 26.3643L50.7578 23H46V17H50.7578L47.3936 13.6357L51.6357 9.39355L55 12.7578V8H61V12.7578Z" fill="white"/></svg>`,
+    transition: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2102_2340)"><ellipse cx="39" cy="66" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="48" rx="39" ry="12" fill="#9736D7"/><ellipse cx="39" cy="30" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="12" rx="39" ry="12" fill="#9736D7"/></g><defs><clipPath id="clip0_2102_2340"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
+    burnout: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2102_2429)"><path d="M55 0C67.7026 0 78 10.2975 78 23C78 29.2189 75.5307 34.8602 71.5205 39C75.5307 43.1398 78 48.7811 78 55C78 67.7026 67.7026 78 55 78C48.7811 78 43.1398 75.5307 39 71.5205C34.8602 75.5307 29.2189 78 23 78C10.2975 78 0 67.7026 0 55C0 48.7814 2.46861 43.1398 6.47852 39C2.46861 34.8602 0 29.2186 0 23C0 10.2975 10.2975 0 23 0C29.2186 0 34.8602 2.46861 39 6.47852C43.1398 2.46861 48.7814 0 55 0Z" fill="#F4C506"/><rect x="32.2426" y="28.2426" width="24" height="6" transform="rotate(45 32.2426 28.2426)" fill="white"/><rect x="49.2426" y="32.2426" width="24" height="6" transform="rotate(135 49.2426 32.2426)" fill="white"/></g><defs><clipPath id="clip0_2102_2429"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
+    explore: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2102_2428)"><path d="M39 0C60.5391 0 78 17.4609 78 39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39C0 17.4609 17.4609 0 39 0Z" fill="#BCBECC"/><circle cx="39.0001" cy="17.5714" r="3.57143" fill="white"/><circle cx="60.4286" cy="39.0001" r="3.57143" transform="rotate(90 60.4286 39.0001)" fill="white"/><circle cx="23.8476" cy="54.1523" r="3.57143" transform="rotate(-135 23.8476 54.1523)" fill="white"/><circle cx="39.0001" cy="60.4285" r="3.57143" fill="white"/><circle cx="17.5715" cy="39.0001" r="3.57143" transform="rotate(90 17.5715 39.0001)" fill="white"/><circle cx="54.1524" cy="23.8479" r="3.57143" transform="rotate(-135 54.1524 23.8479)" fill="white"/><circle cx="23.8477" cy="23.8476" r="3.57143" transform="rotate(-45 23.8477 23.8476)" fill="white"/><circle cx="54.1521" cy="54.1524" r="3.57143" transform="rotate(-45 54.1521 54.1524)" fill="white"/></g><defs><clipPath id="clip0_2102_2428"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
+  };
+
+  /* ── 결과 데이터 ── */
+  const RESULTS = [
+    {
+      key: 'growth',
+      type: '직장 성장형',
+      condition: (a,b,c) => a >= 5 && b <= 2,
+      desc: '지금 직장에서 충분히 성장 가능한 상태예요. 섣부른 창업보다 커리어 최적화가 우선이에요.',
+      tip: '💡 현재 직장에서 연봉 협상, 사내 이동, 역량 개발에 집중하세요.',
+      steps: [
+        '<strong>연봉 협상 타이밍을 잡으세요</strong> — 지난 6개월 성과를 수치로 정리하고 팀장과 1on1을 요청하세요',
+        '<strong>사내 이동 옵션을 탐색하세요</strong> — 관심 있는 팀의 프로젝트에 자원하거나 담당자와 커피챗을 시도하세요',
+        '<strong>외부 시장가치를 확인하세요</strong> — 이직 제안 1~2개를 받아봄으로써 협상 레버리지와 현재 위치를 파악하세요',
+      ],
+    },
+    {
+      key: 'burnout',
+      type: '번아웃 경고형',
+      condition: (a,b,c) => a <= 3 && b >= 5 && c <= 6,
+      desc: '직장도 창업도 지금은 무리예요. 회복과 방향 재정립이 먼저입니다.',
+      tip: '💡 지금 당장 결정하지 마세요. 번아웃 회복 후 재진단을 권장해요.',
+      steps: [
+        '<strong>큰 결정을 최소 4주 뒤로 미루세요</strong> — 번아웃 상태에서 내린 결정은 후회 확률이 2배 높다는 연구 결과가 있어요',
+        '<strong>에너지 회복을 첫 번째 목표로 삼으세요</strong> — 수면·운동·연결 중 한 가지를 2주간 집중 개선하세요',
+        '<strong>번아웃 원인을 구조적으로 분리하세요</strong> — 직무 문제인지, 환경 문제인지, 관계 문제인지 명확히 해야 올바른 해법이 나와요',
+      ],
+    },
+    {
+      key: 'startup',
+      type: '창업 실행형',
+      condition: (a,b,c) => b >= 4 && c >= 10,
+      desc: '이탈 신호와 창업 준비도 모두 충족된 상태예요. 지금이 실행 타이밍이에요.',
+      tip: '💡 구체적인 실행 계획을 수립하고 첫 고객을 확보하는 단계로 넘어가세요.',
+      steps: [
+        '<strong>퇴사 날짜를 역산하세요</strong> — 6개월치 생활비 확보 시점을 기준으로 구체적인 D-Day를 설정하세요',
+        '<strong>첫 유료 고객 1명을 지금 찾으세요</strong> — 아는 사람 중 이 문제를 가진 사람 5명에게 오늘 연락하세요',
+        '<strong>사이드로 먼저 검증하세요</strong> — 퇴사 전 주말 3시간을 써서 MVP 반응을 측정하고 리스크를 줄이세요',
+      ],
+    },
+    {
+      key: 'transition',
+      type: '전환 준비형',
+      condition: (a,b,c) => a <= 4 && b >= 3 && c <= 5,
+      desc: '떠날 신호는 있지만 준비는 아직 부족해요. 이직 또는 사이드 프로젝트가 먼저예요.',
+      tip: '💡 창업 준비도 C 섹션 미체크 항목을 보완하거나 이직을 먼저 고려하세요.',
+      steps: [
+        '<strong>창업 준비도 부족 항목을 파악하세요</strong> — C 섹션에서 체크 못 한 항목이 가장 먼저 채워야 할 숙제예요',
+        '<strong>이직을 단기 전략으로 활용하세요</strong> — 창업 도메인에 더 가까운 회사로 이동해 실력과 네트워크를 쌓으세요',
+        '<strong>사이드 프로젝트로 검증 기간을 확보하세요</strong> — 퇴근 후 2시간으로 가설을 검증하고 6개월 뒤 재진단하세요',
+      ],
+    },
+  ];
+
+  const EXPLORE = {
+    key: 'explore',
+    type: '탐색 중',
+    desc: '아직 패턴이 명확하지 않아요. 더 솔직하게 체크해 주세요.',
+  };
+
+  /* ── 상태 ── */
+  const checked = {};
+  const MAX = { A: 8, B: 7, C: 15 };
+
+  function getScores() {
+    const s = { A: 0, B: 0, C: 0 };
+    for (const k in checked) if (checked[k]) s[k.split('-')[0]]++;
+    return s;
+  }
+
+  function getResult(a, b, c) {
+    for (const r of RESULTS) if (r.condition(a, b, c)) return r;
+    return EXPLORE;
+  }
+
+  /* ── UI 업데이트 ── */
+  function updateUI() {
+    const s = getScores();
+    const total = Object.values(checked).filter(Boolean).length;
+    document.getElementById('score-A-pill').textContent = `${s.A}/8`;
+    document.getElementById('score-B-pill').textContent = `${s.B}/7`;
+    document.getElementById('score-C-pill').textContent = `${s.C}/15`;
+    document.getElementById('count-A').textContent = `${s.A} / 8`;
+    document.getElementById('count-B').textContent = `${s.B} / 7`;
+    document.getElementById('count-C').textContent = `${s.C} / 15`;
+    document.getElementById('progress-count').textContent = `${total} / 30`;
+    document.getElementById('progress-fill').style.width = `${(total / 30) * 100}%`;
+    document.getElementById('result-section').classList.add('hidden');
+  }
+
+  /* ── 체크 인터랙션 ── */
+  let resultShown = false;
+  document.querySelectorAll('.check-item').forEach(item => {
+    item.addEventListener('click', function () {
+      if (resultShown) return;
+      const sec = this.dataset.section;
+      const key = `${sec}-${this.dataset.idx}`;
+      checked[key] = !checked[key];
+      const on = checked[key];
+      this.classList.toggle('checked', on);
+      this.classList.toggle(`checked-${sec.toLowerCase()}`, on);
+      updateUI();
+    });
+  });
+
+  /* ── 결과 제출 ── */
+  let busy = false;
+  function handleSubmit() {
+    if (busy) return;
+    busy = true;
+    const btn = document.getElementById('cta-btn');
+    btn.textContent = '분석 중...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      const s = getScores();
+      const r = getResult(s.A, s.B, s.C);
+      const isExplore = r.key === 'explore';
+
+      // 점수 카드
+      document.getElementById('res-A').textContent = s.A;
+      document.getElementById('res-B').textContent = s.B;
+      document.getElementById('res-C').textContent = s.C;
+
+      // 아이콘 + 유형 + 설명
+      document.getElementById('result-icon').innerHTML = ICONS[r.key];
+      document.getElementById('result-type').textContent = r.type;
+      document.getElementById('result-desc').textContent = r.desc;
+
+      if (isExplore) {
+        // 탐색 중: 잠금 없음, 공유만
+        document.getElementById('result-locked-body').classList.add('hidden');
+        document.getElementById('result-explore-body').classList.remove('hidden');
+      } else {
+        document.getElementById('result-locked-body').classList.remove('hidden');
+        document.getElementById('result-explore-body').classList.add('hidden');
+
+        // Tip
+        document.getElementById('result-tip').textContent = r.tip;
+
+        // 리스크 분석
+        const risks = [
+          { label: '직장 적합도', val: Math.round((s.A / 8) * 100),  color: '#FE4C1B' },
+          { label: '이탈 위험도', val: Math.round((s.B / 7) * 100),  color: '#F4C506' },
+          { label: '창업 준비도', val: Math.round((s.C / 15) * 100), color: '#1EC33F' },
+        ];
+        document.getElementById('risk-rows').innerHTML = risks.map(ri => `
+          <div class="risk-row">
+            <span class="risk-label">${ri.label}</span>
+            <div class="risk-bar-wrap">
+              <div class="risk-bar-bg">
+                <div class="risk-bar-fill" style="width:${ri.val}%;background:${ri.color}"></div>
+              </div>
+              <span class="risk-val" style="color:${ri.color}">${ri.val}점</span>
+            </div>
+          </div>`).join('');
+
+        // 행동 3단계
+        document.getElementById('action-steps').innerHTML = r.steps.map((t, i) => `
+          <div class="action-step">
+            <div class="step-num">${i + 1}</div>
+            <div class="step-text">${t}</div>
+          </div>`).join('');
+      }
+
+      const el = document.getElementById('result-section');
+      el.classList.remove('hidden');
+      document.querySelector('.floating-bar').classList.add('hidden');
+      resultShown = true;
+      btn.disabled = false;
+      busy = false;
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }, 700);
+  }
+
+  /* ── 공유 ── */
+  function handleShare() {
+    const s = getScores();
+    const r = getResult(s.A, s.B, s.C);
+    const text = `나는 "${r.type}" 유형이에요\n직장 적합도 ${s.A}/8 · 이탈 신호 ${s.B}/7 · 창업 준비도 ${s.C}/15\n\n당신은 어떤 유형인가요? → decide.lab에서 무료 진단해보세요`;
+    if (navigator.share) {
+      navigator.share({ title: '직장 vs 창업 진단 | decide.lab', text }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(text)
+        .then(() => alert('클립보드에 복사됐어요 ✅'))
+        .catch(() => alert('URL을 직접 복사해주세요.'));
+    }
+  }
+
+  /* ── 업그레이드 ── */
+  const PAYMENT_URL = 'https://toss.me/decidelab/9900'; // 토스 결제 링크 (준비되면 교체)
+
+  document.getElementById('upgrade-btn').addEventListener('click', () => {
+    document.getElementById('upgrade-btn').classList.add('hidden');
+    document.getElementById('email-step').classList.remove('hidden');
+    document.getElementById('email-input').focus();
+  });
+
+  function updatePayBtn() {
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email-input').value.trim());
+    const privacyOk = document.getElementById('consent-privacy').checked;
+    const termsOk = document.getElementById('consent-terms').checked;
+    document.getElementById('pay-btn').disabled = !(emailOk && privacyOk && termsOk);
+  }
+  document.getElementById('email-input').addEventListener('input', updatePayBtn);
+  document.getElementById('consent-privacy').addEventListener('change', updatePayBtn);
+  document.getElementById('consent-terms').addEventListener('change', updatePayBtn);
+
+  document.getElementById('pay-btn').addEventListener('click', () => {
+    const email = document.getElementById('email-input').value.trim();
+    const s = getScores();
+    const r = getResult(s.A, s.B, s.C);
+    const url = `${PAYMENT_URL}?email=${encodeURIComponent(email)}&type=${r.key}&scores=${s.A}-${s.B}-${s.C}`;
+    window.open(url, '_blank');
+  });
+</script>
+</body>
+</html>
