@@ -450,7 +450,7 @@
     /* ── 블러 영역 ── */
     .locked-preview {
       position: relative;
-      padding: 0 20px 0;
+      padding: 0;
     }
     .locked-preview::after {
       content: '';
@@ -467,21 +467,33 @@
       pointer-events: none;
     }
 
-    /* ── Risk rows ── */
-    .risk-section-wrap { margin-bottom: 20px; }
-    .risk-row {
+    /* ── Risk donut cards (3-col) ── */
+    .risk-section-wrap { margin-bottom: 20px; display: flex; gap: 10px; }
+    .risk-card {
+      flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
+      gap: 6px;
     }
-    .risk-row:last-child { border-bottom: none; }
-    .risk-label { font-size: 14px; color: var(--ink1); font-weight: 600; }
-    .risk-bar-wrap { display: flex; align-items: center; gap: 10px; }
-    .risk-bar-bg { width: 80px; height: 5px; background: var(--bg); border-radius: 100px; overflow: hidden; }
-    .risk-bar-fill { height: 100%; border-radius: 100px; }
-    .risk-val { font-size: 13px; font-weight: 700; min-width: 34px; text-align: right; }
+    .risk-card-label {
+      font-size: 12px;
+      color: var(--ink2);
+      font-weight: 600;
+      text-align: center;
+    }
+    .risk-donut-wrap {
+      position: relative;
+      width: 80px; height: 80px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .risk-donut-wrap svg { position: absolute; inset: 0; }
+    .risk-donut-val {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      position: relative; z-index: 1;
+    }
 
     /* ── Action steps ── */
     .action-section-wrap { }
@@ -519,13 +531,13 @@
       text-align: center;
     }
     .lock-icon {
-      width: 64px; height: 64px;
+      width: 80px; height: 80px;
       background: var(--bg);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 24px;
       margin-bottom: 16px;
     }
     .lock-title { font-size: 20px; font-weight: 700; color: var(--ink1); letter-spacing: -.03em; margin-bottom: 8px; }
@@ -592,9 +604,9 @@
     .email-input:focus { border-color: var(--ink1); }
     .email-hint { font-size: 12px; color: var(--orange); margin-bottom: 12px; line-height: 1.5; font-weight: 500; }
     .pay-btn {
-      width: 100%; padding: 14px;
+      width: 100%; padding: 16px;
       background: var(--orange); border: none; border-radius: 10px;
-      color: #fff; font-size: 14px; font-weight: 700;
+      color: #fff; font-size: 16px; font-weight: 700;
       cursor: pointer; font-family: inherit; letter-spacing: -.01em;
     }
     .pay-btn:hover { background: #e03916; }
@@ -968,7 +980,7 @@
       <!-- 저장 버튼 -->
       <button class="save-btn" onclick="handleSave()">
         내 유형 저장하기
-        <img src="../design/icon_download.svg" width="24" height="24" style="display:block; opacity:.7; transition: opacity .15s, filter .15s;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; opacity:.7;"><path d="M12 3v11m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
     </div>
 
@@ -977,8 +989,8 @@
       <div class="result-body">
         <div class="locked-preview">
           <div class="locked-inner">
-            <div style="padding: 0 20px 0;">
-              <div class="locked-section-title" style="padding: 0 0 0;">영역별 리스크 분석</div>
+            <div style="padding: 32px 20px 0;">
+              <div class="locked-section-title" style="padding: 0 0 24px;">영역별 리스크 분석</div>
               <div class="risk-section-wrap" id="risk-rows"></div>
 
               <div class="locked-section-title" style="margin-top: 8px;">지금 당장 해야 할 행동 3가지</div>
@@ -991,7 +1003,7 @@
 
         <div class="lock-banner">
           <div class="lock-icon">🔒</div>
-          <div class="lock-title">지금 바로 정밀 분석 리포트를 확인해 보세요</div>
+          <div class="lock-title">정밀 분석 리포트를 확인해 보세요</div>
           <div class="lock-sub">리스크 등급·점수·행동 플랜을<br>지금 바로 확인할 수 있어요</div>
         </div>
 
@@ -1107,7 +1119,7 @@
                 <span style="font-size:13px; color:rgba(0,0,0,.35); text-decoration:line-through; font-weight:400;">19,900원</span>
                 <span style="font-size:13px; color:var(--ink1); font-weight:600;">9,900원</span>
               </div>
-              <button class="pay-btn" id="pay-btn" disabled>결제하기 · 9,900원</button>
+              <button class="pay-btn" id="pay-btn" disabled>정밀 분석 받기</button>
             </div>
           </div>
         </div>
@@ -1153,7 +1165,7 @@
     상호: 빛이랑 (decide.lab) &nbsp;|&nbsp; 대표자: 사공선<br>
     사업자등록번호: 576-37-00764 &nbsp;|&nbsp; 통신판매업 신고번호: 제2020-성남분당에이-1536호<br>
     주소: (우 16873) 경기도 용인시 수지구 대지로 36 신흥빌딩 3동 302호<br>
-    고객센터: sun314.studio@gmail.com
+    고객센터: sun314.studio@gmail.com &nbsp;|&nbsp; 전화: 070-8058-8767
   </div>
   <div style="font-size:12px; color:#B0B0CC; font-weight:400; letter-spacing:-.01em;">© 2026 decide.lab</div>
 </footer>
@@ -1340,16 +1352,23 @@
           { label: '이탈 위험도', val: pB, color: '#F4C506' },
           { label: '창업 준비도', val: pC, color: '#1EC33F' },
         ];
-        document.getElementById('risk-rows').innerHTML = risks.map(ri => `
-          <div class="risk-row">
-            <span class="risk-label">${ri.label}</span>
-            <div class="risk-bar-wrap">
-              <div class="risk-bar-bg">
-                <div class="risk-bar-fill" style="width:${ri.val}%;background:${ri.color}"></div>
-              </div>
-              <span class="risk-val" style="color:${ri.color}">${ri.val}점</span>
+        const CIRC = 2 * Math.PI * 30; // ≈ 188.5
+        document.getElementById('risk-rows').innerHTML = risks.map(ri => {
+          const offset = CIRC * (1 - ri.val / 100);
+          return `
+          <div class="risk-card">
+            <div class="risk-card-label">${ri.label}</div>
+            <div class="risk-donut-wrap">
+              <svg width="80" height="80" viewBox="0 0 80 80" style="transform:rotate(-90deg)">
+                <circle cx="40" cy="40" r="30" fill="none" stroke="#ECEDF2" stroke-width="8"/>
+                <circle cx="40" cy="40" r="30" fill="none" stroke="${ri.color}" stroke-width="8"
+                  stroke-dasharray="${CIRC.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
+                  stroke-linecap="round"/>
+              </svg>
+              <div class="risk-donut-val" style="color:${ri.color}">${ri.val}</div>
             </div>
-          </div>`).join('');
+          </div>`;
+        }).join('');
 
         // 행동 3단계
         document.getElementById('action-steps').innerHTML = r.steps.map((t, i) => `
@@ -1493,7 +1512,7 @@
     } catch (e) {
       alert('서버 연결 오류가 발생했어요. 잠시 후 다시 시도해주세요.');
       btn.disabled = false;
-      btn.textContent = '결제하기 · 9,900원';
+      btn.textContent = '정밀 분석 받기';
       return;
     }
 
@@ -1522,7 +1541,7 @@
       } else {
         alert('결제가 취소됐어요: ' + rsp.error_msg);
         btn.disabled = false;
-        btn.textContent = '결제하기 · 9,900원';
+        btn.textContent = '정밀 분석 받기';
       }
     });
   });
