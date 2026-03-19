@@ -118,7 +118,7 @@
     }
 
     /* ── SECTION ── */
-    .section { margin-bottom: 32px; }
+    .section { margin-bottom: 24px; }
     .section-header {
       display: flex;
       align-items: flex-start;
@@ -291,51 +291,163 @@
     }
     .result-section { animation: fadeUp .4s ease; margin-bottom: 48px; }
 
-    .score-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .score-card {
-      background: var(--white);
+    /* ── RESULT DARK CARD ── */
+    .result-dark-card {
+      background: #0A0D2D;
       border-radius: 16px;
-      padding: 18px 8px 14px;
-      text-align: center;
+      overflow: hidden;
+      margin-bottom: 12px;
+      padding-bottom: 24px;
     }
-    .score-num {
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 1;
-      margin-bottom: 4px;
-      letter-spacing: 2px;
+
+    /* ── RESULT DARK CARD 헤더 ── */
+    .rdc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px 0;
     }
-    .score-denom { font-size: 13px; color: var(--ink4); font-weight: 400; }
-    .score-name { font-size: 12px; color: var(--ink1); font-weight: 500; margin-top: 4px; }
+    .rdc-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -.01em;
+    }
+    .rdc-tagline {
+      font-size: 12px;
+      color: rgba(255,255,255,.35);
+      font-weight: 400;
+    }
 
-    .result-card { background: var(--white); border-radius: 20px; overflow: hidden; }
+    /* ── RESULT 아이콘 ── */
+    .rdc-icon-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 0;
+    }
 
-    .result-top { padding: 36px 24px 16px; text-align: center; }
-
-    .result-icon { margin: 0 auto 20px; display: block; width: 80px; height: 80px; }
-
+    /* ── RESULT 유형 + 설명 ── */
     .result-type {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ink1);
-      letter-spacing: -.03em;
-      margin-bottom: 8px;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      letter-spacing: -.04em;
+      padding: 16px 24px 0;
+      line-height: 1.2;
     }
     .result-desc {
       font-size: 14px;
-      color: var(--ink3);
-      line-height: 20px;
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      padding: 8px 32px 0;
+      line-height: 1.65;
     }
 
-    .result-divider { height: 1px; background: var(--line); }
+    /* ── RESULT 점수 패널 (dark) ── */
+    .rdc-score-panel {
+      margin: 20px 20px 0;
+      background: #1C1F40;
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .rdc-score-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+    }
+    .rdc-badge {
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800;
+      color: --ink1(255, 255, 255);
+      background: #676B82;
+      flex-shrink: 0;
+    }
+    .rdc-score-label { font-size: 14px; color: rgba(255,255,255,.6); flex: 1; font-weight: 500; }
+    .rdc-bar-bg {
+      width: 80px; height: 6px;
+      background: #282B4E;
+      border-radius: 100px;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .rdc-bar-fill {
+      height: 100%; border-radius: 100px; width: 0%;
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .rdc-score-val {
+      font-size: 12px; font-weight: 700;
+      color: rgba(255,255,255,.75);
+      min-width: 36px; text-align: right;
+    }
+
+    /* ── 팁 박스 ── */
+    .rc-tip-box {
+      background: #1C1F40;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 16px 20px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+      line-height: 1.6;
+    }
+
+    /* ── RESULT LIGHT CARD ── */
+    .result-light-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    /* ── 아이콘 float 애니메이션 ── */
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .rdc-icon-wrap svg { animation: iconFloat 3.2s ease-in-out infinite; }
+    #result-graphic svg { width: 48px; height: 48px; }
+
+    /* ── 저장 버튼 ── */
+    .save-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: calc(100% - 48px);
+      margin: 40px 24px 0px;
+      padding: 14px;
+      background: transparent;
+      border: 1px solid #676B82;
+      border-radius: 10px;
+      color: rgba(255,255,255,.65);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color .15s, color .15s;
+    }
+    .save-btn:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
+    .save-btn:hover img, .save-btn:active img { opacity: 1; filter: brightness(0) invert(1); }
+
     .result-body { position: relative; }
 
-    /* 블러 영역 */
+    /* ── 섹션 타이틀 ── */
+    .locked-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink3);
+      letter-spacing: .04em;
+      margin-bottom: 8px;
+    }
+
+    /* ── 블러 영역 ── */
     .locked-preview {
       position: relative;
       padding: 0 20px 0;
@@ -355,43 +467,23 @@
       pointer-events: none;
     }
 
-    /* Tip box */
-    .tip-box {
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 14px 16px;
-      font-size: 14px;
-      color: var(--ink1);
-      line-height: 1.65;
-      margin-bottom: 20px;
-    }
-
-    .locked-section-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink3);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    /* Risk rows */
+    /* ── Risk rows ── */
     .risk-section-wrap { margin-bottom: 20px; }
     .risk-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 0;
+      padding: 14px 0;
       border-bottom: 1px solid var(--line);
     }
     .risk-row:last-child { border-bottom: none; }
     .risk-label { font-size: 14px; color: var(--ink1); font-weight: 600; }
     .risk-bar-wrap { display: flex; align-items: center; gap: 10px; }
-    .risk-bar-bg { width: 100px; height: 6px; background: var(--bg); border-radius: 100px; overflow: hidden; }
+    .risk-bar-bg { width: 80px; height: 5px; background: var(--bg); border-radius: 100px; overflow: hidden; }
     .risk-bar-fill { height: 100%; border-radius: 100px; }
-    .risk-val { font-size: 13px; font-weight: 700; min-width: 32px; text-align: right; }
+    .risk-val { font-size: 13px; font-weight: 700; min-width: 34px; text-align: right; }
 
-    /* Action steps */
+    /* ── Action steps ── */
     .action-section-wrap { }
     .action-step {
       display: flex;
@@ -402,21 +494,22 @@
     }
     .action-step:last-child { border-bottom: none; }
     .step-num {
-      width: 26px; height: 26px;
+      width: 20px; height: 20px;
       border-radius: 50%;
       background: var(--ink1);
       color: #fff;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      margin-top: 2px;
     }
     .step-text { font-size: 14px; color: var(--ink2); line-height: 1.6; }
     .step-text strong { color: var(--ink1); font-weight: 700; }
 
     .locked-bottom-pad { height: 24px; }
 
-    /* 잠금 배너 */
+    /* ── 잠금 배너 ── */
     .lock-banner {
       display: flex;
       flex-direction: column;
@@ -439,45 +532,49 @@
     .lock-sub { font-size: 14px; color: var(--ink3); line-height: 20px; }
 
     .upsell-wrap { padding: 0 20px 20px; }
-    .upsell-box { background: var(--ink1); border-radius: 16px; padding: 20px; }
+    .upsell-box { background: #fff; border: 1px solid var(--orange); border-radius: 16px; padding: 20px; }
     .upsell-label {
       font-size: 12px;
       font-weight: 600;
-      color: var(--ink3);
+      color: var(--ink2);
       letter-spacing: 0px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
-    .upsell-features { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+    .upsell-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
     .upsell-feature {
       display: flex;
       align-items: center;
-      gap: 4px;
-      font-size: 13px;
-      color: rgba(255,255,255,.7);
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink1);
     }
     .upsell-check {
-      width: 24px; height: 24px;
-      background: rgba(255,255,255,.08);
+      --check-circle: #FE4C1B; --check-mark: white;
+      width: auto; height: auto;
+      background: transparent;
       border-radius: 50%;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       flex-shrink: 0;
     }
     .upgrade-btn {
       width: 100%;
-      padding: 14px;
+      padding: 16px;
       background: var(--orange);
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       color: #fff;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       font-family: inherit;
       letter-spacing: -.01em;
+      transition: opacity .15s;
     }
+    .upgrade-btn:hover { opacity: .88; }
     .email-step { margin-top: 12px; }
     .email-input {
       width: 100%; box-sizing: border-box;
@@ -492,8 +589,8 @@
       margin-bottom: 8px;
       transition: border-color .15s;
     }
-    .email-input:focus { border-color: var(--orange); }
-    .email-hint { font-size: 12px; color: var(--ink3); margin-bottom: 12px; line-height: 1.5; }
+    .email-input:focus { border-color: var(--ink1); }
+    .email-hint { font-size: 12px; color: var(--orange); margin-bottom: 12px; line-height: 1.5; font-weight: 500; }
     .pay-btn {
       width: 100%; padding: 14px;
       background: var(--orange); border: none; border-radius: 10px;
@@ -504,15 +601,39 @@
     .pay-btn:disabled { opacity: .5; cursor: default; }
 
     /* ── 약관 동의 ── */
-    .consent-wrap { margin: 12px 0 4px; display: flex; flex-direction: column; gap: 8px; }
-    .consent-item { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
-    .consent-item input[type="checkbox"] { flex-shrink: 0; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--orange); cursor: pointer; }
-    .consent-text { font-size: 12px; color: var(--ink3); line-height: 1.5; }
-    .consent-text a { color: var(--orange); text-decoration: underline; }
-    .consent-policy { margin-top: 12px; padding: 14px 16px; background: var(--bg); border-radius: 10px; font-size: 11px; color: var(--ink3); line-height: 1.7; }
-    .consent-policy strong { color: var(--ink2); font-weight: 600; }
-    .biz-info { margin-top: 16px; padding: 14px 16px; background: var(--bg); border-radius: 10px; font-size: 11px; color: var(--ink3); line-height: 1.9; }
-    .biz-info strong { color: var(--ink2); font-weight: 600; display: block; margin-bottom: 4px; }
+    .consent-section { margin-bottom: 16px; }
+    .consent-section-title { font-size: 12px; font-weight: 600; color: var(--ink2); margin-bottom: 16px; letter-spacing: 0px; text-transform: uppercase; }
+    .consent-all-row { display: flex; align-items: center; gap: 8px; background: none; border-radius: 0; padding: 8px 4px; cursor: pointer; }
+    .consent-all-row input[type="checkbox"] { display: none; }
+    .all-check { flex-shrink: 0; width: 18px; height: 18px; --check-circle: #FE4C1B; --check-mark: white; border: 1px solid #CBD0E0; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; }
+    .all-check svg { display: none; width: 18px; height: 18px; }
+    .consent-all-row input:checked + .all-check { border-color: #FE4C1B; background: #FE4C1B; }
+    .consent-all-row input:checked + .all-check svg { display: block; }
+    .consent-all-main { font-size: 14px; font-weight: 500; color: var(--ink1); }
+    .consent-all-sub { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+    .consent-rows { display: flex; flex-direction: column; margin-bottom: 20px; }
+    .consent-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 4px; cursor: pointer; }
+    .consent-row input[type="checkbox"] { display: none; }
+    .consent-row-left { display: flex; align-items: center; gap: 8px; flex: 1; }
+    .badge-req { font-size: 10px; font-weight: 600; color: var(--orange); background: rgba(254,76,27,.1); padding: 2px 7px; border-radius: 4px; flex-shrink: 0; }
+    .consent-row-text { font-size: 13px; color: var(--ink2); }
+    .consent-row { cursor: pointer; }
+    .consent-row-more { font-size: 11px; color: var(--ink3); flex-shrink: 0; }
+    .consent-body { font-size: 11px; color: var(--ink2); line-height: 1.7; padding: 10px 4px 12px; border-top: 1px solid rgba(0,0,0,.06); }
+    .row-check-wrap { display: flex; align-items: center; flex-shrink: 0; cursor: pointer; }
+    .row-check-wrap input { display: none; }
+    .row-check { width: 18px; height: 18px; border: 1px solid #CBD0E0; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .15s, border-color .15s; }
+    .row-check-wrap input:checked + .row-check { background: #FE4C1B; border-color: #FE4C1B; }
+    .row-check-wrap input:checked + .row-check::after { content: ''; display: block; width: 5px; height: 8px; border: 1.5px solid #fff; border-top: none; border-left: none; transform: rotate(45deg) translate(-1px, -1px); }
+    /* ── 이메일 섹션 ── */
+    .email-section-title { font-size: 14px; font-weight: 700; color: var(--ink1); margin-bottom: 10px; letter-spacing: -.02em; }
+    /* ── 환불 정책 카드 ── */
+    .refund-card { background: #F2F3FF; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+    .refund-card-header { display: flex; justify-content: space-between; align-items: center; padding: 13px 14px; cursor: pointer; }
+    .refund-card-label { font-size: 12px; color: var(--ink2); }
+    .refund-toggle-btn { font-size: 11px; color: var(--ink2); background: none; border: none; cursor: pointer; font-family: inherit; }
+    .refund-arrow { display: inline-block; transition: transform .2s; }
+    .refund-card-body { display: none; padding: 0 14px 14px; font-size: 11px; color: var(--ink2); line-height: 1.7; border-top: 1px solid rgba(0,0,0,.06); padding-top: 12px; }
 
     .share-btn {
       width: 100%;
@@ -538,6 +659,30 @@
       color: var(--ink4);
     }
 
+    /* ── 결과 점수 그리드 (미사용 → 유지) ── */
+    .result-score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .result-score-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px 8px 14px;
+      text-align: center;
+    }
+    .result-score-num {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink1);
+      letter-spacing: -.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .result-score-denom { font-size: 13px; color: var(--ink4); font-weight: 400; }
+    .result-score-name { font-size: 11px; color: var(--ink2); font-weight: 500; margin-top: 4px; }
+
     .hidden { display: none !important; }
     .source-list { list-style: none; padding-left: 0; margin: 12px 0 0; }
     .source-list li { display: flex; align-items: center; gap: 6px; }
@@ -547,6 +692,8 @@
     .source-accordion-body { display: none; }
     .source-accordion.open .source-accordion-body { display: block; }
   </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
 
@@ -777,133 +924,249 @@
   <!-- RESULT -->
   <div class="result-section hidden" id="result-section">
 
-    <div class="score-grid">
-      <div class="score-card">
-        <div class="score-num" style="color:#1EC33F"><span id="res-A">0</span><span class="score-denom">/8</span></div>
-        <div class="score-name">직장 적합도</div>
+    <!-- ① DARK 카드: 로고 + 아이콘 + 유형 + 설명 + 점수 패널 + 저장 버튼 -->
+    <div class="result-dark-card" id="result-dark-card">
+      <!-- 헤더: 로고 + 태그라인 -->
+      <div class="rdc-header">
+        <div class="rdc-logo">
+          decide.lab
+        </div>
+        <div class="rdc-tagline">결정의 순간을 돕다</div>
       </div>
-      <div class="score-card">
-        <div class="score-num" style="color:#F4C506"><span id="res-B">0</span><span class="score-denom">/7</span></div>
-        <div class="score-name">이탈 신호</div>
+
+      <!-- 아이콘 -->
+      <div class="rdc-icon-wrap">
+        <div id="result-icon"></div>
       </div>
-      <div class="score-card">
-        <div class="score-num" style="color:#FE4C1B"><span id="res-C">0</span><span class="score-denom">/15</span></div>
-        <div class="score-name">창업 준비도</div>
+
+      <!-- 유형 + 설명 -->
+      <div class="result-type" id="result-type"></div>
+      <p class="result-desc" id="result-desc"></p>
+
+      <!-- 점수 패널 -->
+      <div class="rdc-score-panel" id="rdc-score-panel">
+        <div class="rdc-score-row">
+          <div class="rdc-badge">A</div>
+          <span class="rdc-score-label">직장 적합도</span>
+          <div class="rdc-bar-bg"><div class="rdc-bar-fill" id="rdc-bar-a" style="background:#FE4C1B"></div></div>
+          <span class="rdc-score-val" id="rdc-val-a">— / 8</span>
+        </div>
+        <div class="rdc-score-row">
+          <div class="rdc-badge">B</div>
+          <span class="rdc-score-label">이탈 신호</span>
+          <div class="rdc-bar-bg"><div class="rdc-bar-fill" id="rdc-bar-b" style="background:#F4C506"></div></div>
+          <span class="rdc-score-val" id="rdc-val-b">— / 7</span>
+        </div>
+        <div class="rdc-score-row">
+          <div class="rdc-badge">C</div>
+          <span class="rdc-score-label">창업 준비도</span>
+          <div class="rdc-bar-bg"><div class="rdc-bar-fill" id="rdc-bar-c" style="background:#1EC33F"></div></div>
+          <span class="rdc-score-val" id="rdc-val-c">— / 15</span>
+        </div>
       </div>
+
+      <!-- 저장 버튼 -->
+      <button class="save-btn" onclick="handleSave()">
+        내 유형 저장하기
+        <img src="../design/icon_download.svg" width="24" height="24" style="display:block; opacity:.7; transition: opacity .15s, filter .15s;">
+      </button>
     </div>
 
-    <div class="result-card">
-      <div class="result-top">
-        <div class="result-icon" id="result-icon"></div>
-        <div class="result-type" id="result-type"></div>
-        <p class="result-desc" id="result-desc"></p>
-      </div>
-
-      <!-- 탐색 중일 때 숨김, 나머지 유형은 표시 -->
-      <div id="result-locked-body">
-        <div class="result-body">
-          <div class="locked-preview">
-            <div class="tip-box" id="result-tip" style="margin-bottom:24px;"></div>
-            <div class="locked-inner">
-              <div class="locked-section-title">영역별 리스크 분석</div>
+    <!-- ② LIGHT 카드: 그래픽 + 리스크 분석 + 행동 3단계 -->
+    <div class="result-light-card" id="result-locked-body">
+      <div class="result-body">
+        <div class="locked-preview">
+          <div class="locked-inner">
+            <div style="padding: 0 20px 0;">
+              <div class="locked-section-title" style="padding: 0 0 0;">영역별 리스크 분석</div>
               <div class="risk-section-wrap" id="risk-rows"></div>
 
-              <div class="locked-section-title">지금 당장 해야 할 행동 3가지</div>
+              <div class="locked-section-title" style="margin-top: 8px;">지금 당장 해야 할 행동 3가지</div>
               <div class="action-section-wrap" id="action-steps"></div>
 
               <div class="locked-bottom-pad"></div>
             </div>
           </div>
+        </div>
 
-          <div class="lock-banner">
-            <div class="lock-icon">🔒</div>
-            <div class="lock-title">상세 분석은 잠겨 있어요</div>
-            <div class="lock-sub">리스크 등급·점수·행동 플랜을<br>지금 바로 확인할 수 있어요</div>
-          </div>
+        <div class="lock-banner">
+          <div class="lock-icon">🔒</div>
+          <div class="lock-title">지금 바로 정밀 분석 리포트를 확인해 보세요</div>
+          <div class="lock-sub">리스크 등급·점수·행동 플랜을<br>지금 바로 확인할 수 있어요</div>
+        </div>
 
-          <div class="upsell-wrap">
-            <div class="upsell-box">
-              <div class="upsell-label">정밀 분석에서 확인할 수 있어요</div>
-              <div class="upsell-features">
-                <div class="upsell-feature">
-                  <div class="upsell-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#FE4C1B" stroke="#FE4C1B"/><path d="M16 9.6875L10.5 15.1875L8 12.6875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                  100점 종합 스코어 — 막연한 불안을 숫자로
-                </div>
-                <div class="upsell-feature">
-                  <div class="upsell-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#FE4C1B" stroke="#FE4C1B"/><path d="M16 9.6875L10.5 15.1875L8 12.6875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                  직장·이탈·창업 영역별 리스크 등급
-                </div>
-                <div class="upsell-feature">
-                  <div class="upsell-check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#FE4C1B" stroke="#FE4C1B"/><path d="M16 9.6875L10.5 15.1875L8 12.6875" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                  내 유형에 맞는 다음 행동 3단계 가이드
-                </div>
+        <div class="upsell-wrap">
+          <div class="upsell-box">
+            <div class="upsell-label">정밀 분석에서 확인할 수 있어요</div>
+            <div class="upsell-features">
+              <div class="upsell-feature">
+                <div class="upsell-check" style="background:none; font-size:14px; flex-shrink:0;">🔒</div>
+                3개 영역 종합 스코어 및 현재 포지션 진단
               </div>
-              <button class="upgrade-btn" id="upgrade-btn">정밀 분석 받기 · 9,900원</button>
-              <div class="email-step hidden" id="email-step">
-                <input class="email-input" id="email-input" type="email" placeholder="결과를 받을 이메일 주소를 입력하세요" />
-                <p class="email-hint">결제 완료 후 이 이메일로 정밀 분석 결과 링크를 보내드려요.</p>
-
-                <!-- 환불 정책 안내 -->
-                <div class="consent-policy">
-                  <strong>디지털 콘텐츠 환불 정책</strong>
-                  결제 완료 후 <strong>콘텐츠가 전달된 시점부터</strong> 열람 여부와 관계없이 청약철회(환불)가 불가합니다. 전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항 제5호에 따른 디지털 콘텐츠 특성상 공급이 개시된 경우 환불이 제한됩니다. 결제 전 충분히 확인 후 구매해 주세요.
-                </div>
-
-                <!-- 동의 체크박스 -->
-                <div class="consent-wrap">
-                  <label class="consent-item">
-                    <input type="checkbox" id="consent-privacy" />
-                    <span class="consent-text">[필수] 개인정보 수집·이용에 동의합니다 — 수집 항목: 이메일 주소 / 수집 목적: 분석 결과 전달 / 보유 기간: 서비스 제공 완료 후 즉시 파기</span>
-                  </label>
-                  <label class="consent-item">
-                    <input type="checkbox" id="consent-terms" />
-                    <span class="consent-text">[필수] 이용약관 및 환불 정책에 동의합니다 — 콘텐츠 전달 후 열람 여부와 관계없이 환불이 불가함을 확인했습니다</span>
-                  </label>
-                </div>
-
-                <button class="pay-btn" id="pay-btn" disabled>결제하기 · 9,900원</button>
-
-                <!-- 사업자 고지 (전자상거래법 제13조) -->
-                <div class="biz-info">
-                  <strong>사업자 정보</strong>
-                  상호: 빛이랑 (decide.lab) &nbsp;|&nbsp; 대표자: 사공선<br>
-                  사업자등록번호: 576-37-00764<br>
-                  통신판매업 신고번호: 제2020-성남분당에이-1536호<br>
-                  주소: (우 16873) 경기도 용인시 수지구 대지로 36 신흥빌딩 3동 302호<br>
-                  고객센터: sun314.studio@gmail.com
-                </div>
+              <div class="upsell-feature">
+                <div class="upsell-check" style="background:none; font-size:14px; flex-shrink:0;">🔒</div>
+                내 유형의 반복 패턴 · 맹점 · 리스크 분석
+              </div>
+              <div class="upsell-feature">
+                <div class="upsell-check" style="background:none; font-size:14px; flex-shrink:0;">🔒</div>
+                영역별 리스크 레이더 차트
+              </div>
+              <div class="upsell-feature">
+                <div class="upsell-check" style="background:none; font-size:14px; flex-shrink:0;">🔒</div>
+                유형 맞춤 30일 실행 플랜
               </div>
             </div>
-            <button class="share-btn" onclick="handleShare()">내 유형 공유하기</button>
+            <div id="earlybird-divider" style="height:1px; background:rgba(0,0,0,.08); margin:16px 0;"></div>
+            <div id="earlybird-row" style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:12px;">
+              <span style="background:rgba(255,180,0,0.12); color:#CC8800; border:1px solid rgba(255,180,0,0.4); font-size:11px; font-weight:700; padding:3px 8px; border-radius:8px; letter-spacing:.04em;">얼리버드</span>
+              <span style="font-size:13px; color:rgba(0,0,0,.35); text-decoration:line-through; font-weight:400;">19,900원</span>
+              <span style="font-size:13px; color:var(--ink1); font-weight:600;">9,900원</span>
+            </div>
+            <button class="upgrade-btn" id="upgrade-btn">정밀 분석 받기</button>
+            <div id="upsell-divider" style="display:none; height:1px; background:rgba(0,0,0,.08); margin: 20px 0;"></div>
+            <div class="email-step hidden" id="email-step">
+
+              <!-- 이메일 -->
+              <div class="consent-section-title">결과 받을 이메일</div>
+              <input class="email-input" id="email-input" type="email" placeholder="decide@email.com" />
+              <p class="email-hint">결제 즉시 이메일로 결과 리포트 PDF를 보내드려요</p>
+
+              <!-- 약관 동의 -->
+              <div style="height:1px; background:rgba(0,0,0,.08); margin:16px 0;"></div>
+              <div class="consent-section">
+                <div class="consent-section-title">약관 동의</div>
+                <label class="consent-all-row">
+                  <label class="row-check-wrap" onclick="event.stopPropagation()">
+                    <input type="checkbox" id="consent-all" />
+                    <span class="row-check"></span>
+                  </label>
+                  <div class="consent-all-main">전체 동의</div>
+                </label>
+                <div class="consent-rows">
+                  <div class="consent-row-wrap">
+                    <div class="consent-row" onclick="toggleConsent('privacy-body', this.querySelector('.consent-row-more'))">
+                      <label class="row-check-wrap" onclick="event.stopPropagation()">
+                        <input type="checkbox" id="consent-privacy" />
+                        <span class="row-check"></span>
+                      </label>
+                      <div class="consent-row-left">
+                        <span class="badge-req">필수</span>
+                        <span class="consent-row-text">개인정보 수집·이용 동의</span>
+                      </div>
+                      <span class="consent-row-more"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#8B95A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </div>
+                    <div id="privacy-body" class="consent-body" style="display:none;">
+                      <strong>수집 항목:</strong> 이메일 주소<br>
+                      <strong>수집 목적:</strong> 정밀 분석 리포트 발송<br>
+                      <strong>보유 기간:</strong> 리포트 발송 후 1년, 이후 즉시 파기<br>
+                      <strong>제3자 제공:</strong> 없음<br>
+                      <strong>처리 위탁:</strong> 이메일 발송 서비스 (수탁자: 이메일 발송 대행사, 목적: 리포트 전달)<br><br>
+                      위 개인정보 수집·이용에 동의하지 않을 권리가 있으나, 동의 거부 시 서비스 이용이 제한됩니다.
+                    </div>
+                  </div>
+                  <div class="consent-row-wrap">
+                    <div class="consent-row" onclick="toggleConsent('terms-body', this.querySelector('.consent-row-more'))">
+                      <label class="row-check-wrap" onclick="event.stopPropagation()">
+                        <input type="checkbox" id="consent-terms" />
+                        <span class="row-check"></span>
+                      </label>
+                      <div class="consent-row-left">
+                        <span class="badge-req">필수</span>
+                        <span class="consent-row-text">이용약관 동의</span>
+                      </div>
+                      <span class="consent-row-more"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#8B95A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </div>
+                    <div id="terms-body" class="consent-body" style="display:none;">
+                      본 서비스는 decide.lab이 제공하는 디지털 콘텐츠 서비스입니다.<br><br>
+                      <strong>제1조 (목적)</strong> 본 약관은 decide.lab 정밀 분석 리포트 서비스 이용에 관한 조건을 규정합니다.<br><br>
+                      <strong>제2조 (서비스 제공)</strong> 결제 완료 후 입력한 이메일로 리포트 PDF를 발송합니다.<br><br>
+                      <strong>제3조 (환불)</strong> 결제 완료 후 콘텐츠가 전달된 시점부터 열람 여부와 관계없이 청약철회(환불)가 불가합니다. 전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항 제5호에 따른 디지털 콘텐츠 특성상 공급이 개시된 경우 환불이 제한됩니다.
+                    </div>
+                  </div>
+                  <div class="consent-row-wrap">
+                    <div class="consent-row" onclick="toggleConsent('refund-body', this.querySelector('.consent-row-more'))">
+                      <label class="row-check-wrap" onclick="event.stopPropagation()">
+                        <input type="checkbox" id="consent-refund" />
+                        <span class="row-check"></span>
+                      </label>
+                      <div class="consent-row-left">
+                        <span class="badge-req">필수</span>
+                        <span class="consent-row-text">디지털 콘텐츠 환불 불가 동의</span>
+                      </div>
+                      <span class="consent-row-more"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#8B95A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    </div>
+                    <div id="refund-body" class="consent-body" style="display:none;">
+                      결제 완료 후 콘텐츠가 전달된 시점부터 열람 여부와 관계없이 청약철회(환불)가 불가함에 동의합니다. 전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항 제5호에 따른 디지털 콘텐츠 특성상 공급이 개시된 경우 환불이 제한됩니다.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin:16px 0 10px;">
+                <span style="background:rgba(255,180,0,0.12); color:#CC8800; border:1px solid rgba(255,180,0,0.4); font-size:11px; font-weight:700; padding:3px 8px; border-radius:8px; letter-spacing:.04em;">얼리버드</span>
+                <span style="font-size:13px; color:rgba(0,0,0,.35); text-decoration:line-through; font-weight:400;">19,900원</span>
+                <span style="font-size:13px; color:var(--ink1); font-weight:600;">9,900원</span>
+              </div>
+              <button class="pay-btn" id="pay-btn" disabled>결제하기 · 9,900원</button>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- 탐색 중 전용: 공유 버튼만 -->
-      <div id="result-explore-body" class="hidden">
-        <div style="padding: 0 20px 20px;">
-          <button class="share-btn" onclick="handleShare()">내 유형 공유하기</button>
-        </div>
-      </div>
-
     </div>
+
+    <!-- 탐색 중 전용: 다시 테스트 버튼만 -->
+    <div id="result-explore-body" class="hidden">
+      <div class="result-dark-card" style="padding-bottom:0;">
+        <!-- 헤더 -->
+        <div class="rdc-header">
+          <div class="rdc-logo">
+            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.5366 17.0275C24.5366 17.965 24.4116 18.8579 24.1616 19.7061C23.9116 20.5454 23.5589 21.3222 23.1036 22.0364C22.6571 22.7507 22.1214 23.398 21.4964 23.9784C20.8714 24.5498 20.1795 25.0364 19.4205 25.4382C18.6705 25.84 17.8625 26.1525 16.9964 26.3757C16.1393 26.59 15.2554 26.6972 14.3446 26.6972H5.84018V7.41144H14.3446C15.2554 7.41144 16.1393 7.51858 16.9964 7.73287C17.8536 7.94715 18.6571 8.25519 19.4071 8.65697C20.1661 9.04983 20.858 9.53197 21.483 10.1034C22.117 10.6748 22.6571 11.3177 23.1036 12.032C23.5589 12.7373 23.9116 13.5141 24.1616 14.3623C24.4116 15.2016 24.5366 16.09 24.5366 17.0275Z" fill="#FF481F"/>
+              <path d="M27.8779 5.15936C28.0581 4.88508 28.4265 4.80883 28.7008 4.989C28.9751 5.16921 29.0515 5.53772 28.8713 5.81204C28.6902 6.08772 28.5283 6.30111 26.5687 8.39883C24.5866 10.5206 20.8857 14.4402 18.9615 16.5048C17.8637 17.8016 17.2372 18.612 16.8322 19.1071C16.643 19.3384 16.4716 19.5401 16.3196 19.666C16.2454 19.7273 16.1138 19.8247 15.9357 19.8617C15.709 19.9088 15.4991 19.8415 15.3455 19.7154C15.2569 19.6428 15.1669 19.5391 15.0955 19.4528C15.0148 19.3554 14.9219 19.2357 14.8222 19.1027C14.6224 18.836 14.3821 18.4988 14.134 18.1431C13.6372 17.4311 13.097 16.6282 12.7643 16.1344C12.5809 15.8622 12.6529 15.4929 12.9251 15.3095C13.1973 15.1261 13.5666 15.198 13.75 15.4702C14.084 15.9659 14.6186 16.7604 15.1088 17.463C15.3542 17.8147 15.5855 18.1392 15.7733 18.3898C15.7913 18.4138 15.8088 18.4369 15.8257 18.4592C15.8522 18.4275 15.881 18.3928 15.9122 18.3546C16.2952 17.8865 16.9536 17.0368 18.0633 15.7263L18.0724 15.7155L18.0821 15.7053C19.9945 13.6532 23.7319 9.69431 25.7001 7.5874C27.6942 5.45281 27.7666 5.32879 27.8779 5.15936Z" fill="white"/>
+            </svg>
+            decide.lab
+          </div>
+          <div class="rdc-tagline">결정의 순간을 돕다</div>
+        </div>
+        <div class="rdc-icon-wrap">
+          <div id="result-icon-explore"></div>
+        </div>
+        <div class="result-type" id="result-type-explore"></div>
+        <p class="result-desc" id="result-desc-explore"></p>
+        <div style="height: 24px;"></div>
+      </div>
+      <div style="padding: 12px 0 20px;">
+        <button class="share-btn" onclick="location.reload()">다시 테스트 해보기</button>
+      </div>
+    </div>
+
   </div>
 
 </div>
 
-<footer style="height:78px; display:flex; align-items:center; justify-content:center; background:var(--bg);">
-  <span style="font-size:13px; color:#B0B0CC; font-weight:400; letter-spacing:-.01em;">© 2026 decide.lab</span>
+<footer style="padding: 24px 20px 32px; background:var(--bg); text-align:center;">
+  <button id="biz-toggle" onclick="var d=document.getElementById('biz-detail'),a=document.getElementById('biz-arrow'),open=d.style.display==='none';d.style.display=open?'block':'none';a.style.transform=open?'rotate(180deg)':'';"
+    style="display:block; width:100%; background:none; border:none; font-size:12px; color:#6B7280; cursor:pointer; text-decoration:none; margin-bottom:4px;">
+    사업자 정보 <span id="biz-arrow" style="display:inline-block; transition:transform .2s;">▾</span>
+  </button>
+  <div id="biz-detail" style="display:none; font-size:11px; color:#6B7280; line-height:2; margin-bottom:12px;">
+    상호: 빛이랑 (decide.lab) &nbsp;|&nbsp; 대표자: 사공선<br>
+    사업자등록번호: 576-37-00764 &nbsp;|&nbsp; 통신판매업 신고번호: 제2020-성남분당에이-1536호<br>
+    주소: (우 16873) 경기도 용인시 수지구 대지로 36 신흥빌딩 3동 302호<br>
+    고객센터: sun314.studio@gmail.com
+  </div>
+  <div style="font-size:12px; color:#B0B0CC; font-weight:400; letter-spacing:-.01em;">© 2026 decide.lab</div>
 </footer>
 <div style="height:160px;"></div>
 
 <script>
-  /* ── 아이콘 SVG ── */
+  /* ── 아이콘 SVG (dark 카드용, 100px) ── */
   const ICONS = {
-    growth: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="78" height="78" rx="8" fill="#1EC33F"/><rect x="8" y="50" width="18" height="20" fill="white"/><rect x="30" y="30" width="18" height="40" fill="white"/><rect x="52" y="8" width="18" height="62" fill="white"/></svg>`,
-    startup: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 39C0 17.4609 17.4609 0 39 0H67.1478C73.1413 0 78 4.85868 78 10.8522V39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39Z" fill="#FE4C1B"/><path d="M61 12.7578L64.3643 9.39355L68.6064 13.6367L65.2432 17H70V23H65.2422L68.6064 26.3643L64.3643 30.6064L61 27.2422V32H55V27.2422L51.6357 30.6064L47.3936 26.3643L50.7578 23H46V17H50.7578L47.3936 13.6357L51.6357 9.39355L55 12.7578V8H61V12.7578Z" fill="white"/></svg>`,
-    transition: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2102_2340)"><ellipse cx="39" cy="66" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="48" rx="39" ry="12" fill="#9736D7"/><ellipse cx="39" cy="30" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="12" rx="39" ry="12" fill="#9736D7"/></g><defs><clipPath id="clip0_2102_2340"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
-    burnout: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2102_2429)"><path d="M55 0C67.7026 0 78 10.2975 78 23C78 29.2189 75.5307 34.8602 71.5205 39C75.5307 43.1398 78 48.7811 78 55C78 67.7026 67.7026 78 55 78C48.7811 78 43.1398 75.5307 39 71.5205C34.8602 75.5307 29.2189 78 23 78C10.2975 78 0 67.7026 0 55C0 48.7814 2.46861 43.1398 6.47852 39C2.46861 34.8602 0 29.2186 0 23C0 10.2975 10.2975 0 23 0C29.2186 0 34.8602 2.46861 39 6.47852C43.1398 2.46861 48.7814 0 55 0Z" fill="#F4C506"/><rect x="32.2426" y="28.2426" width="24" height="6" transform="rotate(45 32.2426 28.2426)" fill="white"/><rect x="49.2426" y="32.2426" width="24" height="6" transform="rotate(135 49.2426 32.2426)" fill="white"/></g><defs><clipPath id="clip0_2102_2429"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
-    explore: `<svg width="78" height="78" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2102_2428)"><path d="M39 0C60.5391 0 78 17.4609 78 39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39C0 17.4609 17.4609 0 39 0Z" fill="#BCBECC"/><circle cx="39.0001" cy="17.5714" r="3.57143" fill="white"/><circle cx="60.4286" cy="39.0001" r="3.57143" transform="rotate(90 60.4286 39.0001)" fill="white"/><circle cx="23.8476" cy="54.1523" r="3.57143" transform="rotate(-135 23.8476 54.1523)" fill="white"/><circle cx="39.0001" cy="60.4285" r="3.57143" fill="white"/><circle cx="17.5715" cy="39.0001" r="3.57143" transform="rotate(90 17.5715 39.0001)" fill="white"/><circle cx="54.1524" cy="23.8479" r="3.57143" transform="rotate(-135 54.1524 23.8479)" fill="white"/><circle cx="23.8477" cy="23.8476" r="3.57143" transform="rotate(-45 23.8477 23.8476)" fill="white"/><circle cx="54.1521" cy="54.1524" r="3.57143" transform="rotate(-45 54.1521 54.1524)" fill="white"/></g><defs><clipPath id="clip0_2102_2428"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
+    growth: `<svg width="100" height="100" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="78" height="78" rx="8" fill="#1EC33F"/><rect x="8" y="50" width="18" height="20" fill="white"/><rect x="30" y="30" width="18" height="40" fill="white"/><rect x="52" y="8" width="18" height="62" fill="white"/></svg>`,
+    startup: `<svg width="100" height="100" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 39C0 17.4609 17.4609 0 39 0H67.1478C73.1413 0 78 4.85868 78 10.8522V39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39Z" fill="#FE4C1B"/><path d="M61 12.7578L64.3643 9.39355L68.6064 13.6367L65.2432 17H70V23H65.2422L68.6064 26.3643L64.3643 30.6064L61 27.2422V32H55V27.2422L51.6357 30.6064L47.3936 26.3643L50.7578 23H46V17H50.7578L47.3936 13.6357L51.6357 9.39355L55 12.7578V8H61V12.7578Z" fill="white"/></svg>`,
+    transition: `<svg width="100" height="100" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#ic1)"><ellipse cx="39" cy="66" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="48" rx="39" ry="12" fill="#9736D7"/><ellipse cx="39" cy="30" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="12" rx="39" ry="12" fill="#9736D7"/></g><defs><clipPath id="ic1"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
+    burnout: `<svg width="100" height="100" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#ic2)"><path d="M55 0C67.7026 0 78 10.2975 78 23C78 29.2189 75.5307 34.8602 71.5205 39C75.5307 43.1398 78 48.7811 78 55C78 67.7026 67.7026 78 55 78C48.7811 78 43.1398 75.5307 39 71.5205C34.8602 75.5307 29.2189 78 23 78C10.2975 78 0 67.7026 0 55C0 48.7814 2.46861 43.1398 6.47852 39C2.46861 34.8602 0 29.2186 0 23C0 10.2975 10.2975 0 23 0C29.2186 0 34.8602 2.46861 39 6.47852C43.1398 2.46861 48.7814 0 55 0Z" fill="#F4C506"/><rect x="32.2426" y="28.2426" width="24" height="6" transform="rotate(45 32.2426 28.2426)" fill="white"/><rect x="49.2426" y="32.2426" width="24" height="6" transform="rotate(135 49.2426 32.2426)" fill="white"/></g><defs><clipPath id="ic2"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
+    explore: `<svg width="100" height="100" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#ic3)"><path d="M39 0C60.5391 0 78 17.4609 78 39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39C0 17.4609 17.4609 0 39 0Z" fill="#BCBECC"/><circle cx="39.0001" cy="17.5714" r="3.57143" fill="white"/><circle cx="60.4286" cy="39.0001" r="3.57143" transform="rotate(90 60.4286 39.0001)" fill="white"/><circle cx="23.8476" cy="54.1523" r="3.57143" transform="rotate(-135 23.8476 54.1523)" fill="white"/><circle cx="39.0001" cy="60.4285" r="3.57143" fill="white"/><circle cx="17.5715" cy="39.0001" r="3.57143" transform="rotate(90 17.5715 39.0001)" fill="white"/><circle cx="54.1524" cy="23.8479" r="3.57143" transform="rotate(-135 54.1524 23.8479)" fill="white"/><circle cx="23.8477" cy="23.8476" r="3.57143" transform="rotate(-45 23.8477 23.8476)" fill="white"/><circle cx="54.1521" cy="54.1524" r="3.57143" transform="rotate(-45 54.1521 54.1524)" fill="white"/></g><defs><clipPath id="ic3"><rect width="78" height="78" rx="8" fill="white"/></clipPath></defs></svg>`,
   };
 
   /* ── 결과 데이터 ── */
@@ -911,7 +1174,9 @@
     {
       key: 'growth',
       type: '직장 성장형',
-      condition: (a,b,c) => a >= 5 && b <= 2,
+      color: '#1EC33F',
+      iconLabel: '현재 포지션 최적화',
+      condition: (a,b,c) => a >= 5 && b <= 3,
       desc: '지금 직장에서 충분히 성장 가능한 상태예요. 섣부른 창업보다 커리어 최적화가 우선이에요.',
       tip: '💡 현재 직장에서 연봉 협상, 사내 이동, 역량 개발에 집중하세요.',
       steps: [
@@ -923,7 +1188,9 @@
     {
       key: 'burnout',
       type: '번아웃 경고형',
-      condition: (a,b,c) => a <= 3 && b >= 5 && c <= 6,
+      color: '#F4C506',
+      iconLabel: '회복 우선',
+      condition: (a,b,c) => a <= 3 && b >= 5 && c <= 7,
       desc: '직장도 창업도 지금은 무리예요. 회복과 방향 재정립이 먼저입니다.',
       tip: '💡 지금 당장 결정하지 마세요. 번아웃 회복 후 재진단을 권장해요.',
       steps: [
@@ -935,7 +1202,9 @@
     {
       key: 'startup',
       type: '창업 실행형',
-      condition: (a,b,c) => b >= 4 && c >= 10,
+      color: '#FE4C1B',
+      iconLabel: '지금이 실행 타이밍',
+      condition: (a,b,c) => b >= 4 && c >= 9,
       desc: '이탈 신호와 창업 준비도 모두 충족된 상태예요. 지금이 실행 타이밍이에요.',
       tip: '💡 구체적인 실행 계획을 수립하고 첫 고객을 확보하는 단계로 넘어가세요.',
       steps: [
@@ -947,7 +1216,9 @@
     {
       key: 'transition',
       type: '전환 준비형',
-      condition: (a,b,c) => a <= 4 && b >= 3 && c <= 5,
+      color: '#811EC3',
+      iconLabel: '이직 후 창업 검토',
+      condition: (a,b,c) => b >= 3,
       desc: '떠날 신호는 있지만 준비는 아직 부족해요. 이직 또는 사이드 프로젝트가 먼저예요.',
       tip: '💡 창업 준비도 C 섹션 미체크 항목을 보완하거나 이직을 먼저 고려하세요.',
       steps: [
@@ -961,6 +1232,8 @@
   const EXPLORE = {
     key: 'explore',
     type: '탐색 중',
+    color: '#B0B8C1',
+    iconLabel: '탐색 중',
     desc: '아직 패턴이 명확하지 않아요. 더 솔직하게 체크해 주세요.',
   };
 
@@ -1023,32 +1296,49 @@
       const r = getResult(s.A, s.B, s.C);
       const isExplore = r.key === 'explore';
 
-      // 점수 카드
-      document.getElementById('res-A').textContent = s.A;
-      document.getElementById('res-B').textContent = s.B;
-      document.getElementById('res-C').textContent = s.C;
-
       // 아이콘 + 유형 + 설명
-      document.getElementById('result-icon').innerHTML = ICONS[r.key];
-      document.getElementById('result-type').textContent = r.type;
-      document.getElementById('result-desc').textContent = r.desc;
+      const color = r.color || '#B0B8C1';
 
       if (isExplore) {
-        // 탐색 중: 잠금 없음, 공유만
+        // 탐색 중: dark 카드 숨기고 explore 전용 보여주기
+        document.getElementById('result-dark-card').classList.add('hidden');
         document.getElementById('result-locked-body').classList.add('hidden');
         document.getElementById('result-explore-body').classList.remove('hidden');
+        document.getElementById('result-icon-explore').innerHTML = ICONS[r.key];
+        document.getElementById('result-type-explore').textContent = r.type;
+        document.getElementById('result-desc-explore').innerHTML = r.desc.replace(/\. /g, '.<br>');
       } else {
+        // 일반 결과: dark 카드 표시
+        document.getElementById('result-dark-card').classList.remove('hidden');
         document.getElementById('result-locked-body').classList.remove('hidden');
         document.getElementById('result-explore-body').classList.add('hidden');
 
-        // Tip
-        document.getElementById('result-tip').textContent = r.tip;
+        // 아이콘 (dark 카드)
+        document.getElementById('result-icon').innerHTML = ICONS[r.key];
+        document.getElementById('result-type').textContent = r.type;
+        document.getElementById('result-desc').innerHTML = r.desc.replace(/\. /g, '.<br>');
 
-        // 리스크 분석
+        // dark 카드 점수 바 업데이트
+        const pA = Math.round((s.A / 8) * 100);
+        const pB = Math.round((s.B / 7) * 100);
+        const pC = Math.round((s.C / 15) * 100);
+        ['rdc-bar-a','rdc-bar-b','rdc-bar-c'].forEach(id => {
+          document.getElementById(id).style.background = color;
+        });
+        document.getElementById('rdc-bar-a').style.width = pA + '%';
+        document.getElementById('rdc-bar-b').style.width = pB + '%';
+        document.getElementById('rdc-bar-c').style.width = pC + '%';
+        document.getElementById('rdc-val-a').textContent = `${s.A} / 8`;
+        document.getElementById('rdc-val-b').textContent = `${s.B} / 7`;
+        document.getElementById('rdc-val-c').textContent = `${s.C} / 15`;
+
+        // 팁 박스 (삭제됨 — 스킵)
+
+        // 리스크 분석 (light 카드)
         const risks = [
-          { label: '직장 적합도', val: Math.round((s.A / 8) * 100),  color: '#FE4C1B' },
-          { label: '이탈 위험도', val: Math.round((s.B / 7) * 100),  color: '#F4C506' },
-          { label: '창업 준비도', val: Math.round((s.C / 15) * 100), color: '#1EC33F' },
+          { label: '직장 적합도', val: pA, color: '#FE4C1B' },
+          { label: '이탈 위험도', val: pB, color: '#F4C506' },
+          { label: '창업 준비도', val: pC, color: '#1EC33F' },
         ];
         document.getElementById('risk-rows').innerHTML = risks.map(ri => `
           <div class="risk-row">
@@ -1080,45 +1370,273 @@
   }
 
   /* ── 공유 ── */
-  function handleShare() {
+  const CARD_DATA = {
+    growth:     { color:'#1EC33F', bgAccent:'rgba(30,195,63,0.12)',   tag:'현재 포지션 최적화', type:'직장 성장형',  desc:'지금 직장에서 충분히 성장 가능한 상태예요',
+      icon:`<svg width="120" height="120" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="78" height="78" rx="16" fill="#1EC33F"/><rect x="8" y="50" width="18" height="20" fill="white"/><rect x="30" y="30" width="18" height="40" fill="white"/><rect x="52" y="8" width="18" height="62" fill="white"/></svg>` },
+    startup:    { color:'#FE4C1B', bgAccent:'rgba(254,76,27,0.12)',   tag:'지금이 실행 타이밍',   type:'창업 실행형',  desc:'이탈 신호와 창업 준비도가 모두 충족된 상태예요',
+      icon:`<svg width="120" height="120" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 39C0 17.4609 17.4609 0 39 0H67.1478C73.1413 0 78 4.85868 78 10.8522V39C78 60.5391 60.5391 78 39 78C17.4609 78 0 60.5391 0 39Z" fill="#FE4C1B"/><path d="M61 12.7578L64.3643 9.39355L68.6064 13.6367L65.2432 17H70V23H65.2422L68.6064 26.3643L64.3643 30.6064L61 27.2422V32H55V27.2422L51.6357 30.6064L47.3936 26.3643L50.7578 23H46V17H50.7578L47.3936 13.6357L51.6357 9.39355L55 12.7578V8H61V12.7578Z" fill="white"/></svg>` },
+    transition: { color:'#9736D7', bgAccent:'rgba(151,54,215,0.12)',  tag:'이직 후 창업 검토',   type:'전환 준비형',  desc:'이직이 먼저, 창업은 준비를 마친 뒤의 옵션이에요',
+      icon:`<svg width="120" height="120" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#c1)"><ellipse cx="39" cy="66" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="48" rx="39" ry="12" fill="#9736D7"/><ellipse cx="39" cy="30" rx="39" ry="12" fill="#811EC3"/><ellipse cx="39" cy="12" rx="39" ry="12" fill="#9736D7"/></g><defs><clipPath id="c1"><rect width="78" height="78" rx="16" fill="white"/></clipPath></defs></svg>` },
+    burnout:    { color:'#F4C506', bgAccent:'rgba(244,197,6,0.12)',   tag:'회복 우선',           type:'번아웃 경고형', desc:'먼저 회복이 필요해요. 큰 결정은 잠시 보류하세요',
+      icon:`<svg width="120" height="120" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#c2)"><path d="M55 0C67.7026 0 78 10.2975 78 23C78 29.2189 75.5307 34.8602 71.5205 39C75.5307 43.1398 78 48.7811 78 55C78 67.7026 67.7026 78 55 78C48.7811 78 43.1398 75.5307 39 71.5205C34.8602 75.5307 29.2189 78 23 78C10.2975 78 0 67.7026 0 55C0 48.7814 2.46861 43.1398 6.47852 39C2.46861 34.8602 0 29.2186 0 23C0 10.2975 10.2975 0 23 0C29.2186 0 34.8602 2.46861 39 6.47852C43.1398 2.46861 48.7814 0 55 0Z" fill="#F4C506"/><rect x="32.2426" y="28.2426" width="24" height="6" transform="rotate(45 32.2426 28.2426)" fill="white"/><rect x="49.2426" y="32.2426" width="24" height="6" transform="rotate(135 49.2426 32.2426)" fill="white"/></g><defs><clipPath id="c2"><rect width="78" height="78" rx="16" fill="white"/></clipPath></defs></svg>` },
+  };
+
+  function handleSave() {
     const s = getScores();
     const r = getResult(s.A, s.B, s.C);
-    const text = `나는 "${r.type}" 유형이에요\n직장 적합도 ${s.A}/8 · 이탈 신호 ${s.B}/7 · 창업 준비도 ${s.C}/15\n\n당신은 어떤 유형인가요? → decide.lab에서 무료 진단해보세요`;
-    if (navigator.share) {
-      navigator.share({ title: '직장 vs 창업 진단 | decide.lab', text }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(text)
-        .then(() => alert('클립보드에 복사됐어요 ✅'))
-        .catch(() => alert('URL을 직접 복사해주세요.'));
+    if (!r) return;
+
+    if (r.key === 'explore') {
+      alert('결과 이미지는 유형이 확정된 후에 저장할 수 있어요. 더 솔직하게 체크해 주세요!');
+      return;
     }
+
+    // share-card에 실제 점수 채우기
+    const card = document.getElementById('share-card');
+    card.querySelector('.sc-icon-box').innerHTML = ICONS[r.key].replace('width="100" height="100"', 'width="300" height="300"');
+    card.querySelector('.sc-type').textContent = r.type;
+    card.querySelector('.sc-desc').innerHTML = r.desc;
+    // sc-cta-url 색상은 #FE4C1B 고정
+
+    const pA = Math.round((s.A / 8)  * 100);
+    const pB = Math.round((s.B / 7)  * 100);
+    const pC = Math.round((s.C / 15) * 100);
+    [['a', pA, `${s.A} / 8`], ['b', pB, `${s.B} / 7`], ['c', pC, `${s.C} / 15`]].forEach(([k, pct, label]) => {
+      const bar = document.getElementById(`sc-bar-${k}`);
+      const val = document.getElementById(`sc-val-${k}`);
+      bar.style.width   = pct + '%';
+      bar.style.background = r.color;
+      val.textContent   = label;
+      val.style.color   = 'rgba(255,255,255,0.85)';
+    });
+
+    // html2canvas로 렌더링 → JPG 다운로드
+    html2canvas(card, {
+      width: 1080, height: 1920, scale: 1,
+      backgroundColor: '#0A0D2D',
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `decide_lab_${r.key}.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.92);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }).catch(err => alert('저장 실패: ' + err.message));
+  }
+
+
+  /* ── 약관 아코디언 ── */
+  function toggleConsent(id, chevron) {
+    const body = document.getElementById(id);
+    const open = body.style.display === 'none' || !body.style.display;
+    body.style.display = open ? 'block' : 'none';
+    if (chevron) chevron.querySelector('svg').style.transform = open ? 'rotate(180deg)' : '';
   }
 
   /* ── 업그레이드 ── */
-  const PAYMENT_URL = 'https://toss.me/decidelab/9900'; // 토스 결제 링크 (준비되면 교체)
+  IMP.init('imp64877305');
 
   document.getElementById('upgrade-btn').addEventListener('click', () => {
     document.getElementById('upgrade-btn').classList.add('hidden');
+    document.getElementById('earlybird-divider').style.display = 'none';
+    document.getElementById('earlybird-row').style.display = 'none';
+    document.getElementById('upsell-divider').style.display = 'block';
     document.getElementById('email-step').classList.remove('hidden');
     document.getElementById('email-input').focus();
   });
 
+  const privacyCheck = document.getElementById('consent-privacy');
+  const termsCheck = document.getElementById('consent-terms');
+  const refundCheck = document.getElementById('consent-refund');
+  const allCheck = document.getElementById('consent-all');
+
   function updatePayBtn() {
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email-input').value.trim());
-    const privacyOk = document.getElementById('consent-privacy').checked;
-    const termsOk = document.getElementById('consent-terms').checked;
-    document.getElementById('pay-btn').disabled = !(emailOk && privacyOk && termsOk);
+    document.getElementById('pay-btn').disabled = !(emailOk && privacyCheck.checked && termsCheck.checked && refundCheck.checked);
   }
+  allCheck.addEventListener('change', function() {
+    privacyCheck.checked = termsCheck.checked = refundCheck.checked = this.checked;
+    document.querySelectorAll('.row-check').forEach(el => {
+      el.style.background = this.checked ? '#FE4C1B' : '';
+      el.style.borderColor = this.checked ? '#FE4C1B' : '';
+    });
+    updatePayBtn();
+  });
+  [privacyCheck, termsCheck, refundCheck].forEach(cb => {
+    cb.addEventListener('change', function() {
+      allCheck.checked = privacyCheck.checked && termsCheck.checked && refundCheck.checked;
+      updatePayBtn();
+    });
+  });
   document.getElementById('email-input').addEventListener('input', updatePayBtn);
-  document.getElementById('consent-privacy').addEventListener('change', updatePayBtn);
-  document.getElementById('consent-terms').addEventListener('change', updatePayBtn);
 
-  document.getElementById('pay-btn').addEventListener('click', () => {
+  document.getElementById('pay-btn').addEventListener('click', async () => {
     const email = document.getElementById('email-input').value.trim();
     const s = getScores();
     const r = getResult(s.A, s.B, s.C);
-    const url = `${PAYMENT_URL}?email=${encodeURIComponent(email)}&type=${r.key}&scores=${s.A}-${s.B}-${s.C}`;
-    window.open(url, '_blank');
+    const btn = document.getElementById('pay-btn');
+
+    btn.disabled = true;
+    btn.textContent = '처리 중...';
+
+    // 1) 서버에 점수 임시 저장 → session_id 받기
+    const SERVER = 'https://decide-workbot-production.up.railway.app';
+    let sessionId;
+    try {
+      const res = await fetch(`${SERVER}/api/scores`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, type: r.key, a: s.A, b: s.B, c: s.C })
+      });
+      const data = await res.json();
+      sessionId = data.session_id;
+    } catch (e) {
+      alert('서버 연결 오류가 발생했어요. 잠시 후 다시 시도해주세요.');
+      btn.disabled = false;
+      btn.textContent = '결제하기 · 9,900원';
+      return;
+    }
+
+    // 2) 포트원 결제창 호출
+    IMP.request_pay({
+      pg: 'kakaopay',
+      pay_method: 'card',
+      merchant_uid: sessionId,
+      name: 'decide.lab 정밀 분석 리포트',
+      amount: 9900,
+      buyer_email: email,
+      buyer_name: '',
+    }, function(rsp) {
+      if (rsp.success) {
+        // 결제 성공 → 성공 메시지로 교체
+        document.querySelector('.upsell-box').innerHTML = `
+          <div style="text-align:center; padding: 32px 20px;">
+            <div style="font-size:36px; margin-bottom:16px;">📬</div>
+            <div style="font-size:17px; font-weight:700; color:#fff; margin-bottom:10px;">리포트를 발송했어요!</div>
+            <div style="font-size:13px; color:rgba(255,255,255,.6); line-height:1.8;">
+              <strong style="color:rgba(255,255,255,.85);">${email}</strong>로<br>
+              정밀 분석 리포트를 보내드렸어요.<br>
+              스팸함도 꼭 확인해보세요.
+            </div>
+          </div>`;
+      } else {
+        alert('결제가 취소됐어요: ' + rsp.error_msg);
+        btn.disabled = false;
+        btn.textContent = '결제하기 · 9,900원';
+      }
+    });
   });
+
+  /* ── 미리보기 모드 (?preview=KEY) ── */
+  const PREVIEW_SCORES = {
+    growth:     { A: 6, B: 2, C: 8  },
+    burnout:    { A: 2, B: 5, C: 5  },
+    startup:    { A: 4, B: 5, C: 11 },
+    transition: { A: 4, B: 4, C: 5  },
+  };
+  (function initPreview() {
+    const params = new URLSearchParams(location.search);
+    const previewKey = params.get('preview');
+    const cardKey    = params.get('showcard');
+
+    // ?showcard=growth — share-card 디자인 확인 모드
+    if (cardKey && PREVIEW_SCORES[cardKey]) {
+      const ps = PREVIEW_SCORES[cardKey];
+      const r  = RESULTS.find(x => x.key === cardKey);
+      if (r) {
+        // share-card 채우기
+        const card = document.getElementById('share-card');
+        card.querySelector('.sc-icon-box').innerHTML   = ICONS[r.key];
+        card.querySelector('.sc-type').textContent     = r.type;
+        card.querySelector('.sc-desc').innerHTML       = r.desc;
+        card.querySelector('.sc-cta-url').style.color  = r.color;
+        [['a', ps.A, 8], ['b', ps.B, 7], ['c', ps.C, 15]].forEach(([k, v, max]) => {
+          document.getElementById(`sc-bar-${k}`).style.cssText += `width:${Math.round(v/max*100)}%;background:${r.color}`;
+          document.getElementById(`sc-val-${k}`).textContent    = `${v} / ${max}`;
+          document.getElementById(`sc-val-${k}`).style.color    = 'rgba(255,255,255,0.85)';
+        });
+        // 화면 중앙에 축소해서 표시
+        const scale = Math.min(window.innerWidth / 1080, window.innerHeight / 1920) * 0.92;
+        Object.assign(card.style, {
+          position: 'fixed', left: '50%', top: '50%',
+          transform: `translate(-50%, -50%) scale(${scale})`,
+          transformOrigin: 'center center',
+          zIndex: '9999', outline: '2px dashed rgba(255,255,255,0.3)',
+        });
+      }
+      return; // 체크리스트 UI는 그대로 둠
+    }
+
+    // ?preview=growth — 결과 화면 빠른 확인 모드
+    if (!previewKey || !PREVIEW_SCORES[previewKey]) return;
+    const ps = PREVIEW_SCORES[previewKey];
+    const sections = [['A', ps.A], ['B', ps.B], ['C', ps.C]];
+    sections.forEach(([sec, count]) => {
+      for (let i = 0; i < count; i++) checked[`${sec}-${i}`] = true;
+    });
+    document.querySelector('.floating-bar')?.classList.add('hidden');
+    handleSubmit();
+  })();
 </script>
+
+<!-- 공유 카드 (off-screen, 1080×1920) -->
+<div id="share-card" style="position:fixed; left:-9999px; top:0; width:1080px; height:1920px; background:#0A0D2D; font-family:'Pretendard',sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:80px 80px; overflow:hidden; box-sizing:border-box;">
+  <!-- 헤더 -->
+  <div style="width:100%; display:flex; align-items:center; justify-content:space-between;">
+    <div style="font-size:34px; font-weight:400; color:white; letter-spacing:0;">decide.lab</div>
+    <div style="font-size:34px; color:rgba(255,255,255,0.4); font-weight:400;">결정의 순간을 돕다</div>
+  </div>
+  <!-- 본문 -->
+  <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:84px; width:100%;">
+    <!-- 아이콘 -->
+    <div class="sc-icon-box" style="width:300px; height:300px; display:flex; align-items:center; justify-content:center;"></div>
+    <!-- 유형 + 설명 -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:24px; width:100%;">
+      <div class="sc-type" style="font-size:80px; font-weight:550; color:white; letter-spacing:0; text-align:center; line-height:1.1;"></div>
+      <div class="sc-desc" style="font-size:38px; color:#BCBECC; text-align:center; line-height:1.7; font-weight:400; max-width:800px;"></div>
+    </div>
+    <!-- 점수 패널 -->
+    <div style="width:100%; display:flex; flex-direction:column; gap:50px; background:rgba(255,255,255,0.05); border-radius:28px; padding:48px 56px;">
+      <div style="display:flex; align-items:center;">
+        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
+          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">A</div>
+          <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">직장 적합도</div>
+        </div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; gap:40px; flex-shrink:0;">
+          <div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px; flex-shrink:0;"><div id="sc-bar-a" style="height:20px; border-radius:100px;"></div></div>
+          <div id="sc-val-a" style="font-size:38px; font-weight:400; width:130px; text-align:right; flex-shrink:0; color:rgba(255,255,255,0.85);"></div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center;">
+        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
+          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">B</div>
+          <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">이탈 신호</div>
+        </div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; gap:40px; flex-shrink:0;">
+          <div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px; flex-shrink:0;"><div id="sc-bar-b" style="height:20px; border-radius:100px;"></div></div>
+          <div id="sc-val-b" style="font-size:38px; font-weight:400; width:130px; text-align:right; flex-shrink:0; color:rgba(255,255,255,0.85);"></div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center;">
+        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
+          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">C</div>
+          <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">창업 준비도</div>
+        </div>
+        <div style="flex:1;"></div>
+        <div style="display:flex; align-items:center; gap:40px; flex-shrink:0;">
+          <div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px; flex-shrink:0;"><div id="sc-bar-c" style="height:20px; border-radius:100px;"></div></div>
+          <div id="sc-val-c" style="font-size:38px; font-weight:400; width:130px; text-align:right; flex-shrink:0; color:rgba(255,255,255,0.85);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 푸터 -->
+  <div style="width:100%; display:flex; flex-direction:column; align-items:center; gap:16px;">
+    <div style="font-size:34px; text-align:center; font-weight:400;"><span style="color:rgba(255,255,255,0.5);">당신의 유형은?</span> <span style="color:white;">무료로 진단해보세요</span></div>
+    <div class="sc-cta-url" style="font-size:32px; font-weight:400; color:#FE4C1B; letter-spacing:0;">decidelab.co.kr</div>
+  </div>
+</div>
 </body>
 </html>
