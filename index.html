@@ -705,7 +705,7 @@
     .source-accordion.open .source-accordion-body { display: block; }
   </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 </head>
 <body>
 
@@ -1449,7 +1449,6 @@
   }
 
   /* ── 업그레이드 ── */
-  IMP.init('imp64877305');
 
   document.getElementById('upgrade-btn').addEventListener('click', () => {
     document.getElementById('upgrade-btn').classList.add('hidden');
@@ -1512,34 +1511,34 @@
       return;
     }
 
-    // 2) 포트원 결제창 호출
-    IMP.request_pay({
-      pg: 'html5_inicis.INIpayTest',
-      pay_method: 'card',
-      merchant_uid: sessionId,
-      name: 'decide.lab 정밀 분석 리포트',
-      amount: 9900,
-      buyer_email: email,
-      buyer_name: '',
-    }, function(rsp) {
-      if (rsp.success) {
-        // 결제 성공 → 성공 메시지로 교체
-        document.querySelector('.upsell-box').innerHTML = `
-          <div style="text-align:center; padding: 32px 20px;">
-            <div style="font-size:36px; margin-bottom:16px;">📬</div>
-            <div style="font-size:17px; font-weight:700; color:#fff; margin-bottom:10px;">리포트를 발송했어요!</div>
-            <div style="font-size:13px; color:rgba(255,255,255,.6); line-height:1.8;">
-              <strong style="color:rgba(255,255,255,.85);">${email}</strong>로<br>
-              정밀 분석 리포트를 보내드렸어요.<br>
-              스팸함도 꼭 확인해보세요.
-            </div>
-          </div>`;
-      } else {
-        alert('결제가 취소됐어요: ' + rsp.error_msg);
-        btn.disabled = false;
-        btn.textContent = '정밀 분석 받기';
-      }
+    // 2) 포트원 V2 결제창 호출
+    const response = await PortOne.requestPayment({
+      storeId: 'store-a1b1e173-6f8f-4430-95c3-46e7af421a8a',
+      channelKey: 'channel-key-2c3e15fd-c229-4f8d-8967-7740d653dfd5',
+      paymentId: sessionId,
+      orderName: 'decide.lab 정밀 분석 리포트',
+      totalAmount: 9900,
+      currency: 'KRW',
+      customer: { email: email },
     });
+
+    if (response && !response.code) {
+      // 결제 성공 → 성공 메시지로 교체
+      document.querySelector('.upsell-box').innerHTML = `
+        <div style="text-align:center; padding: 32px 20px;">
+          <div style="font-size:36px; margin-bottom:16px;">📬</div>
+          <div style="font-size:17px; font-weight:700; color:#fff; margin-bottom:10px;">리포트를 발송했어요!</div>
+          <div style="font-size:13px; color:rgba(255,255,255,.6); line-height:1.8;">
+            <strong style="color:rgba(255,255,255,.85);">${email}</strong>로<br>
+            정밀 분석 리포트를 보내드렸어요.<br>
+            스팸함도 꼭 확인해보세요.
+          </div>
+        </div>`;
+    } else {
+      alert('결제가 취소됐어요: ' + (response?.message || ''));
+      btn.disabled = false;
+      btn.textContent = '정밀 분석 받기';
+    }
   });
 
   /* ── 미리보기 모드 (?preview=KEY) ── */
