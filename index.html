@@ -1298,6 +1298,18 @@
     });
   });
 
+  /* ── iOS Safari floating bar fix ── */
+  (function() {
+    const bar = document.querySelector('.floating-bar');
+    if (!bar || !window.visualViewport) return;
+    function fixBar() {
+      const offset = window.innerHeight - window.visualViewport.height - window.visualViewport.offsetTop;
+      bar.style.bottom = Math.max(0, offset) + 'px';
+    }
+    window.visualViewport.addEventListener('resize', fixBar);
+    window.visualViewport.addEventListener('scroll', fixBar);
+  })();
+
   /* ── 결과 제출 ── */
   let busy = false;
   function handleSubmit() {
