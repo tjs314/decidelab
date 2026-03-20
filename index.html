@@ -1425,14 +1425,28 @@
       val.style.color   = 'rgba(255,255,255,0.85)';
     });
 
-    // html2canvas로 렌더링 → JPG 다운로드
+    // html2canvas로 렌더링 → 저장
     html2canvas(card, {
       width: 1080, height: 1920, scale: 1,
       backgroundColor: '#0A0D2D',
-    }).then(canvas => {
+    }).then(async canvas => {
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+      const filename = `decide_lab_${r.key}.jpg`;
+
+      // 모바일: Web Share API로 공유 시트 → "이미지 저장"으로 갤러리 저장
+      if (navigator.share && navigator.canShare) {
+        const blob = await (await fetch(dataUrl)).blob();
+        const file = new File([blob], filename, { type: 'image/jpeg' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'decide.lab 결과 카드' });
+          return;
+        }
+      }
+
+      // PC: 직접 다운로드
       const link = document.createElement('a');
-      link.download = `decide_lab_${r.key}.jpg`;
-      link.href = canvas.toDataURL('image/jpeg', 0.92);
+      link.download = filename;
+      link.href = dataUrl;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
