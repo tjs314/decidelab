@@ -1538,6 +1538,13 @@
     });
 
     if (response && !response.code) {
+      // 3) Railway 웹훅 호출 → PDF 생성 + 이메일 발송
+      await fetch(`${SERVER}/api/payment/webhook`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imp_uid: response.txId || sessionId, merchant_uid: sessionId })
+      }).catch(() => {});
+
       // 결제 성공 → 성공 메시지로 교체
       document.querySelector('.upsell-box').innerHTML = `
         <div style="text-align:center; padding: 32px 20px;">
