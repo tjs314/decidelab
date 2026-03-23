@@ -1474,8 +1474,9 @@
         const img = document.createElement('img');
         img.src = dataUrl;
         img.style.cssText = 'max-width:85%;max-height:75vh;border-radius:12px;';
-        overlay.appendChild(topBar);
         overlay.appendChild(img);
+        topBar.style.cssText = 'display:flex;align-items:center;justify-content:space-between;width:85%;margin-top:16px;';
+        overlay.appendChild(topBar);
         document.body.appendChild(overlay);
       } else {
         // PC: 직접 다운로드
