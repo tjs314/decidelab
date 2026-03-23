@@ -1460,19 +1460,22 @@
         // 모바일: 이미지 모달로 띄우고 꾹 눌러 저장 안내
         const overlay = document.createElement('div');
         overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+        const topBar = document.createElement('div');
+        topBar.style.cssText = 'display:flex;align-items:center;justify-content:space-between;width:85%;margin-bottom:16px;';
         const hint = document.createElement('div');
-        hint.style.cssText = 'color:#fff;font-size:15px;font-weight:600;margin-bottom:16px;text-align:center;line-height:1.6;';
+        hint.style.cssText = 'color:#fff;font-size:15px;font-weight:600;line-height:1.6;';
         hint.textContent = '이미지를 꾹 눌러서 저장하세요';
-        const img = document.createElement('img');
-        img.src = dataUrl;
-        img.style.cssText = 'max-width:85%;max-height:70vh;border-radius:12px;';
         const closeBtn = document.createElement('button');
         closeBtn.textContent = '닫기';
-        closeBtn.style.cssText = 'margin-top:16px;padding:10px 32px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:8px;font-size:14px;';
+        closeBtn.style.cssText = 'padding:6px 20px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:8px;font-size:14px;flex-shrink:0;';
         closeBtn.onclick = () => document.body.removeChild(overlay);
-        overlay.appendChild(hint);
+        topBar.appendChild(hint);
+        topBar.appendChild(closeBtn);
+        const img = document.createElement('img');
+        img.src = dataUrl;
+        img.style.cssText = 'max-width:85%;max-height:75vh;border-radius:12px;';
+        overlay.appendChild(topBar);
         overlay.appendChild(img);
-        overlay.appendChild(closeBtn);
         document.body.appendChild(overlay);
       } else {
         // PC: 직접 다운로드
