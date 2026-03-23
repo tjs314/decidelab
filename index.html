@@ -1454,33 +1454,35 @@
     }).then(async canvas => {
       const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
       const filename = `decide_lab_${r.key}.jpg`;
+      const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 
-      // 다운로드 헬퍼
-      function downloadImage(url, name) {
+      if (isMobile) {
+        // 모바일: 이미지 모달로 띄우고 꾹 눌러 저장 안내
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;';
+        const hint = document.createElement('div');
+        hint.style.cssText = 'color:#fff;font-size:15px;font-weight:600;margin-bottom:16px;text-align:center;line-height:1.6;';
+        hint.textContent = '이미지를 꾹 눌러서 저장하세요';
+        const img = document.createElement('img');
+        img.src = dataUrl;
+        img.style.cssText = 'max-width:85%;max-height:70vh;border-radius:12px;';
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '닫기';
+        closeBtn.style.cssText = 'margin-top:16px;padding:10px 32px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:8px;font-size:14px;';
+        closeBtn.onclick = () => document.body.removeChild(overlay);
+        overlay.appendChild(hint);
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+      } else {
+        // PC: 직접 다운로드
         const link = document.createElement('a');
-        link.download = name;
-        link.href = url;
+        link.download = filename;
+        link.href = dataUrl;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       }
-
-      // 모바일: Web Share API로 공유 시트 → "이미지 저장"으로 갤러리 저장
-      if (navigator.share && navigator.canShare) {
-        try {
-          const blob = await (await fetch(dataUrl)).blob();
-          const file = new File([blob], filename, { type: 'image/jpeg' });
-          if (navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: 'decide.lab 결과 카드' });
-            return;
-          }
-        } catch (e) {
-          // 공유 취소 또는 권한 거부 시 다운로드로 fallback
-        }
-      }
-
-      // PC 또는 모바일 fallback: 직접 다운로드
-      downloadImage(dataUrl, filename);
     }).catch(err => alert('저장 실패: ' + err.message));
   }
 
