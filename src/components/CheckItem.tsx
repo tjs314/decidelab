@@ -18,8 +18,8 @@ export default function CheckItem({ section, idx, label, checked, disabled, onTo
       className={`flex items-start gap-3.5 px-5 py-4 cursor-pointer select-none transition-colors
         ${disabled ? 'pointer-events-none' : ''}
         ${checked ? '' : ''}
-        active:bg-[var(--bg)]
-        border-b border-[var(--line)] last:border-b-0`}
+        active:bg-[var(--bg)]`}
+      style={{ borderBottom: '1px solid var(--line)' }}
       onClick={() => !disabled && onToggle(section, idx)}
       onKeyDown={(e) => {
         if (e.key === ' ' || e.key === 'Enter') {
