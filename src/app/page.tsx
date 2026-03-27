@@ -220,7 +220,7 @@ export default function Home() {
                   <div className="pt-1 pb-5">
                     <button
                       onClick={() => location.reload()}
-                      className="w-full py-3.5 bg-transparent border-[1.5px] border-[#0A0D2D] rounded-xl text-[var(--ink2)] text-base font-semibold cursor-pointer font-[inherit] mt-2.5 transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
+                      className="w-full py-3.5 bg-transparent border-[1.5px] border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-base font-semibold cursor-pointer font-[inherit] mt-2.5 transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
                     >
                       다시 테스트 해보기
                     </button>
