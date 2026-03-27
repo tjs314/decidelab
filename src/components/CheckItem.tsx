@@ -19,11 +19,7 @@ export default function CheckItem({ section, idx, label, checked, disabled, onTo
         ${disabled ? 'pointer-events-none' : ''}
         ${checked ? '' : ''}
         active:bg-[var(--bg)]
-        [background-image:linear-gradient(var(--line),var(--line))]
-        [background-size:calc(100%-32px)_1px]
-        [background-position:center_bottom]
-        [background-repeat:no-repeat]
-        last:[background-image:none]`}
+        border-b border-[var(--line)] last:border-b-0`}
       onClick={() => !disabled && onToggle(section, idx)}
       onKeyDown={(e) => {
         if (e.key === ' ' || e.key === 'Enter') {
