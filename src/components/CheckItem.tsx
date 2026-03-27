@@ -6,10 +6,11 @@ interface CheckItemProps {
   label: string;
   checked: boolean;
   disabled: boolean;
+  hideBorder?: boolean;
   onToggle: (section: string, idx: number) => void;
 }
 
-export default function CheckItem({ section, idx, label, checked, disabled, onToggle }: CheckItemProps) {
+export default function CheckItem({ section, idx, label, checked, disabled, hideBorder, onToggle }: CheckItemProps) {
   return (
     <div
       role="checkbox"
@@ -19,7 +20,7 @@ export default function CheckItem({ section, idx, label, checked, disabled, onTo
         ${disabled ? 'pointer-events-none' : ''}
         ${checked ? '' : ''}
         active:bg-[var(--bg)]`}
-      style={{ backgroundImage: 'linear-gradient(var(--line), var(--line))', backgroundSize: 'calc(100% - 40px) 1px', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
+      style={hideBorder ? undefined : { backgroundImage: 'linear-gradient(var(--line), var(--line))', backgroundSize: 'calc(100% - 40px) 1px', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
       onClick={() => !disabled && onToggle(section, idx)}
       onKeyDown={(e) => {
         if (e.key === ' ' || e.key === 'Enter') {

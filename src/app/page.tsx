@@ -147,8 +147,11 @@ export default function Home() {
                     <div className="text-sm text-[var(--ink1)] mt-1">{section.subtitle}</div>
                   </div>
                 </div>
-                {section.questions.map((q) => {
+                {section.questions.map((q, i) => {
                   const subLabel = section.subLabels?.find((s) => s.beforeIdx === q.idx);
+                  const isLast = i === section.questions.length - 1;
+                  const nextQ = section.questions[i + 1];
+                  const beforeSubLabel = nextQ && section.subLabels?.some((s) => s.beforeIdx === nextQ.idx);
                   return (
                     <div key={`${section.key}-${q.idx}`}>
                       {subLabel && (
@@ -162,6 +165,7 @@ export default function Home() {
                         label={q.label}
                         checked={!!checked[`${section.key}-${q.idx}`]}
                         disabled={resultShown}
+                        hideBorder={isLast || !!beforeSubLabel}
                         onToggle={toggleItem}
                       />
                     </div>
