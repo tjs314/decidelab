@@ -68,9 +68,10 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
           {rows.map((row) => (
             <div key={row.badge} style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '30%', background: '#676B82', textAlign: 'center', lineHeight: '40px', fontSize: '26px', fontWeight: 700, color: '#0A0D2D', fontFamily: 'Arial, Helvetica, sans-serif', flexShrink: 0 }}>
-                  {row.badge}
-                </div>
+                <svg width="40" height="40" viewBox="0 0 40 40" style={{ flexShrink: 0 }}>
+                  <rect width="40" height="40" rx="12" fill="#676B82" />
+                  <text x="20" y="21" textAnchor="middle" dominantBaseline="central" fill="#0A0D2D" fontSize="26" fontWeight="700" fontFamily="Arial, Helvetica, sans-serif">{row.badge}</text>
+                </svg>
                 <div style={{ fontSize: '38px', color: 'rgba(255,255,255,0.5)', fontWeight: 400, width: '200px', flexShrink: 0 }}>
                   {row.label}
                 </div>
