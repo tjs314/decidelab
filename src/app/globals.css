@@ -37,12 +37,6 @@ body {
   border-radius: 4px;
 }
 
-#share-card-root,
-#share-card-root * {
-  all: revert;
-  box-sizing: content-box;
-}
-
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
