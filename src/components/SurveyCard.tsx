@@ -50,7 +50,7 @@ export default function SurveyCard({ resultKey }: Props) {
       />
       <button
         onClick={handleSubmit}
-        className="w-full py-3.5 bg-transparent border-[1.5px] border-[var(--line)] rounded-xl text-[var(--ink2)] text-base font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
+        className="w-full py-3.5 bg-transparent border-[1.5px] border-[#0A0D2D] rounded-xl text-[var(--ink2)] text-base font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
       >
         {sending ? '보내는 중...' : '의견 보내기'}
       </button>
