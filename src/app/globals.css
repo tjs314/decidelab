@@ -37,6 +37,15 @@ body {
   border-radius: 4px;
 }
 
+.share-card-reset *,
+.share-card-reset *::before,
+.share-card-reset *::after {
+  box-sizing: content-box;
+  border-width: 0;
+  border-style: none;
+  line-height: normal;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }

@@ -23,6 +23,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
   return (
     <div
       ref={ref}
+      className="share-card-reset"
       style={{
         position: 'fixed',
         left: '-9999px',
@@ -35,9 +36,10 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '80px',
+        padding: '80px 80px',
         overflow: 'hidden',
         boxSizing: 'border-box',
+        lineHeight: 'normal',
       }}
     >
       {/* 헤더 */}
@@ -68,10 +70,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
           {rows.map((row) => (
             <div key={row.badge} style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
-                <svg width="40" height="40" viewBox="0 0 40 40" style={{ display: 'block', flexShrink: 0 }}>
-                  <rect width="40" height="40" rx="12" fill="#676B82" />
-                  <text x="20" y="21" textAnchor="middle" dominantBaseline="central" fill="#0A0D2D" fontSize="26" fontWeight="700" fontFamily="Arial, Helvetica, sans-serif">{row.badge}</text>
-                </svg>
+                <div style={{ width: '40px', height: '40px', borderRadius: '30%', background: '#676B82', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', fontWeight: 700, color: '#0A0D2D', flexShrink: 0 }}>{row.badge}</div>
                 <div style={{ fontSize: '38px', color: 'rgba(255,255,255,0.5)', fontWeight: 400, width: '200px', flexShrink: 0 }}>
                   {row.label}
                 </div>
