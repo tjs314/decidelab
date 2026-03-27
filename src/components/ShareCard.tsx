@@ -23,7 +23,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
     <div style="width:300px; height:300px; display:flex; align-items:center; justify-content:center;">${getIconSvgString(result.key, 300)}</div>
     <div style="display:flex; flex-direction:column; align-items:center; gap:24px; width:100%;">
       <div style="font-size:80px; font-weight:550; color:white; letter-spacing:0; text-align:center; line-height:1.1;">${result.type}</div>
-      <div style="font-size:38px; color:#BCBECC; text-align:center; line-height:1.7; font-weight:400; max-width:800px;">${result.desc}</div>
+      <div style="font-size:38px; color:#BCBECC; text-align:center; line-height:1.7; font-weight:400; max-width:800px;">${result.desc.replace(/\. /g, '.<br>')}</div>
     </div>
     <div style="width:100%; display:flex; flex-direction:column; gap:50px; background:rgba(255,255,255,0.05); border-radius:28px; padding:48px 56px;">
       <div style="display:flex; align-items:center;">
