@@ -217,7 +217,7 @@ export default function Home() {
                     <p className="text-sm text-white/55 text-center px-8 pt-2 pb-6 leading-relaxed"
                        dangerouslySetInnerHTML={{ __html: result.desc.replace(/\. /g, '.<br>') }} />
                   </div>
-                  <div className="pt-1 pb-5">
+                  <div className="pt-6 pb-5">
                     <button
                       onClick={() => location.reload()}
                       className="w-full py-3.5 bg-transparent border-[1.5px] border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-base font-semibold cursor-pointer font-[inherit] mt-2.5 transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
