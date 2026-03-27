@@ -47,7 +47,7 @@ export default function PaymentSection({ result, scores, onPaymentSuccess }: Pro
 
       const response = await PortOne.requestPayment({
         storeId: 'store-a1b1e173-6f8f-4430-95c3-46e7af421a8a',
-        channelKey: 'channel-key-9a9a2b7b-8cc3-48eb-a94a-8a823bb8d9aa',
+        channelKey: 'channel-key-5a514b54-7e42-4537-b174-828e95cce2f2',
         paymentId: sessionId,
         payMethod: 'CARD',
         orderName: 'decide.lab 정밀 분석 리포트',
