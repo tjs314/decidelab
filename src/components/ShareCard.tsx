@@ -69,6 +69,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
   return (
     <div
       ref={ref}
+      id="share-card-root"
       style={{
         position: 'fixed',
         left: '-9999px',
