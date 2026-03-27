@@ -61,6 +61,17 @@ export default function Home() {
         height: 1920,
         scale: 1,
         backgroundColor: '#0A0D2D',
+        onclone: (doc: Document) => {
+          const root = doc.getElementById('share-card-root');
+          if (root) {
+            root.style.lineHeight = 'normal';
+            root.style.boxSizing = 'content-box';
+            root.querySelectorAll('*').forEach((el) => {
+              (el as HTMLElement).style.boxSizing = 'content-box';
+              (el as HTMLElement).style.lineHeight = (el as HTMLElement).style.lineHeight || 'normal';
+            });
+          }
+        },
       });
       const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
       const filename = `decide_lab_${result.key}.jpg`;
