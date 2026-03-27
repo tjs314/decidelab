@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import html2canvas from 'html2canvas';
+import { drawShareCard } from '@/components/drawShareCard';
 import { sections, sources } from '@/data/questions';
 import { getResult } from '@/data/results';
 import type { ResultType } from '@/data/results';
@@ -11,7 +11,6 @@ import ResultDarkCard from '@/components/ResultDarkCard';
 import LockedSection from '@/components/LockedSection';
 import PaymentSection from '@/components/PaymentSection';
 import SurveyCard from '@/components/SurveyCard';
-import ShareCard from '@/components/ShareCard';
 import Footer from '@/components/Footer';
 import { getIconByKey } from '@/components/ResultIcons';
 
@@ -23,7 +22,6 @@ export default function Home() {
   const [paidEmail, setPaidEmail] = useState<string | null>(null);
   const [sourcesOpen, setSourcesOpen] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
-  const shareCardRef = useRef<HTMLDivElement>(null);
 
   const scores = {
     A: Object.entries(checked).filter(([k, v]) => k.startsWith('A-') && v).length,
@@ -54,26 +52,9 @@ export default function Home() {
   };
 
   const handleSave = async () => {
-    if (!shareCardRef.current || !result || result.key === 'explore') return;
+    if (!result || result.key === 'explore') return;
     try {
-      const canvas = await html2canvas(shareCardRef.current, {
-        width: 1080,
-        height: 1920,
-        scale: 1,
-        backgroundColor: '#0A0D2D',
-        onclone: (doc: Document) => {
-          const root = doc.getElementById('share-card-root');
-          if (root) {
-            root.style.lineHeight = 'normal';
-            root.style.boxSizing = 'content-box';
-            root.querySelectorAll('*').forEach((el) => {
-              (el as HTMLElement).style.boxSizing = 'content-box';
-              (el as HTMLElement).style.lineHeight = (el as HTMLElement).style.lineHeight || 'normal';
-            });
-          }
-        },
-      });
-      const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+      const dataUrl = await drawShareCard(result, scores);
       const filename = `decide_lab_${result.key}.jpg`;
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) && window.innerWidth < 768;
 
@@ -301,10 +282,6 @@ export default function Home() {
       )}
     </div>
 
-    {/* 공유 카드 (off-screen, html2canvas용) */}
-    {result && result.key !== 'explore' && (
-      <ShareCard ref={shareCardRef} result={result} scores={scores} />
-    )}
     </>
   );
 }

@@ -25,41 +25,26 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
       <div style="font-size:80px; font-weight:550; color:white; letter-spacing:0; text-align:center; line-height:1.1;">${result.type}</div>
       <div style="font-size:38px; color:#BCBECC; text-align:center; line-height:1.7; font-weight:400; max-width:800px;">${result.desc.replace(/\. /g, '.<br>')}</div>
     </div>
-    <div style="width:100%; display:flex; flex-direction:column; gap:50px; background:rgba(255,255,255,0.05); border-radius:28px; padding:48px 56px;">
-      <div style="display:flex; align-items:center;">
-        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; line-height:40px; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">A</div>
-          <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">직장 적합도</div>
-        </div>
-        <div style="flex:1;"></div>
-        <div style="display:flex; align-items:center; gap:40px; flex-shrink:0;">
-          <div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px; flex-shrink:0;"><div style="height:20px; border-radius:100px; width:${pA}%; background:${result.color};"></div></div>
-          <div style="font-size:38px; font-weight:400; width:130px; text-align:right; flex-shrink:0; color:rgba(255,255,255,0.85);">${scores.A} / 8</div>
-        </div>
-      </div>
-      <div style="display:flex; align-items:center;">
-        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; line-height:40px; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">B</div>
-          <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">이탈 신호</div>
-        </div>
-        <div style="flex:1;"></div>
-        <div style="display:flex; align-items:center; gap:40px; flex-shrink:0;">
-          <div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px; flex-shrink:0;"><div style="height:20px; border-radius:100px; width:${pB}%; background:${result.color};"></div></div>
-          <div style="font-size:38px; font-weight:400; width:130px; text-align:right; flex-shrink:0; color:rgba(255,255,255,0.85);">${scores.B} / 7</div>
-        </div>
-      </div>
-      <div style="display:flex; align-items:center;">
-        <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; line-height:40px; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">C</div>
-          <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">창업 준비도</div>
-        </div>
-        <div style="flex:1;"></div>
-        <div style="display:flex; align-items:center; gap:40px; flex-shrink:0;">
-          <div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px; flex-shrink:0;"><div style="height:20px; border-radius:100px; width:${pC}%; background:${result.color};"></div></div>
-          <div style="font-size:38px; font-weight:400; width:130px; text-align:right; flex-shrink:0; color:rgba(255,255,255,0.85);">${scores.C} / 15</div>
-        </div>
-      </div>
-    </div>
+    <table style="width:100%; background:rgba(255,255,255,0.05); border-radius:28px; padding:48px 56px; border-collapse:separate; border-spacing:0 25px;">
+      <tr>
+        <td style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; vertical-align:middle; font-size:26px; font-weight:700; color:#0A0D2D;">A</td>
+        <td style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; vertical-align:middle; padding-left:16px;">직장 적합도</td>
+        <td style="vertical-align:middle; padding-left:40px;"><div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px;"><div style="height:20px; border-radius:100px; width:${pA}%; background:${result.color};"></div></div></td>
+        <td style="font-size:38px; font-weight:400; text-align:right; vertical-align:middle; color:rgba(255,255,255,0.85); padding-left:40px; white-space:nowrap;">${scores.A} / 8</td>
+      </tr>
+      <tr>
+        <td style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; vertical-align:middle; font-size:26px; font-weight:700; color:#0A0D2D;">B</td>
+        <td style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; vertical-align:middle; padding-left:16px;">이탈 신호</td>
+        <td style="vertical-align:middle; padding-left:40px;"><div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px;"><div style="height:20px; border-radius:100px; width:${pB}%; background:${result.color};"></div></div></td>
+        <td style="font-size:38px; font-weight:400; text-align:right; vertical-align:middle; color:rgba(255,255,255,0.85); padding-left:40px; white-space:nowrap;">${scores.B} / 7</td>
+      </tr>
+      <tr>
+        <td style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; vertical-align:middle; font-size:26px; font-weight:700; color:#0A0D2D;">C</td>
+        <td style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; vertical-align:middle; padding-left:16px;">창업 준비도</td>
+        <td style="vertical-align:middle; padding-left:40px;"><div style="width:240px; height:20px; background:rgba(255,255,255,0.1); border-radius:100px;"><div style="height:20px; border-radius:100px; width:${pC}%; background:${result.color};"></div></div></td>
+        <td style="font-size:38px; font-weight:400; text-align:right; vertical-align:middle; color:rgba(255,255,255,0.85); padding-left:40px; white-space:nowrap;">${scores.C} / 15</td>
+      </tr>
+    </table>
   </div>
   <div style="width:100%; display:flex; flex-direction:column; align-items:center; gap:16px;">
     <div style="font-size:34px; text-align:center; font-weight:400;"><span style="color:rgba(255,255,255,0.5);">당신의 유형은?</span> <span style="color:white;">무료로 진단해보세요</span></div>
