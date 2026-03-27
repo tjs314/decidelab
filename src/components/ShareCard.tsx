@@ -28,7 +28,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
     <div style="width:100%; display:flex; flex-direction:column; gap:50px; background:rgba(255,255,255,0.05); border-radius:28px; padding:48px 56px;">
       <div style="display:flex; align-items:center;">
         <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">A</div>
+          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; line-height:40px; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">A</div>
           <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">직장 적합도</div>
         </div>
         <div style="flex:1;"></div>
@@ -39,7 +39,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
       </div>
       <div style="display:flex; align-items:center;">
         <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">B</div>
+          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; line-height:40px; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">B</div>
           <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">이탈 신호</div>
         </div>
         <div style="flex:1;"></div>
@@ -50,7 +50,7 @@ const ShareCard = forwardRef<HTMLDivElement, Props>(({ result, scores }, ref) =>
       </div>
       <div style="display:flex; align-items:center;">
         <div style="display:flex; align-items:center; gap:16px; flex-shrink:0;">
-          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">C</div>
+          <div style="width:40px; height:40px; border-radius:30%; background:#676B82; text-align:center; line-height:40px; font-size:26px; font-weight:700; color:#0A0D2D; flex-shrink:0;">C</div>
           <div style="font-size:38px; color:rgba(255,255,255,0.5); font-weight:400; width:200px; flex-shrink:0;">창업 준비도</div>
         </div>
         <div style="flex:1;"></div>
