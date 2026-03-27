@@ -44,7 +44,9 @@ export default function ResultDarkCard({ result, scores, onSave }: Props) {
       <div className="mx-5 mt-5 bg-[#1C1F40] rounded-xl px-5 py-4">
         {rows.map((row) => (
           <div key={row.badge} className="flex items-center gap-3 py-2">
-            <div className="w-5 h-5 rounded-md grid place-items-center text-[10px] font-extrabold text-[var(--ink1)] bg-[#676B82] shrink-0 pb-[1px]">
+            <div
+              style={{ width: 20, height: 20, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: 'var(--ink1)', background: '#676B82', flexShrink: 0, lineHeight: 1 }}
+            >
               {row.badge}
             </div>
             <span className="text-sm text-white/60 flex-1 font-medium">{row.label}</span>
