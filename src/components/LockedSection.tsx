@@ -99,7 +99,7 @@ export default function LockedSection({ result, scores }: Props) {
         <div className="flex justify-center pt-4 pb-2 px-5">
           <div className="flex flex-col items-center gap-1">
             <div className="text-xl font-bold text-[var(--ink1)] tracking-tight">나만을 위한 <span className="text-[var(--orange)]">정밀 맞춤</span> 분석</div>
-            <div className="text-sm text-[var(--ink3)]">(PDF로 제공)</div>
+            <div className="text-sm text-[var(--ink3)]">(PDF로 제공해드려요)</div>
           </div>
         </div>
 
