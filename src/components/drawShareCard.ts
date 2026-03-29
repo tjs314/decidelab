@@ -82,7 +82,7 @@ export async function drawShareCard(
 
   // ── 유형 이름 ──
   const titleY = iconY + iconSize + gapIconTitle + titleH / 2;
-  ctx.font = font(600, 80);
+  ctx.font = font(700, 80);
   ctx.fillStyle = '#FFFFFF';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';

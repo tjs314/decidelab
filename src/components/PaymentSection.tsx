@@ -128,7 +128,7 @@ export default function PaymentSection({ result, scores, onPaymentSuccess }: Pro
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="decide@email.com"
-              className="w-full px-4 py-3 border-[1.5px] border-[var(--line)] rounded-[10px] text-sm font-[inherit] text-[var(--ink1)] bg-white outline-none mb-2 transition-colors focus:border-[var(--ink1)]"
+              className="w-full px-4 py-3 border border-[var(--line)] rounded-[10px] text-sm font-[inherit] text-[var(--ink1)] bg-white outline-none mb-2 transition-colors focus:border-[var(--ink1)]"
             />
             <p className="text-xs text-[var(--orange)] mb-3 leading-normal font-medium">결제 즉시 이메일로 결과 리포트 PDF를 보내드려요</p>
 

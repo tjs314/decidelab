@@ -46,11 +46,11 @@ export default function SurveyCard({ resultKey }: Props) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="예) 결혼vs독신, 딩크vs출산, 주거유형 진단"
-        className="w-full px-4 py-3 border-[1.5px] border-[var(--line)] rounded-[10px] text-sm font-[inherit] text-[var(--ink1)] bg-white outline-none mb-3 transition-colors focus:border-[var(--ink1)] placeholder:text-[var(--ink3)]"
+        className="w-full px-4 py-3 border border-[var(--line)] rounded-[10px] text-sm font-[inherit] text-[var(--ink1)] bg-white outline-none mb-3 transition-colors focus:border-[var(--ink1)] placeholder:text-[var(--ink3)]"
       />
       <button
         onClick={handleSubmit}
-        className="w-full py-3.5 bg-transparent border-[1.5px] border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-base font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
+        className="w-full py-3.5 bg-transparent border border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-base font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
       >
         {sending ? '보내는 중...' : '의견 보내기'}
       </button>

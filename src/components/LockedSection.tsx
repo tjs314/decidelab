@@ -74,7 +74,7 @@ export default function LockedSection({ result, scores }: Props) {
             <div className="text-xs font-bold text-[var(--ink3)] tracking-wider mt-2">지금 당장 해야 할 행동 3가지</div>
             {result.steps && (
               <>
-                <div className="flex gap-3.5 py-3.5 border-b border-[var(--line)] items-start">
+                <div className="flex gap-3.5 py-3.5 items-start">
                   <div className="w-5 h-5 rounded-full bg-[var(--ink1)] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</div>
                   <div className="text-sm text-[var(--ink2)] leading-relaxed" dangerouslySetInnerHTML={{ __html: result.steps[0] }} />
                 </div>
@@ -93,6 +93,46 @@ export default function LockedSection({ result, scores }: Props) {
 
           {/* 그라데이션 오버레이 */}
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-white pointer-events-none z-10" />
+        </div>
+
+        {/* 타이틀 카피 */}
+        <div className="flex justify-center pt-4 pb-2 px-5">
+          <div className="flex flex-col items-center gap-1">
+            <div className="text-xl font-bold text-[var(--ink1)] tracking-tight">나만을 위한 <span className="text-[var(--orange)]">정밀 맞춤</span> 분석</div>
+            <div className="text-sm text-[var(--ink3)]">(PDF로 제공)</div>
+          </div>
+        </div>
+
+        {/* PDF 프리뷰 스택 */}
+        <div className="pb-8 px-5">
+          <div className="relative w-full" style={{ aspectRatio: '100/58' }}>
+            {/* blank 1 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)] bg-white" style={{ width: '28%', aspectRatio: '180/254', bottom: '-4%', right: '7%' }} />
+            {/* blank 2 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)] bg-white" style={{ width: '28%', aspectRatio: '180/254', bottom: '-3%', right: '36%' }} />
+            {/* blank 3 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)] bg-white" style={{ width: '28%', aspectRatio: '180/254', bottom: '-5%', right: '54%' }} />
+            {/* 5: page 8 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: 0, right: 0 }}>
+              <img src="/pdf-page-8.png" alt="" className="w-full h-full object-cover object-top" />
+            </div>
+            {/* 4: page 7 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: '8%', right: '18%' }}>
+              <img src="/pdf-page-7.png" alt="" className="w-full h-full object-cover object-top" />
+            </div>
+            {/* 3: page 6 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: '1%', right: '36%' }}>
+              <img src="/pdf-page-6.png" alt="" className="w-full h-full object-cover object-top" />
+            </div>
+            {/* 2: page 5 */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: '10%', right: '54%' }}>
+              <img src="/pdf-page-5.png" alt="" className="w-full h-full object-cover object-top" />
+            </div>
+            {/* 1: 커버 (맨 앞) */}
+            <div className="absolute rounded-[4px] overflow-hidden shadow-xl" style={{ width: '28%', aspectRatio: '180/254', bottom: '3%', right: '72%', transform: 'rotate(-3deg)' }}>
+              <img src="/pdf-cover.png" alt="" className="w-full h-full object-cover" />
+            </div>
+          </div>
         </div>
 
         {/* 잠금 배너 */}

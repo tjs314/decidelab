@@ -11,7 +11,7 @@ export default function Footer() {
         onClick={() => setOpen(!open)}
         className="block w-full bg-none border-none text-xs text-[#6B7280] cursor-pointer mb-1"
       >
-        사업자 정보 <span className={`inline-block transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
+        사업자 정보 <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className={`inline-block -translate-y-[1px] transition-transform ${open ? 'rotate-180' : ''}`}><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
       {open && (
         <div className="text-[11px] text-[#6B7280] leading-loose mb-3">
