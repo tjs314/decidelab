@@ -20,7 +20,7 @@ export default function CheckItem({ section, idx, label, checked, disabled, hide
         ${disabled ? 'pointer-events-none' : ''}
         ${checked ? '' : ''}
         active:bg-[var(--bg)]`}
-      style={hideBorder ? undefined : { backgroundImage: 'linear-gradient(var(--line), var(--line))', backgroundSize: 'calc(100% - 40px) 1px', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
+      style={hideBorder ? undefined : { backgroundImage: 'linear-gradient(var(--bg), var(--bg))', backgroundSize: 'calc(100% - 40px) 1px', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
       onClick={() => !disabled && onToggle(section, idx)}
       onKeyDown={(e) => {
         if (e.key === ' ' || e.key === 'Enter') {
