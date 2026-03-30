@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { drawShareCard } from '@/components/drawShareCard';
 import { sections, sources } from '@/data/questions';
-import { getResult } from '@/data/results';
+import { getResult, getResultByKey } from '@/data/results';
 import type { ResultType } from '@/data/results';
+import { notifyWebhook } from '@/lib/payment';
 import CheckItem from '@/components/CheckItem';
 import ProgressBar from '@/components/ProgressBar';
 import ResultDarkCard from '@/components/ResultDarkCard';
@@ -22,6 +23,53 @@ export default function Home() {
   const [paidEmail, setPaidEmail] = useState<string | null>(null);
   const [sourcesOpen, setSourcesOpen] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+
+  // 모바일 결제 리다이렉트 복귀 처리
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('payment') !== 'complete') return;
+
+    const paymentId = params.get('paymentId');
+    const code = params.get('code'); // 에러 시에만 존재
+
+    // URL 정리
+    window.history.replaceState({}, '', window.location.pathname);
+
+    if (code) {
+      alert('결제가 취소됐어요: ' + (params.get('message') || ''));
+      return;
+    }
+
+    // localStorage에서 결제 정보 복원
+    const saved = localStorage.getItem('dl_payment');
+    if (!saved) return;
+
+    try {
+      const { sessionId, email, resultKey, scores: savedScores } = JSON.parse(saved);
+      localStorage.removeItem('dl_payment');
+
+      // 결과 복원
+      const savedResult = getResultByKey(resultKey);
+      if (!savedResult) return;
+
+      setResult(savedResult);
+      setResultShown(true);
+
+      // 체크 상태 복원 (스코어 기반)
+      const restored: Record<string, boolean> = {};
+      for (let i = 0; i < savedScores.A; i++) restored[`A-${i}`] = true;
+      for (let i = 0; i < savedScores.B; i++) restored[`B-${i}`] = true;
+      for (let i = 0; i < savedScores.C; i++) restored[`C-${i}`] = true;
+      setChecked(restored);
+
+      // 웹훅 호출 후 결제 완료 처리
+      notifyWebhook(paymentId || sessionId, sessionId)
+        .then(() => setPaidEmail(email))
+        .catch(() => setPaidEmail(email)); // 웹훅 실패해도 결제는 완료 처리
+    } catch {
+      // 파싱 실패 시 무시
+    }
+  }, []);
 
   const scores = {
     A: Object.entries(checked).filter(([k, v]) => k.startsWith('A-') && v).length,

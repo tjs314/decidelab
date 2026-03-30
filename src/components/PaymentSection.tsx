@@ -45,6 +45,14 @@ export default function PaymentSection({ result, scores, onPaymentSuccess }: Pro
         requestPayment: (opts: Record<string, unknown>) => Promise<{ code?: string; txId?: string; message?: string }>;
       };
 
+      // 모바일 결제 리다이렉트를 위해 상태 저장
+      localStorage.setItem('dl_payment', JSON.stringify({
+        sessionId,
+        email: email.trim(),
+        resultKey: result.key,
+        scores,
+      }));
+
       const response = await PortOne.requestPayment({
         storeId: 'store-a1b1e173-6f8f-4430-95c3-46e7af421a8a',
         channelKey: 'channel-key-5a514b54-7e42-4537-b174-828e95cce2f2',
@@ -53,6 +61,7 @@ export default function PaymentSection({ result, scores, onPaymentSuccess }: Pro
         orderName: 'decide.lab 정밀 분석 리포트',
         totalAmount: 9900,
         currency: 'KRW',
+        redirectUrl: `${window.location.origin}?payment=complete`,
         customer: { email: email.trim(), phoneNumber: '01000000000', fullName: '구매자' },
       });
 

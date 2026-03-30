@@ -71,6 +71,11 @@ export const EXPLORE: ResultType = {
   desc: '아직 패턴이 명확하지 않아요. 더 솔직하게 체크해 주세요.',
 };
 
+export function getResultByKey(key: string): ResultType | undefined {
+  if (key === 'explore') return EXPLORE;
+  return RESULTS.find((r) => r.key === key);
+}
+
 export function getResult(a: number, b: number, c: number): ResultType {
   if (a >= 5 && b <= 3) return RESULTS[0]; // growth
   if (a <= 3 && b >= 5 && c <= 7) return RESULTS[1]; // burnout
