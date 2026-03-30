@@ -6,6 +6,7 @@ export interface ResultType {
   desc: string;
   tip?: string;
   steps?: string[];
+  rarity?: number;
 }
 
 export const RESULTS: ResultType[] = [
@@ -15,6 +16,7 @@ export const RESULTS: ResultType[] = [
     color: '#1EC33F',
     iconLabel: '현재 포지션 최적화',
     desc: '지금 직장에서 충분히 성장 가능한 상태예요. 섣부른 창업보다 커리어 최적화가 우선이에요.',
+    rarity: 16.2,
     tip: '현재 직장에서 연봉 협상, 사내 이동, 역량 개발에 집중하세요.',
     steps: [
       '<strong>연봉 협상 타이밍을 잡으세요</strong> — 지난 6개월 성과를 수치로 정리하고 팀장과 1on1을 요청하세요',
@@ -28,6 +30,7 @@ export const RESULTS: ResultType[] = [
     color: '#F4C506',
     iconLabel: '회복 우선',
     desc: '직장도 창업도 지금은 무리예요. 회복과 방향 재정립이 먼저입니다.',
+    rarity: 8.7,
     tip: '지금 당장 결정하지 마세요. 번아웃 회복 후 재진단을 권장해요.',
     steps: [
       '<strong>큰 결정을 최소 4주 뒤로 미루세요</strong> — 번아웃 상태에서 내린 결정은 후회 확률이 2배 높다는 연구 결과가 있어요',
@@ -41,6 +44,7 @@ export const RESULTS: ResultType[] = [
     color: '#FE4C1B',
     iconLabel: '지금이 실행 타이밍',
     desc: '이탈 신호와 창업 준비도 모두 충족된 상태예요. 지금이 실행 타이밍이에요.',
+    rarity: 11.4,
     tip: '구체적인 실행 계획을 수립하고 첫 고객을 확보하는 단계로 넘어가세요.',
     steps: [
       '<strong>퇴사 날짜를 역산하세요</strong> — 6개월치 생활비 확보 시점을 기준으로 구체적인 D-Day를 설정하세요',
@@ -54,6 +58,7 @@ export const RESULTS: ResultType[] = [
     color: '#811EC3',
     iconLabel: '이직 후 창업 검토',
     desc: '떠날 신호는 있지만 준비는 아직 부족해요. 이직 또는 사이드 프로젝트가 먼저예요.',
+    rarity: 14.3,
     tip: '창업 준비도 C 섹션 미체크 항목을 보완하거나 이직을 먼저 고려하세요.',
     steps: [
       '<strong>창업 준비도 부족 항목을 파악하세요</strong> — C 섹션에서 체크 못 한 항목이 가장 먼저 채워야 할 숙제예요',

@@ -144,7 +144,7 @@ export default function LockedSection({ result, scores }: Props) {
             정밀 분석 리포트를 확인해 보세요
           </div>
           <div className="text-sm text-[var(--ink3)] leading-5">
-            당신의 점수 조합은 전체 응답자의 약 <strong className="text-[var(--orange)]">??</strong>%에만<br/>해당해요. 어떤 의미인지 확인해 보세요
+            당신의 점수 조합은 전체 응답자의 약 <strong className="text-[var(--orange)]">{result.rarity ?? '??'}</strong>%에만<br/>해당해요. 어떤 의미인지 확인해 보세요
           </div>
         </div>
       </div>
