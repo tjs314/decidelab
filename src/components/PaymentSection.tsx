@@ -7,10 +7,11 @@ import { createSession, notifyWebhook } from '@/lib/payment';
 interface Props {
   result: ResultType;
   scores: { A: number; B: number; C: number };
+  checked: Record<string, boolean>;
   onPaymentSuccess: (email: string) => void;
 }
 
-export default function PaymentSection({ result, scores, onPaymentSuccess }: Props) {
+export default function PaymentSection({ result, scores, checked, onPaymentSuccess }: Props) {
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState('');
   const [consentAll, setConsentAll] = useState(false);
@@ -51,6 +52,7 @@ export default function PaymentSection({ result, scores, onPaymentSuccess }: Pro
         email: email.trim(),
         resultKey: result.key,
         scores,
+        checked,
       }));
 
       const response = await PortOne.requestPayment({

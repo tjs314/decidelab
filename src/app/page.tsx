@@ -35,17 +35,12 @@ export default function Home() {
     // URL 정리
     window.history.replaceState({}, '', window.location.pathname);
 
-    if (code) {
-      alert('결제가 취소됐어요: ' + (params.get('message') || ''));
-      return;
-    }
-
     // localStorage에서 결제 정보 복원
     const saved = localStorage.getItem('dl_payment');
     if (!saved) return;
 
     try {
-      const { sessionId, email, resultKey, scores: savedScores } = JSON.parse(saved);
+      const { sessionId, email, resultKey, checked: savedChecked } = JSON.parse(saved);
       localStorage.removeItem('dl_payment');
 
       // 결과 복원
@@ -55,12 +50,15 @@ export default function Home() {
       setResult(savedResult);
       setResultShown(true);
 
-      // 체크 상태 복원 (스코어 기반)
-      const restored: Record<string, boolean> = {};
-      for (let i = 0; i < savedScores.A; i++) restored[`A-${i}`] = true;
-      for (let i = 0; i < savedScores.B; i++) restored[`B-${i}`] = true;
-      for (let i = 0; i < savedScores.C; i++) restored[`C-${i}`] = true;
-      setChecked(restored);
+      // 체크 상태 복원
+      if (savedChecked) {
+        setChecked(savedChecked);
+      }
+
+      if (code) {
+        alert('결제가 취소됐어요: ' + (params.get('message') || ''));
+        return;
+      }
 
       // 웹훅 호출 후 결제 완료 처리
       notifyWebhook(paymentId || sessionId, sessionId)
@@ -298,7 +296,7 @@ export default function Home() {
                     /* 미결제: 잠금 섹션 + 결제 (하나의 흰색 카드 안) */
                     <div className="bg-white rounded-2xl overflow-hidden mb-3">
                       <LockedSection result={result} scores={scores} />
-                      <PaymentSection result={result} scores={scores} onPaymentSuccess={handlePaymentSuccess} />
+                      <PaymentSection result={result} scores={scores} checked={checked} onPaymentSuccess={handlePaymentSuccess} />
                     </div>
                   )}
 
