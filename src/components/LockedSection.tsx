@@ -109,36 +109,19 @@ export default function LockedSection({ result, scores }: Props) {
           </div>
         </div>
 
-        {/* PDF 프리뷰 스택 */}
-        <div className="pb-8 px-5">
-          <div className="relative w-full" style={{ aspectRatio: '100/58' }}>
-            {/* blank 1 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)] bg-white" style={{ width: '28%', aspectRatio: '180/254', bottom: '-4%', right: '7%' }} />
-            {/* blank 2 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)] bg-white" style={{ width: '28%', aspectRatio: '180/254', bottom: '-3%', right: '36%' }} />
-            {/* blank 3 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)] bg-white" style={{ width: '28%', aspectRatio: '180/254', bottom: '-5%', right: '54%' }} />
-            {/* 5: page 8 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: 0, right: 0 }}>
-              <img src="/pdf-page-8.png" alt="" className="w-full h-full object-cover object-top" />
-            </div>
-            {/* 4: page 7 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: '8%', right: '18%' }}>
-              <img src="/pdf-page-7.png" alt="" className="w-full h-full object-cover object-top" />
-            </div>
-            {/* 3: page 6 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: '1%', right: '36%' }}>
-              <img src="/pdf-page-6.png" alt="" className="w-full h-full object-cover object-top" />
-            </div>
-            {/* 2: page 5 */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-sm border border-[#E5E8EB] [filter:blur(1px)]" style={{ width: '28%', aspectRatio: '180/254', bottom: '10%', right: '54%' }}>
-              <img src="/pdf-page-5.png" alt="" className="w-full h-full object-cover object-top" />
-            </div>
-            {/* 1: 커버 (맨 앞) */}
-            <div className="absolute rounded-[4px] overflow-hidden shadow-xl" style={{ width: '28%', aspectRatio: '180/254', bottom: '3%', right: '72%', transform: 'rotate(-3deg)' }}>
-              <img src="/pdf-cover.png" alt="" className="w-full h-full object-cover" />
-            </div>
+        {/* PDF 캐러셀 */}
+        <div className="relative overflow-hidden py-4">
+          <div className="flex gap-3 animate-[carousel-scroll_30s_linear_infinite] w-max px-5">
+            {[...Array(2)].map((_, set) =>
+              ['pdf-cover.png','pdf-page-2.png','pdf-page-3.png','pdf-page-4.png','pdf-page-5.png','pdf-page-6.png','pdf-page-7.png','pdf-page-8.png'].map((src, i) => (
+                <div key={`${set}-${i}`} className="shrink-0 w-[105px] rounded-[4px] overflow-hidden border border-[#D8DCE2]" style={{ aspectRatio: '595/842', filter: i === 0 ? 'none' : 'blur(1.5px)', opacity: i === 0 ? 1 : 0.8 }}>
+                  <img src={`/${src}`} alt="" className="w-full h-full object-cover object-top" />
+                </div>
+              ))
+            )}
           </div>
+          <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
         </div>
 
         {/* 잠금 배너 */}
