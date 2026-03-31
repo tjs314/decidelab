@@ -113,7 +113,7 @@ export default function LockedSection({ result, scores }: Props) {
         <div className="relative overflow-hidden py-4">
           <div className="flex gap-3 animate-[carousel-scroll_30s_linear_infinite] w-max px-5">
             {[...Array(2)].map((_, set) =>
-              ['pdf-cover.png','pdf-page-2.png','pdf-page-3.png','pdf-page-4.png','pdf-page-5.png','pdf-page-6.png','pdf-page-7.png','pdf-page-8.png'].map((src, i) => (
+              ['pdf-cover.png','pdf-page-2.png','pdf-page-3.png','pdf-page-4.png','pdf-page-5.png','pdf-page-6.png','pdf-page-7.png','pdf-page-8.png','pdf-page-9.png','pdf-page-10.png'].map((src, i) => (
                 <div key={`${set}-${i}`} className="shrink-0 w-[105px] rounded-[4px] overflow-hidden border border-[#D8DCE2]" style={{ aspectRatio: '595/842', filter: i === 0 ? 'none' : 'blur(1.5px)', opacity: i === 0 ? 1 : 0.8 }}>
                   <img src={`/${src}`} alt="" className="w-full h-full object-cover object-top" />
                 </div>
