@@ -19,9 +19,8 @@ export default function CheckItem({ section, idx, label, checked, disabled, hide
       className={`flex items-start gap-3.5 px-5 py-4 cursor-pointer select-none transition-colors
         ${disabled ? 'pointer-events-none' : ''}
         ${checked ? '' : ''}
-        ${hideBorder ? 'pb-6' : ''}
         active:bg-[var(--bg)]`}
-      style={hideBorder ? undefined : { backgroundImage: 'linear-gradient(var(--line), var(--line))', backgroundSize: 'calc(100% - 40px) 1px', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
+      style={hideBorder ? undefined : { backgroundImage: 'linear-gradient(#F2F3FF, #F2F3FF)', backgroundSize: 'calc(100% - 40px) 1px', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
       onClick={() => !disabled && onToggle(section, idx)}
       onKeyDown={(e) => {
         if (e.key === ' ' || e.key === 'Enter') {
@@ -33,7 +32,7 @@ export default function CheckItem({ section, idx, label, checked, disabled, hide
       <div
         className={`w-[22px] h-[22px] rounded-full border-[1.5px] flex-shrink-0 mt-[1px]
           flex items-center justify-center transition-all duration-200
-          ${checked ? 'bg-[var(--ink1)] border-[var(--ink1)]' : 'bg-white border-[var(--line)]'}`}
+          ${checked ? 'bg-[var(--ink1)] border-[var(--ink1)]' : 'bg-white border-[#BCBECC]'}`}
       >
         <svg
           width="11" height="8" viewBox="0 0 11 8" fill="none"
@@ -42,7 +41,7 @@ export default function CheckItem({ section, idx, label, checked, disabled, hide
           <path d="M1.5 4L4 6.5L9.5 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      <span className={`text-[15px] leading-relaxed flex-1 pt-[1px] transition-colors
+      <span className={`text-sm leading-relaxed flex-1 pt-[1px] transition-colors
         ${checked ? 'text-[var(--ink1)] font-medium' : 'text-[var(--ink2)] font-normal'}`}>
         {label}
       </span>
