@@ -217,30 +217,41 @@ export default function Home() {
             </section>
           ))}
 
-          {/* 출처 아코디언 */}
-          <div className="mt-6 bg-[#E8EAFF] rounded-2xl px-5 py-4 mb-6">
-            <button
-              onClick={() => setSourcesOpen(!sourcesOpen)}
-              className="w-full flex justify-between items-center bg-none border-none p-0 cursor-pointer"
-            >
-              <span className="text-[13px] font-semibold text-[#AAAECB] text-left">
-                📊 이 문항은 실제 데이터를 바탕으로 만들었어요
-              </span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                   className={`shrink-0 transition-transform ${sourcesOpen ? 'rotate-180' : ''}`}>
-                <path d="M4 6l4 4 4-4" stroke="#AAAECB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            {sourcesOpen && (
-              <ul className="list-none p-0 mt-3 text-xs text-[#AAAECB] leading-loose">
-                {sources.map((s, i) => (
-                  <li key={i} className="flex items-center gap-1.5">
-                    <span className="text-[0.75em] shrink-0">•</span>
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            )}
+          {/* 신뢰 뱃지 */}
+          <div className="mt-6 bg-[#E8EAFF] rounded-2xl p-5 mb-6">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 bg-[#D6DEFF] rounded-[10px] flex items-center justify-center shrink-0">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 1.5L3 5v4.5c0 4.5 3 8.2 7 9.5 4-1.3 7-5 7-9.5V5l-7-3.5z" stroke="#4B5EAA" strokeWidth="1.5" strokeLinejoin="round" fill="none"/>
+                  <path d="M7 10.5l2 2 4-4" stroke="#4B5EAA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div className="text-sm font-bold text-[#0A0D2D] leading-snug">50개 이상의 공신력 있는 데이터 기반</div>
+                <div className="text-[13px] text-[#4E5968]">이 문항은 실제 데이터를 바탕으로 만들었어요</div>
+              </div>
+            </div>
+            <div className="mt-3.5 pt-3.5 border-t border-[#D4D7E5]">
+              <button
+                onClick={() => setSourcesOpen(!sourcesOpen)}
+                className="flex items-center gap-1 bg-transparent border-none p-0 cursor-pointer text-xs font-medium text-[#8B95A1] hover:text-[#4E5968] transition-colors"
+              >
+                전체 출처 보기
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
+                     className={`shrink-0 transition-transform ${sourcesOpen ? 'rotate-180' : ''}`}>
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              {sourcesOpen && (
+                <ul className="list-none p-0 mt-2.5">
+                  {sources.map((s, i) => (
+                    <li key={i} className="text-xs text-[#4E5968] leading-[1.9] pl-3 relative before:content-[''] before:absolute before:left-0 before:top-[10px] before:w-1 before:h-1 before:rounded-full before:bg-[#B0B8C1]">
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
           {/* RESULT */}

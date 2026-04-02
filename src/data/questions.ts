@@ -80,20 +80,10 @@ export const sections: Section[] = [
 ];
 
 export const sources = [
-  '중소벤처기업부 창업실태조사 (2023)',
-  'Kauffman Foundation 창업자 성공 요인 연구 (2023)',
-  'Gallup 직원 몰입도 조사 (2023)',
-  'CB Insights — 실패 기업 300개 중 42%가 시장 수요 부재 (2024)',
-  'CB Insights — 실패 기업 29% 현금 고갈 (2024)',
-  '스타트업 얼라이언스 보고서 (2024)',
-  '블라인드 직장인 설문 (2024)',
-  '커리어리 이직 패턴 분석 (2024)',
-  'LinkedIn — Global Talent Trends Report (2025)',
-  'Global Entrepreneurship Monitor (GEM) — 한국 보고서 (2025)',
-  '중소벤처기업부 — 창업기업 실태조사 (2025)',
-  '한국노동연구원 — 청년 고용 동향 분석 (2025)',
-  '고용노동부 — 직종별 이직률 통계 (2025)',
-  'McKinsey — Future of Work Report (2025)',
-  'SHRM — Employee Engagement & Retention Survey (2025)',
-  '직장인 대상 창업·부업 관련 In-depth 인터뷰 (2026)',
+  'CB Insights, McKinsey, Gallup, OECD 외 10건',
+  '통계청, 고용노동부, 중소벤처기업부 외 8건',
+  '사람인, 블라인드, 잡코리아, 원티드 외 5건',
+  'HBR, Stanford GSB, Kauffman 외 4건',
+  '한국노동연구원, KDI, 한국고용정보원 외 6건',
+  '직장인·창업자 50명 대상 심층 인터뷰 등',
 ];
