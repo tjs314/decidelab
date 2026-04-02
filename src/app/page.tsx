@@ -12,6 +12,7 @@ import ProgressBar from '@/components/ProgressBar';
 import ResultDarkCard from '@/components/ResultDarkCard';
 import LockedSection from '@/components/LockedSection';
 import PaymentSection from '@/components/PaymentSection';
+import ReportPreview from '@/components/ReportPreview';
 import SurveyCard from '@/components/SurveyCard';
 import Footer from '@/components/Footer';
 import { getIconByKey } from '@/components/ResultIcons';
@@ -398,6 +399,7 @@ export default function Home() {
                     <div className="bg-white rounded-2xl overflow-hidden mb-3">
                       <LockedSection result={result} scores={scores} />
                       <PaymentSection result={result} scores={scores} checked={checked} onPaymentSuccess={handlePaymentSuccess} />
+                      <ReportPreview />
                     </div>
                   )}
 
