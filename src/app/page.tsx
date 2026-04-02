@@ -281,7 +281,7 @@ export default function Home() {
                     <div className="bg-white rounded-2xl overflow-hidden mt-3">
                       <div className="px-[22px] pt-6 pb-5">
                         <div className="inline-flex items-center gap-[5px] bg-[#FFF5F2] text-[var(--orange)] text-[11px] font-bold px-2.5 py-[5px] rounded-md mb-3 tracking-wide">
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L7.5 4.5L11 5L8.5 7.5L9 11L6 9.5L3 11L3.5 7.5L1 5L4.5 4.5L6 1Z" fill="#FF4B1A"/></svg>
+                          <svg className="shrink-0 -translate-y-px" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L7.5 4.5L11 5L8.5 7.5L9 11L6 9.5L3 11L3.5 7.5L1 5L4.5 4.5L6 1Z" fill="#FF4B1A"/></svg>
                           지금 단계에서의 핵심
                         </div>
                         <div className="text-[15px] font-semibold text-[var(--ink1)] leading-[1.65] tracking-tight">

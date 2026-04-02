@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #0A0D2D;
+    font-family: 'Pretendard', sans-serif;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    width: 1160px;
+    height: 590px;
+    border: 3px solid #FE4C1B;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 52px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.25;
+    letter-spacing: -1px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    color: #8B95AF;
+    line-height: 1.5;
+  }
+
+  .brand {
+    font-size: 18px;
+    font-weight: 500;
+    color: #FE4C1B;
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+
+  .logo {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .logo-d {
+    font-size: 160px;
+    font-weight: 900;
+    color: #FE4C1B;
+    line-height: 1;
+  }
+
+  .logo-check {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    font-size: 100px;
+    color: #FFFFFF;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  /* SVG check mark */
+  .check-svg {
+    position: absolute;
+    right: -5px;
+    bottom: 15px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <div class="title">직장 vs 창업,<br>나는 어떤<br>사람인가?</div>
+      <div class="subtitle">감정이 아닌 데이터로 결정하는 법</div>
+      <div class="brand">decide.lab</div>
+    </div>
+    <div class="logo">
+      <span class="logo-d">D</span>
+      <svg class="check-svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
+        <path d="M20 48L38 66L72 28" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

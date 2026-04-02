@@ -100,37 +100,18 @@ export default function PaymentSection({ result, scores, checked, onPaymentSucce
 
   return (
     <div className="px-5 pb-5">
-      <div className="border border-[var(--orange)] rounded-2xl p-5">
-        <div className="text-xs font-semibold text-[var(--ink2)] uppercase mb-5">정밀 분석에서 확인할 수 있어요</div>
-        <div className="flex flex-col gap-3 mb-4">
-          {['3개 영역 종합 스코어 및 현재 포지션 진단', '내 유형의 반복 패턴 · 맹점 · 리스크 분석', '영역별 리스크 레이더 차트', '유형 맞춤 30일 실행 플랜'].map((f) => (
-            <div key={f} className="flex items-center gap-2 text-sm font-semibold text-[var(--ink1)]">
-              <span className="text-sm shrink-0">🔒</span>
-              {f}
-            </div>
-          ))}
-        </div>
-
+      <div>
         {!showEmail && (
-          <>
-            <div className="h-px bg-black/[.08] my-4" />
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="bg-[rgba(255,180,0,0.12)] text-[#CC8800] border border-[rgba(255,180,0,0.4)] text-[11px] font-bold px-2 py-0.5 rounded-lg tracking-wider">얼리버드</span>
-              <span className="text-[13px] text-black/35 line-through">19,900원</span>
-              <span className="text-[13px] text-[var(--ink1)] font-semibold">9,900원</span>
-            </div>
-            <button
-              onClick={() => setShowEmail(true)}
-              className="w-full py-4 bg-[var(--orange)] border-none rounded-xl text-white text-base font-bold cursor-pointer font-[inherit] tracking-tight hover:opacity-90 transition-opacity"
-            >
-              정밀 분석 받기
-            </button>
-          </>
+          <button
+            onClick={() => setShowEmail(true)}
+            className="w-full py-4 bg-[var(--orange)] border-none rounded-xl text-white text-base font-bold cursor-pointer font-[inherit] tracking-tight hover:opacity-90 transition-opacity"
+          >
+            정밀 분석 받기
+          </button>
         )}
 
         {showEmail && (
-          <div className="mt-3">
-            <div className="h-px bg-black/[.08] my-5" />
+          <div className="border border-[var(--line)] rounded-2xl p-5">
 
             {/* 이메일 */}
             <div className="text-sm font-bold text-[var(--ink1)] mb-2.5 tracking-tight">결과 받을 이메일</div>
@@ -192,7 +173,7 @@ export default function PaymentSection({ result, scores, checked, onPaymentSucce
             {/* 결제 버튼 */}
             <div className="flex items-center justify-center gap-2 mt-4 mb-2.5">
               <span className="bg-[rgba(255,180,0,0.12)] text-[#CC8800] border border-[rgba(255,180,0,0.4)] text-[11px] font-bold px-2 py-0.5 rounded-lg tracking-wider">얼리버드</span>
-              <span className="text-[13px] text-black/35 line-through">19,900원</span>
+              <span className="text-[13px] text-black/35 line-through">46,000원</span>
               <span className="text-[13px] text-[var(--ink1)] font-semibold">9,900원</span>
             </div>
             <button
