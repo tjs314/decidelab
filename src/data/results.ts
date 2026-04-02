@@ -73,7 +73,13 @@ export const EXPLORE: ResultType = {
   type: '탐색 중',
   color: '#B0B8C1',
   iconLabel: '탐색 중',
-  desc: '아직 패턴이 명확하지 않아요. 더 솔직하게 체크해 주세요.',
+  desc: '직장 만족도·이탈 신호·창업 준비도가 아직 뚜렷한 방향을 가리키지 않아요. 결정의 초기 단계에 있다는 뜻이에요.',
+  tip: '방향을 정하는 것보다, 내가 뭘 원하는지 명확히 하는 게 먼저예요.',
+  steps: [
+    '<strong>불만족 포인트를 구체화하세요</strong> — "막연히 답답하다"를 "보상이 부족하다" "성장이 안 된다" 등 구체적 언어로 바꿔보세요',
+    '<strong>한 달간 관찰 일지를 시작하세요</strong> — 매주 금요일, 이번 주 가장 에너지가 올라간 순간과 빠진 순간을 한 줄씩 기록하세요',
+    '<strong>1개월 뒤 다시 체크해보세요</strong> — 기록이 쌓이면 패턴이 보이고, 그때 훨씬 정확한 결과가 나와요',
+  ],
 };
 
 export function getResultByKey(key: string): ResultType | undefined {

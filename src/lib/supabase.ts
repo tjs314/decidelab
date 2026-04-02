@@ -12,3 +12,21 @@ export async function submitSurvey(suggestion: string, resultType: string | null
     body: JSON.stringify({ suggestion, result_type: resultType }),
   });
 }
+
+export async function submitReminder(email: string, resultType: string) {
+  const remindAt = new Date();
+  remindAt.setMonth(remindAt.getMonth() + 1);
+  return fetch(SUPABASE_URL + '/rest/v1/reminders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON,
+      'Authorization': 'Bearer ' + SUPABASE_ANON,
+    },
+    body: JSON.stringify({
+      email,
+      result_type: resultType,
+      remind_at: remindAt.toISOString().split('T')[0],
+    }),
+  });
+}

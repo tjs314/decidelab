@@ -6,6 +6,7 @@ import { sections, sources } from '@/data/questions';
 import { getResult, getResultByKey } from '@/data/results';
 import type { ResultType } from '@/data/results';
 import { notifyWebhook } from '@/lib/payment';
+import { submitReminder } from '@/lib/supabase';
 import CheckItem from '@/components/CheckItem';
 import ProgressBar from '@/components/ProgressBar';
 import ResultDarkCard from '@/components/ResultDarkCard';
@@ -22,6 +23,9 @@ export default function Home() {
   const [busy, setBusy] = useState(false);
   const [paidEmail, setPaidEmail] = useState<string | null>(null);
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [reminderOpen, setReminderOpen] = useState(false);
+  const [reminderEmail, setReminderEmail] = useState('');
+  const [reminderDone, setReminderDone] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
   // 모바일 결제 리다이렉트 복귀 처리
@@ -245,6 +249,7 @@ export default function Home() {
               {result.key === 'explore' ? (
                 /* 탐색 중 */
                 <div>
+                  {/* Dark Card */}
                   <div className="bg-[#0A0D2D] rounded-2xl overflow-hidden">
                     <div className="flex justify-between items-center px-6 pt-5">
                       <div className="text-xs font-semibold text-white">decide.lab</div>
@@ -259,14 +264,99 @@ export default function Home() {
                     <p className="text-sm text-white/55 text-center px-8 pt-2 pb-6 leading-relaxed"
                        dangerouslySetInnerHTML={{ __html: result.desc.replace(/\. /g, '.<br>') }} />
                   </div>
-                  <div className="pt-6 pb-5">
+
+                  {/* Tip + Steps */}
+                  {result.tip && result.steps && (
+                    <div className="bg-white rounded-2xl overflow-hidden mt-3">
+                      <div className="px-[22px] pt-6 pb-5">
+                        <div className="inline-flex items-center gap-[5px] bg-[#FFF5F2] text-[var(--orange)] text-[11px] font-bold px-2.5 py-[5px] rounded-md mb-3 tracking-wide">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L7.5 4.5L11 5L8.5 7.5L9 11L6 9.5L3 11L3.5 7.5L1 5L4.5 4.5L6 1Z" fill="#FF4B1A"/></svg>
+                          지금 단계에서의 핵심
+                        </div>
+                        <div className="text-[15px] font-semibold text-[var(--ink1)] leading-[1.65] tracking-tight">
+                          {result.tip}
+                        </div>
+                      </div>
+                      <div className="px-[22px] pt-5 pb-6">
+                        <div className="text-xs font-bold text-[#8B95A1] tracking-widest uppercase mb-4">지금 해볼 수 있는 3가지</div>
+                        {result.steps.map((step, i) => (
+                          <div key={i} className={`flex gap-3.5 py-3 ${i < result.steps!.length - 1 ? 'border-b border-[#E5E8EB]' : ''}`}>
+                            <div className="w-6 h-6 rounded-full bg-[#0A0D2D] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-px">{i + 1}</div>
+                            <div className="text-sm text-[#4E5968] leading-[1.65] [&_strong]:text-[var(--ink1)] [&_strong]:font-semibold" dangerouslySetInnerHTML={{ __html: step }} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Encouragement */}
+                  <div className="bg-white rounded-2xl px-[22px] py-7 text-center mt-3">
+                    <span className="text-[32px] block mb-3">🧭</span>
+                    <p className="text-sm text-[#4E5968] leading-[1.75]">
+                      아직 방향이 안 보이는 것도<br/>
+                      <strong className="text-[var(--ink1)]">완전히 정상이에요.</strong><br/><br/>
+                      대부분의 사람들은 고민의 한가운데에서<br/>
+                      체크리스트를 해보거든요.<br/>
+                      기록하고, 관찰하고, 다시 와주세요.
+                    </p>
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex flex-col gap-2.5 pt-6 pb-5">
                     <button
                       onClick={() => location.reload()}
-                      className="w-full py-3.5 bg-transparent border border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-base font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
+                      className="w-full py-3.5 bg-[#0A0D2D] rounded-xl text-white text-base font-semibold cursor-pointer font-[inherit] transition-opacity hover:opacity-85"
                     >
                       다시 테스트 해보기
                     </button>
+                    <button
+                      onClick={() => setReminderOpen(true)}
+                      className="w-full py-[13px] bg-transparent border border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-base font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
+                    >
+                      1개월 뒤 리마인더 받기
+                    </button>
                   </div>
+
+                  {/* Reminder Modal */}
+                  {reminderOpen && (
+                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-5" onClick={() => setReminderOpen(false)}>
+                      <div className="bg-white rounded-2xl p-8 pb-6 w-full max-w-[340px] text-center relative" onClick={(e) => e.stopPropagation()}>
+                        <button onClick={() => setReminderOpen(false)} className="absolute top-4 right-[18px] bg-transparent border-none text-[22px] text-[#B0B8C1] cursor-pointer font-[inherit]">&times;</button>
+                        {reminderDone ? (
+                          <div className="py-4">
+                            <span className="text-[32px] block mb-3">✅</span>
+                            <div className="text-[17px] font-extrabold text-[var(--ink1)] mb-2">등록 완료!</div>
+                            <div className="text-sm text-[#8B95A1] leading-relaxed">1개월 뒤 리마인더를<br/>보내드릴게요.</div>
+                          </div>
+                        ) : (
+                          <>
+                            <span className="text-[36px] block mb-3.5">💌</span>
+                            <div className="text-[18px] font-extrabold text-[var(--ink1)] tracking-tight mb-2">1개월 뒤 다시 알려드릴게요</div>
+                            <p className="text-sm text-[#8B95A1] leading-[1.65] mb-5">이메일을 남겨주시면,<br/>1개월 뒤 체크리스트 리마인더를 보내드려요.</p>
+                            <input
+                              type="email"
+                              value={reminderEmail}
+                              onChange={(e) => setReminderEmail(e.target.value)}
+                              placeholder="이메일 주소를 입력하세요"
+                              className="w-full py-3.5 px-4 border border-[#E5E8EB] rounded-xl text-[15px] font-[inherit] text-[var(--ink1)] outline-none mb-3 focus:border-[#0A0D2D] placeholder:text-[#B0B8C1] transition-colors"
+                            />
+                            <button
+                              onClick={async () => {
+                                if (!reminderEmail) return;
+                                try {
+                                  await submitReminder(reminderEmail, 'explore');
+                                } catch { /* ignore */ }
+                                setReminderDone(true);
+                              }}
+                              className="w-full py-3.5 bg-transparent border border-[#0A0D2D] rounded-xl text-[#0A0D2D] text-[15px] font-semibold cursor-pointer font-[inherit] transition-colors hover:border-[var(--orange)] hover:text-[var(--orange)]"
+                            >
+                              리마인더 등록하기
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 /* 일반 결과 */
