@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description: '30개 체크리스트로 알아보는 나의 커리어 방향',
     images: ['https://decidelab.co.kr/og-image.png'],
   },
+  icons: {
+    icon: '/favicon.svg',
+  },
   metadataBase: new URL('https://decidelab.co.kr'),
 };
 
