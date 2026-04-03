@@ -1,19 +1,27 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface Props {
   resultKey: string;
 }
 
-const tocItems = [
-  { num: '01', name: '점수 요약 + 포지션 진단', desc: '3개 영역 종합 스코어, 전체 응답자 중 내 위치', hot: false },
-  { num: '02', name: '유형 심층 해설', desc: '반복 패턴 · 숨겨진 맹점 · 핵심 인사이트', hot: true, badge: '맞춤' },
-  { num: '03', name: '리스크 레이더 차트', desc: '내 점수 시각화 + 평균 비교 분석', hot: false },
-  { num: '04', name: '영역별 정밀 분석', desc: '직장 적합도 · 이탈 신호 · 창업 준비도 상세 해설', hot: false },
-  { num: '05', name: '포지션 매트릭스', desc: '4가지 유형 중 나의 위치 2x2 시각화', hot: false },
-  { num: '06', name: '4주 액션 플랜', desc: '주차별 태스크 + 체크포인트 30일 로드맵', hot: true, badge: '인기' },
-  { num: '07', name: '핵심 메시지 + 마무리', desc: '지금 가장 중요한 한 가지', hot: false },
+const bonusDescByType: Record<string, string> = {
+  growth: '연봉 협상 스크립트 · 사내 포지셔닝 전략 · 승진 루트맵 · 성과 어필법 · 커리어 레버리지 설계',
+  burnout: '번아웃 회복 루틴 · 퇴사 타이밍 판단법 · 이직 준비 체크리스트 · 면접 전략 · 연봉 협상법',
+  startup: '시장 검증 5단계 · 첫 고객 확보 채널 · MVP 로드맵 · 재무 안전망 설계 · 퇴사 타이밍 판단',
+  transition: '이력서 전략 · 연봉 협상법 · 네트워킹 · 사이드 프로젝트 · 의사결정 트리',
+};
+
+const getTocItems = (resultKey: string) => [
+  { num: '01', name: '내 점수는 상위 몇 %?', desc: '3개 영역 종합 스코어 + 전체 응답자 중 내 위치', hot: false },
+  { num: '02', name: '나도 몰랐던 반복 패턴', desc: '내 유형이 빠지기 쉬운 함정 · 숨겨진 맹점 분석', hot: true, badge: '맞춤' },
+  { num: '03', name: '한눈에 보는 리스크 레이더', desc: '내 점수 시각화 + 평균 대비 어디가 위험한지', hot: false },
+  { num: '04', name: '지금 회사, 계속 다녀도 될까?', desc: '직장 적합도 · 이탈 신호 · 창업 준비도 정밀 해부', hot: false },
+  { num: '05', name: '나는 4가지 유형 중 어디?', desc: '포지션 매트릭스 2x2 — 같은 유형의 실제 행동 패턴', hot: false },
+  { num: '06', name: '이번 달부터 바로 실행하는 4주 플랜', desc: '주차별 할 일 + 완료 기준이 있는 30일 로드맵', hot: true, badge: '인기' },
+  { num: 'BONUS', name: '유형별 맞춤 실전 가이드 (10p)', desc: bonusDescByType[resultKey] || bonusDescByType.growth, hot: true, badge: 'NEW' },
+  { num: '07', name: '지금 가장 먼저 해야 할 한 가지', desc: '읽고 바로 움직일 수 있는 핵심 메시지', hot: false },
 ];
 
 const reviewsByType: Record<string, { text: string; author: string }[]> = {
@@ -51,19 +59,54 @@ export default function ReportPreview({ resultKey }: Props) {
   const [tocOpen, setTocOpen] = useState(false);
   const [reviewIdx, setReviewIdx] = useState(0);
   const [fade, setFade] = useState(true);
+  const touchStartX = useRef(0);
+  const touchDelta = useRef(0);
+  const autoTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const reviews = reviewsByType[resultKey] || reviewsByType.growth;
+  const tocItems = getTocItems(resultKey);
 
+  const goTo = useCallback((idx: number) => {
+    setFade(false);
+    setTimeout(() => {
+      setReviewIdx(idx);
+      setFade(true);
+    }, 200);
+  }, []);
+
+  const goNext = useCallback(() => {
+    goTo((reviewIdx + 1) % reviews.length);
+  }, [reviewIdx, reviews.length, goTo]);
+
+  const goPrev = useCallback(() => {
+    goTo((reviewIdx - 1 + reviews.length) % reviews.length);
+  }, [reviewIdx, reviews.length, goTo]);
+
+  // 자동 롤링
   useEffect(() => {
-    const timer = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setReviewIdx((prev) => (prev + 1) % reviews.length);
-        setFade(true);
-      }, 300);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [reviews.length]);
+    autoTimer.current = setInterval(goNext, 5000);
+    return () => { if (autoTimer.current) clearInterval(autoTimer.current); };
+  }, [goNext]);
+
+  // 스와이프 시 자동 롤링 리셋
+  const resetAutoTimer = useCallback(() => {
+    if (autoTimer.current) clearInterval(autoTimer.current);
+    autoTimer.current = setInterval(goNext, 5000);
+  }, [goNext]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchDelta.current = 0;
+  };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchDelta.current = e.touches[0].clientX - touchStartX.current;
+  };
+  const handleTouchEnd = () => {
+    if (Math.abs(touchDelta.current) > 40) {
+      if (touchDelta.current < 0) goNext(); else goPrev();
+      resetAutoTimer();
+    }
+  };
 
   const currentReview = reviews[reviewIdx];
 
@@ -121,18 +164,27 @@ export default function ReportPreview({ resultKey }: Props) {
         )}
       </div>
 
-      {/* 롤링 후기 */}
+      {/* 롤링 후기 — 스와이프 가능 */}
       <div className="px-[22px] pt-7 pb-6">
-        <div className={`bg-[var(--bg)] rounded-xl p-[16px_18px] transition-opacity duration-300 ${fade ? 'opacity-100' : 'opacity-0'}`}>
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className={`bg-[var(--bg)] rounded-xl p-[16px_18px] transition-opacity duration-200 cursor-grab active:cursor-grabbing select-none ${fade ? 'opacity-100' : 'opacity-0'}`}
+        >
           <div className="text-[13px] text-[var(--ink2)] leading-[1.6]">
             &ldquo;{currentReview.text}&rdquo;
           </div>
           <div className="text-[11px] text-[var(--ink4)] mt-2">— {currentReview.author}</div>
         </div>
-        {/* 인디케이터 */}
+        {/* 인디케이터 — 클릭 가능 */}
         <div className="flex justify-center gap-1.5 mt-3">
           {reviews.map((_, i) => (
-            <div key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === reviewIdx ? 'bg-[var(--orange)]' : 'bg-[var(--ink4)]/30'}`} />
+            <button
+              key={i}
+              onClick={() => { goTo(i); resetAutoTimer(); }}
+              className={`w-1.5 h-1.5 rounded-full transition-colors border-none p-0 cursor-pointer ${i === reviewIdx ? 'bg-[var(--orange)]' : 'bg-[var(--ink4)]/30'}`}
+            />
           ))}
         </div>
       </div>
