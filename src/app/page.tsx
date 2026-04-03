@@ -399,7 +399,7 @@ export default function Home() {
                     <div className="bg-white rounded-2xl overflow-hidden mb-3">
                       <LockedSection result={result} scores={scores} />
                       <PaymentSection result={result} scores={scores} checked={checked} onPaymentSuccess={handlePaymentSuccess} />
-                      <ReportPreview />
+                      <ReportPreview resultKey={result.key} />
                     </div>
                   )}
 
