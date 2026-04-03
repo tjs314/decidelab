@@ -122,7 +122,7 @@ export default function PaymentSection({ result, scores, checked, onPaymentSucce
               placeholder="decide@email.com"
               className="w-full px-4 py-3 border border-[var(--line)] rounded-[10px] text-sm font-[inherit] text-[var(--ink1)] bg-white outline-none mb-2 transition-colors focus:border-[var(--ink1)]"
             />
-            <p className="text-xs text-[var(--orange)] mb-3 leading-normal font-medium">결제 즉시 이메일로 결과 리포트 PDF를 보내드려요</p>
+            <p className="text-xs text-[var(--orange)] mb-3 leading-normal font-medium">결제 후 10분 이내로 결과 리포트 PDF를 보내드려요</p>
 
             <div className="h-px bg-black/[.08] my-4" />
 
@@ -171,11 +171,6 @@ export default function PaymentSection({ result, scores, checked, onPaymentSucce
             </div>
 
             {/* 결제 버튼 */}
-            <div className="flex items-center justify-center gap-2 mt-4 mb-2.5">
-              <span className="bg-[rgba(255,180,0,0.12)] text-[#CC8800] border border-[rgba(255,180,0,0.4)] text-[11px] font-bold px-2 py-0.5 rounded-lg tracking-wider">얼리버드</span>
-              <span className="text-[13px] text-black/35 line-through">46,000원</span>
-              <span className="text-[13px] text-[var(--ink1)] font-semibold">9,900원</span>
-            </div>
             <button
               onClick={handlePay}
               disabled={!canPay || paying}

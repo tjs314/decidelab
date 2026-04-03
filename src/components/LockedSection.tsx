@@ -59,7 +59,7 @@ export default function LockedSection({ result }: Props) {
         <div className="text-xl font-extrabold text-[var(--ink1)] tracking-tight leading-[1.45]">
           정밀 분석으로<br/><span className="text-[var(--orange)]">나만의 돌파구</span>를 찾아보세요
         </div>
-        <div className="text-sm text-[var(--ink3)] mt-1.5">20페이지 PDF · 결제 후 10분 이내 이메일 발송</div>
+        <div className="text-sm text-[var(--ink3)] mt-1.5">평생 소장 가능한 20페이지 PDF로 제공</div>
         <div className="flex items-center justify-center gap-2 mt-4">
           <span className="bg-[rgba(255,180,0,0.12)] text-[#CC8800] border border-[rgba(255,180,0,0.4)] text-xs font-bold px-2 py-[3px] rounded-md">얼리버드</span>
           <span className="text-[15px] text-black/25 line-through">46,000원</span>
