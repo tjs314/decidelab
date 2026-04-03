@@ -83,7 +83,7 @@ export default function LockedSection({ result }: Props) {
           {/* 유료 */}
           <div className="rounded-[14px] p-[18px_16px] flex flex-col gap-3 border border-[rgba(254,76,27,0.2)]" style={{ background: 'linear-gradient(135deg, #FFF5F2 0%, #FFF0EC 100%)' }}>
             <div className="text-[13px] font-bold text-[var(--orange)] text-center">정밀 리포트</div>
-            {['유형별 심층 해설', '숨겨진 맹점 분석', '리스크 레이더 차트', '4주 액션 플랜', '포지션 매트릭스', '유형별 맞춤 가이드'].map((t) => (
+            {['나도 몰랐던 반복 패턴', '숨겨진 맹점 분석', '내 위치 시각화 차트', '바로 실행하는 4주 플랜', '나는 어디쯤? 포지션맵', '진짜 써먹는 실전 가이드'].map((t) => (
               <div key={t} className="flex items-center gap-1.5 text-[13px] leading-[1.5] text-[var(--ink2)]">
                 <svg className="shrink-0" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#FE4C1B" strokeWidth="1.2"/><path d="M4.5 7.2L6.2 8.8 9.5 5.5" stroke="#FE4C1B" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 {t}

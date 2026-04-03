@@ -20,8 +20,8 @@ const getTocItems = (resultKey: string) => [
   { num: '04', name: '지금 회사, 계속 다녀도 될까?', desc: '직장 적합도 · 이탈 신호 · 창업 준비도 정밀 해부', hot: false },
   { num: '05', name: '나는 4가지 유형 중 어디?', desc: '포지션 매트릭스 2x2 — 같은 유형의 실제 행동 패턴', hot: false },
   { num: '06', name: '이번 달부터 바로 실행하는 4주 플랜', desc: '주차별 할 일 + 완료 기준이 있는 30일 로드맵', hot: true, badge: '인기' },
-  { num: 'BONUS', name: '유형별 맞춤 실전 가이드', desc: bonusDescByType[resultKey] || bonusDescByType.growth, hot: true, badge: '+10p' },
-  { num: '07', name: '지금 가장 먼저 해야 할 한 가지', desc: '읽고 바로 움직일 수 있는 핵심 메시지', hot: false },
+  { num: '07', name: '유형별 맞춤 실전 가이드', desc: bonusDescByType[resultKey] || bonusDescByType.growth, hot: true, badge: '리얼꿀팁' },
+  { num: '08', name: '지금 가장 먼저 해야 할 한 가지', desc: '읽고 바로 움직일 수 있는 핵심 메시지', hot: false },
 ];
 
 const reviewsByType: Record<string, { text: string; author: string }[]> = {
