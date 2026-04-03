@@ -54,34 +54,8 @@ export default function LockedSection({ result }: Props) {
         <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-gradient-to-b from-transparent to-white z-10" />
       </div>
 
-      {/* ② 비교 카드 */}
-      <div className="px-[22px] pt-6">
-        <div className="grid grid-cols-2 gap-2.5">
-          {/* 무료 */}
-          <div className="rounded-[14px] p-[18px_16px] flex flex-col gap-3 bg-[#F7F8FA] border border-[var(--line)]">
-            <div className="text-[13px] font-bold text-[var(--ink3)] text-center">무료 결과</div>
-            {['유형 이름만 확인', '3개 영역 점수', '한줄 요약'].map((t) => (
-              <div key={t} className="flex items-start gap-1.5 text-[13px] leading-[1.5] text-[var(--ink3)]">
-                <svg className="shrink-0 mt-px" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#B0B8C1" strokeWidth="1.2"/><path d="M4.5 7h5" stroke="#B0B8C1" strokeWidth="1.2" strokeLinecap="round"/></svg>
-                {t}
-              </div>
-            ))}
-          </div>
-          {/* 유료 */}
-          <div className="rounded-[14px] p-[18px_16px] flex flex-col gap-3 border border-[rgba(254,76,27,0.2)]" style={{ background: 'linear-gradient(135deg, #FFF5F2 0%, #FFF0EC 100%)' }}>
-            <div className="text-[13px] font-bold text-[var(--orange)] text-center">정밀 리포트</div>
-            {['유형별 심층 해설', '숨겨진 맹점 분석', '리스크 레이더 차트', '4주 액션 플랜', '포지션 매트릭스', '유형별 맞춤 가이드'].map((t) => (
-              <div key={t} className="flex items-start gap-1.5 text-[13px] leading-[1.5] text-[var(--ink2)]">
-                <svg className="shrink-0 mt-px" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#FE4C1B" strokeWidth="1.2"/><path d="M4.5 7.2L6.2 8.8 9.5 5.5" stroke="#FE4C1B" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                {t}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ③ CTA 헤드라인 + 가격 */}
-      <div className="px-[22px] pt-5 pb-6 text-center">
+      {/* ② CTA 헤드라인 + 가격 */}
+      <div className="px-[22px] pt-5 text-center">
         <div className="text-xl font-extrabold text-[var(--ink1)] tracking-tight leading-[1.45]">
           정밀 분석으로<br/><span className="text-[var(--orange)]">나만의 돌파구</span>를 찾아보세요
         </div>
@@ -90,6 +64,32 @@ export default function LockedSection({ result }: Props) {
           <span className="bg-[rgba(255,180,0,0.12)] text-[#CC8800] border border-[rgba(255,180,0,0.4)] text-xs font-bold px-2 py-[3px] rounded-md">얼리버드</span>
           <span className="text-[15px] text-black/25 line-through">46,000원</span>
           <span className="text-[22px] font-extrabold text-[var(--ink1)]">9,900원</span>
+        </div>
+      </div>
+
+      {/* ③ 비교 카드 */}
+      <div className="px-[22px] pt-6 pb-6">
+        <div className="grid grid-cols-2 gap-2.5">
+          {/* 무료 */}
+          <div className="rounded-[14px] p-[18px_16px] flex flex-col gap-3 bg-[#F7F8FA] border border-[var(--line)]">
+            <div className="text-[13px] font-bold text-[var(--ink3)] text-center">무료 결과</div>
+            {['유형 이름만 확인', '3개 영역 점수', '한줄 요약'].map((t) => (
+              <div key={t} className="flex items-center gap-1.5 text-[13px] leading-[1.5] text-[var(--ink3)]">
+                <svg className="shrink-0" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#B0B8C1" strokeWidth="1.2"/><path d="M4.5 7h5" stroke="#B0B8C1" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                {t}
+              </div>
+            ))}
+          </div>
+          {/* 유료 */}
+          <div className="rounded-[14px] p-[18px_16px] flex flex-col gap-3 border border-[rgba(254,76,27,0.2)]" style={{ background: 'linear-gradient(135deg, #FFF5F2 0%, #FFF0EC 100%)' }}>
+            <div className="text-[13px] font-bold text-[var(--orange)] text-center">정밀 리포트</div>
+            {['유형별 심층 해설', '숨겨진 맹점 분석', '리스크 레이더 차트', '4주 액션 플랜', '포지션 매트릭스', '유형별 맞춤 가이드'].map((t) => (
+              <div key={t} className="flex items-center gap-1.5 text-[13px] leading-[1.5] text-[var(--ink2)]">
+                <svg className="shrink-0" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#FE4C1B" strokeWidth="1.2"/><path d="M4.5 7.2L6.2 8.8 9.5 5.5" stroke="#FE4C1B" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                {t}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
