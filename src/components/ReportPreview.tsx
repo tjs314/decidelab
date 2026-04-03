@@ -20,7 +20,7 @@ const getTocItems = (resultKey: string) => [
   { num: '04', name: '지금 회사, 계속 다녀도 될까?', desc: '직장 적합도 · 이탈 신호 · 창업 준비도 정밀 해부', hot: false },
   { num: '05', name: '나는 4가지 유형 중 어디?', desc: '포지션 매트릭스 2x2 — 같은 유형의 실제 행동 패턴', hot: false },
   { num: '06', name: '이번 달부터 바로 실행하는 4주 플랜', desc: '주차별 할 일 + 완료 기준이 있는 30일 로드맵', hot: true, badge: '인기' },
-  { num: 'BONUS', name: '유형별 맞춤 실전 가이드 (10p)', desc: bonusDescByType[resultKey] || bonusDescByType.growth, hot: true, badge: 'NEW' },
+  { num: 'BONUS', name: '유형별 맞춤 실전 가이드', desc: bonusDescByType[resultKey] || bonusDescByType.growth, hot: true, badge: '+10p' },
   { num: '07', name: '지금 가장 먼저 해야 할 한 가지', desc: '읽고 바로 움직일 수 있는 핵심 메시지', hot: false },
 ];
 
@@ -114,7 +114,7 @@ export default function ReportPreview({ resultKey }: Props) {
     <div>
       {/* PDF 미리보기 — 반응형 */}
       <div className="px-[22px] pt-7">
-        <div className="text-xs font-bold text-[var(--ink3)] tracking-[0.04em] text-center mb-4">리포트 미리보기</div>
+        <div className="text-[13px] font-bold text-[var(--ink3)] tracking-[0.04em] text-center mb-4">리포트 미리보기</div>
         <div className="flex gap-2.5 sm:gap-4 justify-center">
           {[
             { src: '/pdf-page-8.png', caption: '4주 액션 플랜', blur: true },
@@ -125,7 +125,7 @@ export default function ReportPreview({ resultKey }: Props) {
               <div className="w-full rounded-lg overflow-hidden border border-[#D8DCE2] bg-[#fafafa] shadow-[0_2px_8px_rgba(0,0,0,0.06)]" style={{ aspectRatio: '595/842' }}>
                 <img src={p.src} alt={p.caption} className={`w-full h-full object-cover object-top ${p.blur ? '[filter:blur(2px)] opacity-75' : ''}`} />
               </div>
-              <div className="text-[11px] text-[var(--ink4)] mt-2">{p.caption}</div>
+              <div className="text-xs text-[var(--ink4)] mt-2">{p.caption}</div>
             </div>
           ))}
         </div>
@@ -135,7 +135,7 @@ export default function ReportPreview({ resultKey }: Props) {
       <div className="px-[22px] pt-7">
         <button
           onClick={() => setTocOpen(!tocOpen)}
-          className="flex items-center justify-center gap-1 w-full bg-transparent border border-[var(--line)] rounded-[10px] p-3 cursor-pointer font-[inherit] text-[13px] font-semibold text-[var(--ink2)] hover:border-[var(--ink4)] transition-colors"
+          className="flex items-center justify-center gap-1 w-full bg-transparent border border-[var(--line)] rounded-[10px] p-3 cursor-pointer font-[inherit] text-sm font-semibold text-[var(--ink2)] hover:border-[var(--ink4)] transition-colors"
         >
           정밀 리포트에 담긴 전체 내용 보기
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`shrink-0 transition-transform ${tocOpen ? 'rotate-180' : ''}`}>
@@ -146,17 +146,17 @@ export default function ReportPreview({ resultKey }: Props) {
           <div className="mt-4">
             {tocItems.map((item) => (
               <div key={item.num} className="flex items-start gap-3 py-3 border-b border-[var(--line)] last:border-b-0">
-                <div className={`w-6 h-6 rounded-md text-[10px] font-bold flex items-center justify-center shrink-0 mt-px ${item.hot ? 'bg-[#FFF0EC] text-[var(--orange)]' : 'bg-[var(--bg)] text-[var(--ink3)]'}`}>
+                <div className={`min-w-[28px] h-7 rounded-md text-[11px] font-bold flex items-center justify-center shrink-0 mt-px px-1 ${item.hot ? 'bg-[#FFF0EC] text-[var(--orange)]' : 'bg-[var(--bg)] text-[var(--ink3)]'}`}>
                   {item.num}
                 </div>
-                <div>
-                  <div className="text-[13px] font-semibold text-[var(--ink1)] leading-[1.4]">
+                <div className="min-w-0">
+                  <div className="text-sm font-semibold text-[var(--ink1)] leading-[1.4]">
                     {item.name}
                     {item.badge && (
-                      <span className="inline-flex text-[9px] font-bold text-[var(--orange)] bg-[#FFF0EC] px-1.5 py-px rounded-[3px] ml-1.5 align-middle">{item.badge}</span>
+                      <span className="inline-flex text-[10px] font-bold text-[var(--orange)] bg-[#FFF0EC] px-1.5 py-px rounded-[3px] ml-1.5 align-middle">{item.badge}</span>
                     )}
                   </div>
-                  <div className="text-[11px] text-[var(--ink3)] mt-0.5 leading-[1.4]">{item.desc}</div>
+                  <div className="text-xs text-[var(--ink3)] mt-0.5 leading-[1.4]">{item.desc}</div>
                 </div>
               </div>
             ))}
@@ -172,10 +172,10 @@ export default function ReportPreview({ resultKey }: Props) {
           onTouchEnd={handleTouchEnd}
           className={`bg-[var(--bg)] rounded-xl p-[16px_18px] transition-opacity duration-200 cursor-grab active:cursor-grabbing select-none ${fade ? 'opacity-100' : 'opacity-0'}`}
         >
-          <div className="text-[13px] text-[var(--ink2)] leading-[1.6]">
+          <div className="text-sm text-[var(--ink2)] leading-[1.6]">
             &ldquo;{currentReview.text}&rdquo;
           </div>
-          <div className="text-[11px] text-[var(--ink4)] mt-2">— {currentReview.author}</div>
+          <div className="text-xs text-[var(--ink4)] mt-2">— {currentReview.author}</div>
         </div>
         {/* 인디케이터 — 클릭 가능 */}
         <div className="flex justify-center gap-1.5 mt-3">
