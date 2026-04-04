@@ -219,12 +219,9 @@ export default function Home() {
           ))}
 
           {/* 데이터 신뢰도 영역 */}
-          <div className="mt-6 bg-[#E8EAFF] rounded-[14px] px-5 py-[18px] mb-6 flex items-center gap-3.5">
-            <div className="text-[28px] font-black text-[#0A0D2D] tracking-tight leading-none shrink-0">120만+</div>
-            <div className="flex flex-col gap-1">
-              <div className="text-[13px] font-semibold text-[#191F28] leading-[1.5]">글로벌 커리어 데이터 기반<br/>조직심리학 × AI 정밀 분석</div>
-              <div className="text-[11.5px] text-[#8B8FAE]">당신의 결정을 숫자로 증명합니다</div>
-            </div>
+          <div className="mt-6 bg-[#E8EAFF] rounded-[14px] px-5 py-5 mb-6 text-center">
+            <div className="text-[13.5px] font-semibold text-[#191F28] leading-[1.65] mb-1.5">120만 데이터 기반 + 조직심리학 연구 + AI 정밀 분석</div>
+            <div className="text-[13px] text-[#8B8FAE]">당신의 결정을 돕습니다</div>
           </div>
 
           {/* RESULT */}
