@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
+
+const GA_ID = 'G-CVZ9581W45';
 
 export const metadata: Metadata = {
   title: '직장 vs 창업, 나는 어떤 사람인가? | decide.lab',
@@ -42,6 +45,18 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
         <script src="https://cdn.portone.io/v2/browser-sdk.js" defer />
       </head>
       <body>
